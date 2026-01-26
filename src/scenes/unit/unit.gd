@@ -1,14 +1,6 @@
 extends Node2D
 class_name Unit
+
 @onready var visuals: Node2D = %Visuals
 @onready var sprite: Sprite2D = %Sprite
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+@onready var anim_player: AnimationPlayer = $AnimationPlayer
