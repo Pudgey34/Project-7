@@ -1,8 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://v3s585564nk4"]
+[gd_scene load_steps=8 format=3 uid="uid://v3s585564nk4"]
 
 [ext_resource type="PackedScene" uid="uid://dy3i5rocyopb" path="res://scenes/unit/unit.tscn" id="1_8jg27"]
 [ext_resource type="Script" uid="uid://k3se2wgulxmg" path="res://scenes/unit/players/player.gd" id="2_0kmb5"]
 [ext_resource type="Texture2D" uid="uid://cproxhccob85g" path="res://assets/sprites/Players/Player_1.png" id="3_0kmb5"]
+[ext_resource type="Resource" uid="uid://h6rpo7vj3tnd" path="res://resources/units/players/stats_player_default.tres" id="3_skj4b"]
+[ext_resource type="Script" uid="uid://c858bvn2ij6io" path="res://scenes/unit/players/trail.gd" id="5_0c7nu"]
+
+[sub_resource type="Curve" id="Curve_qqlo3"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0c7nu"]
 radius = 29.0
@@ -12,9 +18,25 @@ script = ExtResource("2_0kmb5")
 dash_duration = 0.3
 dash_speed_multi = 3.1
 dash_cooldown = 2.5
+stats = ExtResource("3_skj4b")
+
+[node name="Shadow" parent="Visuals" index="0"]
+z_index = 1
 
 [node name="Sprite" parent="Visuals" index="1"]
+z_index = 1
 texture = ExtResource("3_0kmb5")
+
+[node name="Trail" type="Line2D" parent="Visuals" index="2" node_paths=PackedStringArray("player")]
+unique_name_in_owner = true
+top_level = true
+position = Vector2(0, -35)
+points = PackedVector2Array(0, 0)
+width = 50.0
+width_curve = SubResource("Curve_qqlo3")
+script = ExtResource("5_0c7nu")
+player = NodePath("../..")
+trail_duration = 0.5
 
 [node name="CollisionShape2D" parent="." index="1"]
 visible = false
@@ -30,4 +52,9 @@ one_shot = true
 [node name="DashCooldownTimer" type="Timer" parent="." index="4"]
 one_shot = true
 
+[node name="TrailTimer" type="Timer" parent="." index="5"]
+unique_name_in_owner = true
+one_shot = true
+
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="TrailTimer" to="Visuals/Trail" method="_on_trail_timer_timeout"]
