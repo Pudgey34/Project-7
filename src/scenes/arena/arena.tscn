@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://b4ifpsnkclb5q"]
+
+[ext_resource type="Texture2D" uid="uid://cy4xfx762bxgb" path="res://assets/sprites/BG.png" id="1_5tue2"]
+[ext_resource type="Script" uid="uid://dx6ay2e086uwg" path="res://scenes/arena/arena.gd" id="1_asdgj"]
+[ext_resource type="Texture2D" uid="uid://ov4fmsbglo55" path="res://assets/sprites/Map.png" id="2_aj7ud"]
+[ext_resource type="PackedScene" uid="uid://v3s585564nk4" path="res://scenes/unit/players/player_default.tscn" id="3_asdgj"]
+[ext_resource type="Script" uid="uid://ccgcwy5sr1qo2" path="res://scenes/arena/camera_2d.gd" id="5_jx0ua"]
+
+[node name="Arena" type="Node2D" node_paths=PackedStringArray("player")]
+script = ExtResource("1_asdgj")
+player = NodePath("PlayerDefault")
+
+[node name="BlackBG" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("1_5tue2")
+
+[node name="GrassBG" type="Sprite2D" parent="."]
+position = Vector2(2, -1)
+scale = Vector2(2, 2)
+texture = ExtResource("2_aj7ud")
+
+[node name="PlayerDefault" parent="." instance=ExtResource("3_asdgj")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("5_jx0ua")
