@@ -1,19 +1,33 @@
-[gd_scene load_steps=5 format=3 uid="uid://cjkpq563q15pt"]
+[gd_scene load_steps=7 format=3 uid="uid://cjkpq563q15pt"]
 
 [ext_resource type="PackedScene" uid="uid://dy3i5rocyopb" path="res://scenes/unit/unit.tscn" id="1_dd0vi"]
-[ext_resource type="Resource" uid="uid://b830d1rb8ka51" path="res://resources/units/enemies/stats_enemy_chaser_slow.tres" id="2_lmqbh"]
+[ext_resource type="Script" uid="uid://c0e53leqa3p2u" path="res://scenes/unit/enemy/enemy.gd" id="2_lmqbh"]
 [ext_resource type="Texture2D" uid="uid://d1ou504pylric" path="res://assets/sprites/Enemies/Enemy_1.png" id="2_oo7ju"]
+[ext_resource type="Resource" uid="uid://b830d1rb8ka51" path="res://resources/units/enemies/stats_enemy_chaser_slow.tres" id="3_lmqbh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e15k4"]
+radius = 31.257
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lmqbh"]
 radius = 150.0
 
 [node name="EnemyChaserSlow" instance=ExtResource("1_dd0vi")]
-stats = ExtResource("2_lmqbh")
+collision_layer = 2
+script = ExtResource("2_lmqbh")
+flock_push = 20.0
+stats = ExtResource("3_lmqbh")
 
 [node name="Sprite" parent="Visuals" index="1"]
 texture = ExtResource("2_oo7ju")
 
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(-1, -23)
+shape = SubResource("CircleShape2D_e15k4")
+debug_color = Color(0.9570754, 0.0779297, 0.4874565, 0.41960785)
+
 [node name="VisionArea" type="Area2D" parent="." index="3"]
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="VisionArea" index="0"]
 position = Vector2(0, -27)

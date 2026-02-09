@@ -14,6 +14,7 @@ point_count = 2
 radius = 29.0
 
 [node name="PlayerDefault" instance=ExtResource("1_8jg27")]
+collision_mask = 2
 script = ExtResource("2_0kmb5")
 dash_duration = 0.3
 dash_speed_multi = 3.1
