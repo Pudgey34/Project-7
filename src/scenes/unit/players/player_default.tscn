@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://v3s585564nk4"]
+[gd_scene load_steps=9 format=3 uid="uid://v3s585564nk4"]
 
 [ext_resource type="PackedScene" uid="uid://dy3i5rocyopb" path="res://scenes/unit/unit.tscn" id="1_8jg27"]
 [ext_resource type="Script" uid="uid://k3se2wgulxmg" path="res://scenes/unit/players/player.gd" id="2_0kmb5"]
@@ -11,7 +11,10 @@ _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0c7nu"]
-radius = 29.0
+radius = 3.1622777
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qqlo3"]
+radius = 38.052597
 
 [node name="PlayerDefault" instance=ExtResource("1_8jg27")]
 collision_mask = 2
@@ -40,7 +43,7 @@ player = NodePath("../..")
 trail_duration = 0.5
 
 [node name="CollisionShape2D" parent="." index="1"]
-visible = false
+z_index = 1
 position = Vector2(0, -23)
 shape = SubResource("CircleShape2D_0c7nu")
 
@@ -56,6 +59,15 @@ one_shot = true
 [node name="TrailTimer" type="Timer" parent="." index="5"]
 unique_name_in_owner = true
 one_shot = true
+
+[node name="HurtboxComponent" parent="." index="6"]
+collision_layer = 32
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" index="0"]
+z_index = 1
+position = Vector2(1, -26)
+shape = SubResource("CircleShape2D_qqlo3")
 
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="TrailTimer" to="Visuals/Trail" method="_on_trail_timer_timeout"]

@@ -1,15 +1,19 @@
-[gd_scene load_steps=7 format=3 uid="uid://cjkpq563q15pt"]
+[gd_scene load_steps=9 format=3 uid="uid://cjkpq563q15pt"]
 
 [ext_resource type="PackedScene" uid="uid://dy3i5rocyopb" path="res://scenes/unit/unit.tscn" id="1_dd0vi"]
 [ext_resource type="Script" uid="uid://c0e53leqa3p2u" path="res://scenes/unit/enemy/enemy.gd" id="2_lmqbh"]
 [ext_resource type="Texture2D" uid="uid://d1ou504pylric" path="res://assets/sprites/Enemies/Enemy_1.png" id="2_oo7ju"]
 [ext_resource type="Resource" uid="uid://b830d1rb8ka51" path="res://resources/units/enemies/stats_enemy_chaser_slow.tres" id="3_lmqbh"]
+[ext_resource type="Script" uid="uid://b606hufmt1agi" path="res://scenes/components/hitbox_component.gd" id="5_e15k4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e15k4"]
-radius = 31.257
+radius = 6.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lmqbh"]
 radius = 150.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_421q1"]
+radius = 38.0
 
 [node name="EnemyChaserSlow" instance=ExtResource("1_dd0vi")]
 collision_layer = 2
@@ -32,3 +36,17 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="VisionArea" index="0"]
 position = Vector2(0, -27)
 shape = SubResource("CircleShape2D_lmqbh")
+
+[node name="HitboxComponent" type="Area2D" parent="." index="5"]
+collision_layer = 4
+collision_mask = 32
+script = ExtResource("5_e15k4")
+metadata/_custom_type_script = "uid://b606hufmt1agi"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" index="0"]
+z_index = 1
+position = Vector2(0, -24)
+shape = SubResource("CircleShape2D_421q1")
+debug_color = Color(0.20047104, 0.62869686, 0.35603836, 0.41960785)
+
+[connection signal="area_entered" from="HitboxComponent" to="HitboxComponent" method="_on_area_entered"]
