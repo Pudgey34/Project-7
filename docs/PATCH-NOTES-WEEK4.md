@@ -10,3 +10,5 @@ Health Bar implemented for player and enemy
 Player Flash when taking damage
 8:05 PM to 8:10 PM
 Adding block chance printing to console when triggered.
+8:15 PM to 8:55 PM
+Floating Text Update

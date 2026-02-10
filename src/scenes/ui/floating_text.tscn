@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://cnjxlvdplj5ds"]
+
+[ext_resource type="Script" uid="uid://di608i01y2wye" path="res://scenes/ui/floating_text.gd" id="1_0qskq"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_x405i"]
+font_size = 32
+outline_size = 10
+outline_color = Color(0.011087579, 0.011087578, 0.01108758, 1)
+
+[node name="FloatingText" type="Node2D"]
+z_index = 10
+script = ExtResource("1_0qskq")
+
+[node name="ValueLabel" type="Label" parent="."]
+z_index = 10
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "10"
+label_settings = SubResource("LabelSettings_x405i")
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true

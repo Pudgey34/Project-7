@@ -273,7 +273,7 @@ back_color = Color(0, 0, 0, 1)
 fill_color = Color(0, 0, 0, 1)
 
 [node name="FlashTimer" type="Timer" parent="."]
-wait_time = 0.2
+wait_time = 0.1
 one_shot = true
 
 [connection signal="on_damaged" from="HurtboxComponent" to="." method="_on_hurtbox_component_on_damaged"]
