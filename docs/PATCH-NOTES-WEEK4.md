@@ -6,3 +6,5 @@ Bug fixing print statement on collision not appearing
 Basic Health Implemented for player
 7:20 PM to 7:45 PM
 Health Bar implemented for player and enemy
+7:55PM to 8:05 PM
+Player Flash when taking damage
