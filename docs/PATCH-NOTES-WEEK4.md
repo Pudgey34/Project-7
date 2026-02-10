@@ -4,3 +4,5 @@ Basic enemy chaser behaviour added
 Bug fixing print statement on collision not appearing
 7:00PM to 7:20 PM
 Basic Health Implemented for player
+7:20 PM to 7:45 PM
+Health Bar implemented for player and enemy

@@ -29,6 +29,10 @@ window/stretch/mode="canvas_items"
 
 project/assembly_name="Project7"
 
+[gui]
+
+theme/custom_font="uid://kfh6ooeul77g"
+
 [input]
 
 move_left={
