@@ -17,6 +17,11 @@ func _on_hurtbox_component_on_damaged(hitbox: HitboxComponent) -> void:
 	if health_component.current_health <= 0:
 		return
 		
+	var blocked := Global.get_chance_success(stats.block_chance / 100)
+	if blocked: 
+		print("Blocked!")
+		return
+	
 	set_flash_material()
 	
 	

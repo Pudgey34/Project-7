@@ -8,3 +8,5 @@ Basic Health Implemented for player
 Health Bar implemented for player and enemy
 7:55PM to 8:05 PM
 Player Flash when taking damage
+8:05 PM to 8:10 PM
+Adding block chance printing to console when triggered.
