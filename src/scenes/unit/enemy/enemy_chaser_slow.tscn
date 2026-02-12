@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cjkpq563q15pt"]
+[gd_scene load_steps=10 format=3 uid="uid://cjkpq563q15pt"]
 
 [ext_resource type="PackedScene" uid="uid://dy3i5rocyopb" path="res://scenes/unit/unit.tscn" id="1_dd0vi"]
 [ext_resource type="Script" uid="uid://c0e53leqa3p2u" path="res://scenes/unit/enemy/enemy.gd" id="2_lmqbh"]
@@ -11,6 +11,9 @@ radius = 6.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lmqbh"]
 radius = 150.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_03rrj"]
+radius = 38.013157
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_421q1"]
 radius = 38.0
@@ -30,6 +33,7 @@ shape = SubResource("CircleShape2D_e15k4")
 debug_color = Color(0.9570754, 0.0779297, 0.4874565, 0.41960785)
 
 [node name="VisionArea" type="Area2D" parent="." index="3"]
+visible = false
 collision_layer = 0
 collision_mask = 2
 
@@ -37,7 +41,17 @@ collision_mask = 2
 position = Vector2(0, -27)
 shape = SubResource("CircleShape2D_lmqbh")
 
+[node name="HurtboxComponent" parent="." index="4"]
+collision_layer = 8
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" index="0"]
+position = Vector2(0, -21)
+shape = SubResource("CircleShape2D_03rrj")
+debug_color = Color(0.8840078, 0.3342889, 0, 0.41960785)
+
 [node name="HitboxComponent" type="Area2D" parent="." index="5"]
+visible = false
 collision_layer = 4
 collision_mask = 32
 script = ExtResource("5_e15k4")
