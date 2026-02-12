@@ -21,6 +21,8 @@ func _on_hurtbox_component_on_damaged(hitbox: HitboxComponent) -> void:
 	if blocked: 
 		Global.on_create_block_text.emit(self)
 		return
+		
+	
 	
 	set_flash_material()
 	health_component.take_damage(hitbox.damage)
