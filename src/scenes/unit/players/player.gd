@@ -26,6 +26,7 @@ func _ready() -> void:
 	add_weapon(preload("uid://bxayqlg74oyri"))
 
 
+
 # MOVEMENT
 func _process(delta: float) -> void:
 	move_dir = Input.get_vector("move_left","move_right","move_up","move_down")
