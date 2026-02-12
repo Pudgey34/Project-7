@@ -4,9 +4,11 @@
 
 [resource]
 script = ExtResource("1_kkanm")
-damage = 4.0
+damage = 30.0
 accuracy = 1.0
-cooldown = 1.5
+cooldown = 0.7
+crit_chance = 0.1
+crit_damage = 1.75
 max_range = 180.0
 knockback = 1.0
 metadata/_custom_type_script = "uid://cj5gl53yq56xm"
