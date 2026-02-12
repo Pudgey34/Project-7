@@ -24,17 +24,6 @@ func _ready() -> void:
 	dash_cooldown_timer.wait_time = dash_cooldown
 	
 	add_weapon(preload("uid://bxayqlg74oyri"))
-	add_weapon(preload("uid://bxayqlg74oyri"))
-	add_weapon(preload("uid://bxayqlg74oyri"))
-	add_weapon(preload("uid://bxayqlg74oyri"))
-	add_weapon(preload("uid://bxayqlg74oyri"))
-	add_weapon(preload("uid://bxayqlg74oyri"))
-
-
-
-
-
-	
 
 
 # MOVEMENT
@@ -101,6 +90,8 @@ func can_dash() -> bool:
 	Input.is_action_just_pressed("dash") and\
 	move_dir != Vector2.ZERO
 	
+func is_facing_right() -> bool:
+	return visuals.scale.x == -0.5
 
 
 func _on_dash_timer_timeout() -> void:
