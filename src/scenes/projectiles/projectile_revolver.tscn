@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgv5i6ww2y07b"]
+
+[ext_resource type="PackedScene" uid="uid://10wvignjh6qs" path="res://scenes/projectiles/projectile_pistol.tscn" id="1_lfjve"]
+
+[node name="ProjectileRevolver" instance=ExtResource("1_lfjve")]
+
+[node name="Sprite2D" parent="." index="0"]
+scale = Vector2(0.6, 0.5)
