@@ -55,81 +55,81 @@ script = ExtResource("6_qqlo3")
 visible = false
 
 [node name="Marker2D" type="Marker2D" parent="WeaponContainer/One" index="0"]
-position = Vector2(50, -30)
+position = Vector2(-30, -30)
 
 [node name="Two" type="Node2D" parent="WeaponContainer" index="1"]
+visible = false
 
 [node name="Marker2D" type="Marker2D" parent="WeaponContainer/Two" index="0"]
-position = Vector2(-50, -30)
+position = Vector2(-30, -30)
 
 [node name="Marker2D2" type="Marker2D" parent="WeaponContainer/Two" index="1"]
-position = Vector2(50, -30)
+position = Vector2(30, -30)
 
 [node name="Three" type="Node2D" parent="WeaponContainer" index="2"]
 visible = false
 
 [node name="Marker2D" type="Marker2D" parent="WeaponContainer/Three" index="0"]
-position = Vector2(-50, 25)
+position = Vector2(-30, -30)
 
 [node name="Marker2D2" type="Marker2D" parent="WeaponContainer/Three" index="1"]
-position = Vector2(50, 25)
+position = Vector2(30, -30)
 
 [node name="Marker2D3" type="Marker2D" parent="WeaponContainer/Three" index="2"]
-position = Vector2(0, -125)
+position = Vector2(0, 15)
 
 [node name="Four" type="Node2D" parent="WeaponContainer" index="3"]
-visible = false
 
 [node name="Marker2D" type="Marker2D" parent="WeaponContainer/Four" index="0"]
-position = Vector2(-50, 25)
+position = Vector2(-30, -50)
 
 [node name="Marker2D2" type="Marker2D" parent="WeaponContainer/Four" index="1"]
-position = Vector2(50, 25)
+position = Vector2(30, -50)
 
 [node name="Marker2D3" type="Marker2D" parent="WeaponContainer/Four" index="2"]
-position = Vector2(-50, -125)
+position = Vector2(-30, 15)
 
 [node name="Marker2D4" type="Marker2D" parent="WeaponContainer/Four" index="3"]
-position = Vector2(50, -125)
+position = Vector2(30, 15)
 
 [node name="Five" type="Node2D" parent="WeaponContainer" index="4"]
 visible = false
 
 [node name="Marker2D" type="Marker2D" parent="WeaponContainer/Five" index="0"]
-position = Vector2(-50, 25)
+position = Vector2(-30, -50)
 
 [node name="Marker2D2" type="Marker2D" parent="WeaponContainer/Five" index="1"]
-position = Vector2(50, 25)
+position = Vector2(30, -50)
 
 [node name="Marker2D3" type="Marker2D" parent="WeaponContainer/Five" index="2"]
-position = Vector2(50, -50)
+position = Vector2(-30, 15)
 
 [node name="Marker2D4" type="Marker2D" parent="WeaponContainer/Five" index="3"]
-position = Vector2(-50, -50)
+position = Vector2(30, 15)
 
 [node name="Marker2D5" type="Marker2D" parent="WeaponContainer/Five" index="4"]
-position = Vector2(0, -125)
+position = Vector2(0, 25)
 
 [node name="Six" type="Node2D" parent="WeaponContainer" index="5"]
 visible = false
 
 [node name="Marker2D" type="Marker2D" parent="WeaponContainer/Six" index="0"]
-position = Vector2(40, 25)
+position = Vector2(-40, -27.5)
 
 [node name="Marker2D2" type="Marker2D" parent="WeaponContainer/Six" index="1"]
-position = Vector2(-40, 25)
+position = Vector2(40, -27.5)
 
 [node name="Marker2D3" type="Marker2D" parent="WeaponContainer/Six" index="2"]
-position = Vector2(40, -125)
+position = Vector2(30, -60)
 
 [node name="Marker2D4" type="Marker2D" parent="WeaponContainer/Six" index="3"]
-position = Vector2(-40, -125)
+position = Vector2(-30, -60)
 
 [node name="Marker2D5" type="Marker2D" parent="WeaponContainer/Six" index="4"]
-position = Vector2(60, -50)
+position = Vector2(-30, 5)
 
 [node name="Marker2D6" type="Marker2D" parent="WeaponContainer/Six" index="5"]
-position = Vector2(-60, -50)
+position = Vector2(30, 5)
 
 [node name="AnimationPlayer" parent="." index="3"]
 autoplay = "idle"

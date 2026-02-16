@@ -45,6 +45,7 @@ func _process(delta: float) -> void:
 			closest_target = null
 			
 	rotate_to_target()
+	update_visuals()
 	
 	if can_use_weapon():
 		use_weapon()
@@ -91,6 +92,12 @@ func get_idle_rotation() -> float:
 func calculate_spread() -> void:
 	weapon_spread += randf_range(-1+data.stats.accuracy, 1-data.stats.accuracy)
 	rotation += weapon_spread
+	
+func update_visuals() -> void:
+	if abs(rotation) > PI/2:
+		sprite.scale.y = -0.35
+	else:
+		sprite.scale.y = 0.35
 	
 func can_use_weapon() -> bool:
 	return cooldown_timer.is_stopped() and closest_target
