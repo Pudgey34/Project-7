@@ -24,13 +24,12 @@ func _ready() -> void:
 	dash_cooldown_timer.wait_time = dash_cooldown
 	
 
-	#add_weapon(preload("uid://bxayqlg74oyri"))
+	add_weapon(preload("uid://bxayqlg74oyri"))
 	#add_weapon(preload("uid://ci0b8f4wu1e2p"))
 
 
-
-# MOVEMENT
 func _process(delta: float) -> void:
+	if Global.game_paused: return
 	move_dir = Input.get_vector("move_left","move_right","move_up","move_down")
 	
 	var current_velocity := move_dir * stats.speed
@@ -49,14 +48,12 @@ func _process(delta: float) -> void:
 	update_rotation()
 	
 	
-# ANIMATE IF IDLE OR MOVING
 func update_animations() -> void:
 	if move_dir.length() > 0:
 		anim_player.play("move")
 	else:
 		anim_player.play("idle")
 
-# ADJUST FACING DIRECTION LEFT OR RIGHT IF MOVING LEFT OR RIGHT
 func update_rotation() -> void:
 	if move_dir == Vector2.ZERO:
 		return

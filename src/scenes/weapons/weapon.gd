@@ -38,6 +38,7 @@ func get_closest_target() -> Node2D:
 	return closest_enemy
 
 func _process(delta: float) -> void:
+	if Global.game_paused: return
 	if not is_attacking:
 		if targets.size() > 0:
 			update_closest_target()

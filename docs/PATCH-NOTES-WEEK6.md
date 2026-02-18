@@ -6,5 +6,5 @@ Ranged Weapon implementation.
 2:30PM - 3:30PM
 Enemy Attack Behaviour
 
-3:30PM - 5:00 PM
+3:30PM - 5:30 PM
 Enemy Spawning
