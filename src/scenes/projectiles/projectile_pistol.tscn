@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://45dwbyxmy4wd" path="res://assets/sprites/Projectiles/Projectile_2.png" id="2_yt6ye"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_reban"]
-radius = 11.0
+radius = 18.248287
 
 [node name="ProjectilePistol" type="Node2D" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("1_71gtn")

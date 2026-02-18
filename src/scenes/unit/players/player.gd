@@ -25,7 +25,7 @@ func _ready() -> void:
 	
 
 	#add_weapon(preload("uid://bxayqlg74oyri"))
-	add_weapon(preload("uid://ci0b8f4wu1e2p"))
+	#add_weapon(preload("uid://ci0b8f4wu1e2p"))
 
 
 
