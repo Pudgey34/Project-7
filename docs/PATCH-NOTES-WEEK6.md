@@ -5,3 +5,6 @@ Ranged Weapon implementation.
 2026-02-18
 2:30PM - 3:30PM
 Enemy Attack Behaviour
+
+3:30PM - 5:00 PM
+Enemy Spawning

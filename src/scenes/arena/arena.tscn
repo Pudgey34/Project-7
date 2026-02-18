@@ -1,10 +1,11 @@
-[gd_scene load_steps=25 format=3 uid="uid://b4ifpsnkclb5q"]
+[gd_scene load_steps=26 format=3 uid="uid://b4ifpsnkclb5q"]
 
 [ext_resource type="Texture2D" uid="uid://cy4xfx762bxgb" path="res://assets/sprites/BG.png" id="1_5tue2"]
 [ext_resource type="Script" uid="uid://dx6ay2e086uwg" path="res://scenes/arena/arena.gd" id="1_asdgj"]
 [ext_resource type="Texture2D" uid="uid://ov4fmsbglo55" path="res://assets/sprites/Map.png" id="2_aj7ud"]
 [ext_resource type="PackedScene" uid="uid://v3s585564nk4" path="res://scenes/unit/players/player_default.tscn" id="3_asdgj"]
 [ext_resource type="Script" uid="uid://ccgcwy5sr1qo2" path="res://scenes/arena/camera_2d.gd" id="5_jx0ua"]
+[ext_resource type="PackedScene" uid="uid://cl1blw5gfdqfo" path="res://scenes/unit/enemy/enemy_charger.tscn" id="6_jx0ua"]
 [ext_resource type="Script" uid="uid://c0e53leqa3p2u" path="res://scenes/unit/enemy/enemy.gd" id="6_w4nra"]
 [ext_resource type="Resource" uid="uid://d1a6qg5m27xcm" path="res://resources/units/enemies/stats_enemy_shooter.tres" id="7_t3vx8"]
 [ext_resource type="Texture2D" uid="uid://devt2xbk78rej" path="res://assets/sprites/shadow.png" id="8_rhjlh"]
@@ -374,6 +375,9 @@ enemy = NodePath("..")
 fire_pos = NodePath("../Visuals/FirePos")
 projectile_count = 10
 projectile_scene = ExtResource("15_l0cts")
+
+[node name="EnemyCharger" parent="." instance=ExtResource("6_jx0ua")]
+position = Vector2(-505, -66)
 
 [connection signal="on_damaged" from="EnemyShooter/HurtboxComponent" to="EnemyShooter" method="_on_hurtbox_component_on_damaged"]
 [connection signal="area_entered" from="EnemyShooter/HitboxComponent" to="EnemyShooter/HitboxComponent" method="_on_area_entered"]
