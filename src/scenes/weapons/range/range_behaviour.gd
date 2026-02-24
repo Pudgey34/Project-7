@@ -18,6 +18,7 @@ func execute_attack() -> void:
 	
 	tween.tween_property(weapon.sprite, "position", attack_pos, weapon.data.stats.recoil_duration)
 	tween.parallel().tween_property(weapon.sprite, "rotation", rotation_amount, weapon.data.stats.recoil_duration)
+	
 
 	
 	tween.tween_property(weapon.sprite, "position", weapon.atk_start_pos, weapon.data.stats.recoil_duration)
@@ -38,5 +39,5 @@ func create_projectile() -> void:
 	
 	var velocity := Vector2.RIGHT.rotated(weapon.rotation) * weapon.data.stats.projectile_speed 
 	
-	instance.set_projectile(velocity, get_damage(), critical, weapon.data.stats.knockback, weapon.get_parent())
+	instance.set_projectile(velocity, get_damage(), critical, weapon.data.stats.knockback, weapon.get_parent(), weapon)
 	

@@ -9,11 +9,11 @@ var velocity: Vector2
 func _process(delta: float) -> void:
 	position += velocity * delta
 
-func set_projectile(velocity: Vector2, damage: float, critical: bool, knockback: float, unit: Node2D) -> void:
+func set_projectile(velocity: Vector2, damage: float, critical: bool, knockback: float, unit: Node2D, weapon: Weapon) -> void:
 	self.velocity = velocity
 	rotation = velocity.angle()
 	if hitbox:
-		hitbox.setup(damage, critical, knockback, unit)
+		hitbox.setup(damage, critical, knockback, unit, weapon)
 	
 
 

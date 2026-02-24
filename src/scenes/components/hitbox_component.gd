@@ -8,6 +8,7 @@ var damage := 1.0
 var critical := false
 var knockback_power := 0
 var source: Node2D
+var weapon: Weapon
 
 #func _ready() -> void:
 #	area_entered.connect(_on_area_entered)
@@ -21,11 +22,12 @@ func disable() -> void:
 	set_deferred("monitoring", false)
 	set_deferred("monitorable", false)
 	
-func setup(damage: float, critical: bool, knockback: float, source: Node2D) -> void:
+func setup(damage: float, critical: bool, knockback: float, source: Node2D, weapon: Weapon) -> void:
 	self.damage = damage
 	self.critical = critical
 	knockback_power = knockback
-	self.source =source
+	self.source = source
+	self.weapon = weapon
 
 func _on_area_entered(area: Area2D) -> void:
 	if area is HurtboxComponent:

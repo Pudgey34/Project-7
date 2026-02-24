@@ -17,4 +17,5 @@ func get_damage() -> float:
 		critical = true
 		damage = ceil(damage * weapon.data.stats.crit_damage)
 	return damage
+		
 	

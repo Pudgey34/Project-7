@@ -27,6 +27,9 @@ func _on_hurtbox_component_on_damaged(hitbox: HitboxComponent) -> void:
 	set_flash_material()
 	health_component.take_damage(hitbox.damage)
 	Global.on_create_damage_text.emit(self, hitbox)
+	
+	if self is Enemy and hitbox.weapon:
+		Global.apply_life_steal(hitbox.weapon)
 
 func set_flash_material() -> void:
 	sprite.material = Global.FLASH_MATERIAL
