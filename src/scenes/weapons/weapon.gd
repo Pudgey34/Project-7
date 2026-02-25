@@ -53,6 +53,7 @@ func _process(delta: float) -> void:
 	
 
 func use_weapon() -> void:
+	weapon_spread = 0.0
 	calculate_spread()
 	weapon_behaviour.execute_attack()
 	cooldown_timer.wait_time = data.stats.cooldown
@@ -82,7 +83,11 @@ func get_rotation_to_target() -> float:
 	
 func setup_weapon(data: ItemWeapon) -> void:
 	self.data = data
-	collision.shape.radius = data.stats.max_range
+	if collision.shape:
+		collision.shape = collision.shape.duplicate()
+	var circle := collision.shape as CircleShape2D
+	if circle:
+		circle.radius = data.stats.max_range
 	
 func get_idle_rotation() -> float:
 	if Global.player.is_facing_right():

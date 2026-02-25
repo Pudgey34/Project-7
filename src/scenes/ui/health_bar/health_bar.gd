@@ -20,7 +20,7 @@ func _ready() -> void:
 	
 func update_bar(value: float, health: float) -> void:
 	progress_bar.value = value
-	health_label.text = str(health)
+	health_label.text = "%.1f" % health
 
 
 func _on_health_component_on_health_changed(current: float, max: float) -> void:

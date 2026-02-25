@@ -15,8 +15,9 @@ class_name Arena
 #@onready var upgrade_panel: UpgradePanel = $GameUI/UpgradePanel
 @onready var shop_panel: ShopPanel = %ShopPanel
 @onready var upgrade_panel: UpgradePanel = %UpgradePanel
+@onready var coins_bag: CoinsBag = %CoinsBag
 
-
+var gold_list: Array[Coins]
 
 
 func _ready() -> void:
@@ -25,6 +26,7 @@ func _ready() -> void:
 	Global.on_create_damage_text.connect(_on_create_damage_text)
 	Global.on_upgrade_selected.connect(_on_upgrade_selected)
 	Global.on_create_heal_text.connect(_on_create_heal_text)
+	Global.on_enemy_died.connect(_on_enemy_died)
 	spawner.start_wave()
 	
 	shop_panel.load_shop(7)
@@ -55,6 +57,50 @@ func start_new_wave() -> void:
 	spawner.wave_index += 1
 	spawner.start_wave()
 	
+func clean_arena() -> void:
+	if gold_list.size() > 0:
+		var target_center_pos := coins_bag.global_position + coins_bag.size / 2.0
+		for gold in gold_list:
+			if is_instance_valid(gold):
+				var gold_item := gold as Coins
+				gold_item.set_collection_target(target_center_pos)
+	gold_list.clear()
+	
+
+func wait_for_coins_collection() -> void:
+	var max_wait_time := 5.0  # Maximum 5 seconds to wait
+	var elapsed_time := 0.0
+	var check_interval := 0.05
+	
+	while elapsed_time < max_wait_time:
+		var has_coins = false
+		for child in get_children():
+			if child is Coins:
+				# Make sure any coins found also get sucked up
+				var coin := child as Coins
+				var target_center_pos := coins_bag.global_position + coins_bag.size / 2.0
+				coin.set_collection_target(target_center_pos)
+				has_coins = true
+		
+		if not has_coins:
+			break
+		
+		await get_tree().create_timer(check_interval).timeout
+		elapsed_time += check_interval
+
+func spawn_coins(enemy: Enemy) -> void:
+	var random_angle := randf_range(0, TAU)
+	var offset := Vector2.RIGHT.rotated(random_angle) * 35
+	var spawn_pos := enemy.global_position + offset
+	
+	
+	var gold_instance := Global.COINS_SCENE.instantiate()
+	gold_list.append(gold_instance)
+	
+	gold_instance.global_position = spawn_pos
+	gold_instance.value = enemy.stats.gold_drop
+	call_deferred("add_child", gold_instance)
+	
 
 func _on_create_block_text(unit: Node2D) -> void:
 	var text := create_floating_text(unit)
@@ -81,10 +127,14 @@ func _on_upgrade_selected() -> void:
 
 func _on_spawner_on_wave_completed() -> void:
 	if not Global.player: return
-	await get_tree().create_timer(1.0).timeout
+	clean_arena()
+	await wait_for_coins_collection()
 	show_upgrades()
 
 
 func _on_shop_panel_on_shop_next_wave() -> void:
 	shop_panel.hide()
 	start_new_wave()
+	
+func _on_enemy_died(enemy: Enemy) -> void:
+	spawn_coins(enemy)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cnjxlvdplj5ds"]
 
-[ext_resource type="Script" uid="uid://di608i01y2wye" path="res://scenes/ui/floating_text.gd" id="1_0qskq"]
+[ext_resource type="Script" uid="uid://di608i01y2wye" path="res://scenes/ui/floating_text/floating_text.gd" id="1_0qskq"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_x405i"]
 font_size = 32

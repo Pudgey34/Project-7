@@ -4,7 +4,7 @@ class_name WeaponStats
 
 @export var damage := 1.0
 @export_range(0.0,1.0) var accuracy := 0.9
-@export_range(0.5,3.0) var cooldown := 1.0
+@export_range(0.01,5.0) var cooldown := 1.0
 @export_range(0.0,1.0) var crit_chance := 0.05
 @export var crit_damage := 1.5
 @export var max_range := 150.0

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://c2s1ovs001wtm"]
 
-[ext_resource type="Script" uid="uid://5jaj7d6nqgge" path="res://scenes/ui/health_bar.gd" id="1_1vcc2"]
+[ext_resource type="Script" uid="uid://5jaj7d6nqgge" path="res://scenes/ui/health_bar/health_bar.gd" id="1_1vcc2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wsxx7"]
 bg_color = Color(0.13725491, 0.019607844, 0.02745098, 1)
@@ -29,8 +29,6 @@ anchors_preset = 0
 offset_right = 96.0
 offset_bottom = 20.0
 script = ExtResource("1_1vcc2")
-back_color = null
-fill_color = null
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 layout_mode = 1

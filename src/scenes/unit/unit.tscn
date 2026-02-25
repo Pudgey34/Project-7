@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://devt2xbk78rej" path="res://assets/sprites/shadow.png" id="2_bhlit"]
 [ext_resource type="PackedScene" uid="uid://bntjso6cff88q" path="res://scenes/components/hurtbox_component.tscn" id="3_vh40f"]
 [ext_resource type="PackedScene" uid="uid://d4h8ghlbeccxi" path="res://scenes/components/health_component.tscn" id="4_bhlit"]
-[ext_resource type="PackedScene" uid="uid://c2s1ovs001wtm" path="res://scenes/ui/health_bar.tscn" id="5_vgvef"]
+[ext_resource type="PackedScene" uid="uid://c2s1ovs001wtm" path="res://scenes/ui/health_bar/health_bar.tscn" id="5_vgvef"]
 
 [sub_resource type="Animation" id="Animation_vqlpx"]
 length = 0.001

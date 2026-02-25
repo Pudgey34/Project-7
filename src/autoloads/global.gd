@@ -5,10 +5,11 @@ signal on_create_damage_text(unit: Node2D, hitbox: HitboxComponent)
 signal on_create_heal_text(unit: Node2D, heal: float)
 
 signal on_upgrade_selected
-
+signal on_enemy_died(enemy: Enemy)
+const COINS_SCENE = preload("uid://dkvbklgbghtf3")
 const FLASH_MATERIAL = preload("uid://bys1rfyuawvhe")
 const FLOATING_TEXT_SCENE = preload("uid://cnjxlvdplj5ds")
-
+const ITEM_CARD_SCENE = preload("uid://c8bnprxgjttxt")
 const COMMON_STYLE = preload("uid://cxtqhn2pkqjsg")
 const EPIC_STYLE = preload("uid://duhsf70p3qe8m")
 const LEGENDARY_STYLE = preload("uid://bls2cae0qlmoq")
@@ -38,6 +39,9 @@ enum UpgradeTier{
 var coins: int
 var player: Player
 var game_paused:= false
+
+var equipped_weapons: Array[ItemWeapon]
+var selected_weapon: ItemWeapon
 
 func get_harvesting_coins() -> void:
 	coins += player.stats.harvesting
