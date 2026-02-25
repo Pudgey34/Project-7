@@ -21,6 +21,12 @@ const UPGRADE_PROBABILITY_CONFIG = {
 	"legendary": { "start_wave": 7, "base_multi": 0.0023 },
 	
 }
+const SHOP_PROBABILITY_CONFIG = {
+	"rare": { "start_wave": 2, "base_multi": 0.1 },
+	"epic": { "start_wave": 4, "base_multi": 0.06 },
+	"legendary": { "start_wave": 7, "base_multi": 0.01 },
+	
+}
 
 enum UpgradeTier{
 	COMMON,
@@ -117,7 +123,9 @@ func select_items_for_offer(item_pool: Array, current_wave: int, config: Diction
 	var rare_limit = epic_limit + tier_chances[1]
 	
 	var offered_items: Array = []
-	while offered_items.size() < 4:
+	var attempts := 0
+	while offered_items.size() < 4 and attempts < 100:
+		attempts += 1
 		var roll := randf()
 		var chosen_tier_index := 0
 		if roll < legendary_limit:

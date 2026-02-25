@@ -85,9 +85,7 @@ visible = false
 
 [node name="ShopPanel" parent="GameUI" instance=ExtResource("10_2ml6w")]
 unique_name_in_owner = true
-visible = false
 
 [connection signal="on_wave_completed" from="Spawner" to="." method="_on_spawner_on_wave_completed"]
 [connection signal="timeout" from="Spawner/SpawnTimer" to="Spawner" method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="Spawner/WaveTimer" to="Spawner" method="_on_wave_timer_timeout"]
-[connection signal="on_shop_next_wave" from="GameUI/ShopPanel" to="." method="_on_shop_panel_on_shop_next_wave"]

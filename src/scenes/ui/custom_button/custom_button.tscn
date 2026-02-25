@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://4ob1k1bqlxm"]
+[gd_scene load_steps=4 format=3 uid="uid://4ob1k1bqlxm"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qf0dw"]
 bg_color = Color(0.3882353, 0.3882353, 0.3882353, 1)
@@ -9,6 +9,18 @@ corner_radius_bottom_left = 12
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iq67i"]
 bg_color = Color(0.09411765, 0.62352943, 0.74509805, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_focus"]
+bg_color = Color(0.3882353, 0.3882353, 0.3882353, 1)
+border_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
 corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
@@ -28,4 +40,5 @@ grow_vertical = 0
 theme_override_font_sizes/font_size = 48
 theme_override_styles/normal = SubResource("StyleBoxFlat_qf0dw")
 theme_override_styles/hover = SubResource("StyleBoxFlat_iq67i")
+theme_override_styles/focus = SubResource("StyleBoxFlat_focus")
 text = "select"

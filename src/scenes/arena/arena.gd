@@ -12,7 +12,11 @@ class_name Arena
 @onready var wave_index_label: Label = %WaveIndexLabel
 @onready var wave_time_label: Label = %WaveTimeLabel
 @onready var spawner: Spawner = $Spawner
-@onready var upgrade_panel: UpgradePanel = $GameUI/UpgradePanel
+#@onready var upgrade_panel: UpgradePanel = $GameUI/UpgradePanel
+@onready var shop_panel: ShopPanel = %ShopPanel
+@onready var upgrade_panel: UpgradePanel = %UpgradePanel
+
+
 
 
 func _ready() -> void:
@@ -22,6 +26,8 @@ func _ready() -> void:
 	Global.on_upgrade_selected.connect(_on_upgrade_selected)
 	Global.on_create_heal_text.connect(_on_create_heal_text)
 	spawner.start_wave()
+	
+	shop_panel.load_shop(7)
 
 func _process(delta:float) -> void:
 	if Global.game_paused: return
@@ -68,10 +74,17 @@ func _on_create_heal_text(unit: Node2D, heal: float) -> void:
 func _on_upgrade_selected() -> void:
 	#print("Upgrade Selected.")
 	upgrade_panel.hide()
-	start_new_wave()
+	shop_panel.load_shop(spawner.wave_index)
+	shop_panel.show()
+	#start_new_wave()
 
 
 func _on_spawner_on_wave_completed() -> void:
 	if not Global.player: return
 	await get_tree().create_timer(1.0).timeout
 	show_upgrades()
+
+
+func _on_shop_panel_on_shop_next_wave() -> void:
+	shop_panel.hide()
+	start_new_wave()

@@ -2,23 +2,32 @@ extends Unit
 
 class_name Enemy
 
-@export var flock_push := 20.0
+@export var flock_push := 10.0
 @onready var vision_area: Area2D = $VisionArea
 @onready var knockback_timer: Timer = $KnockbackTimer
+@onready var hitbox: HitboxComponent = $HitboxComponent
 
 var can_move := true
 
-var knockback_dir: Vector2
-var knockback_power: float
+var knockback_velocity: Vector2
+const KNOCKBACK_DECAY := 8.0
+
+func _ready() -> void:
+	super._ready()
+	hitbox.setup(stats.damage, false, 0, self, null)
 
 func _process(delta: float) -> void:
 	if Global.game_paused: return
 	if not can_move:
 		return
 		
-	if not can_move_towards_player():
-		return
-	position += (get_move_direction() + knockback_dir *knockback_power) * stats.speed * delta
+	knockback_velocity = knockback_velocity.lerp(Vector2.ZERO, KNOCKBACK_DECAY * delta)
+		
+	var movement = Vector2.ZERO
+	if can_move_towards_player():
+		movement = get_move_direction() * stats.speed
+	
+	position += (movement + knockback_velocity) * delta
 	update_rotation()
 		
 func get_move_direction() -> Vector2:
@@ -29,9 +38,11 @@ func get_move_direction() -> Vector2:
 	for area: Node2D in vision_area.get_overlapping_areas():
 		if area != self and area.is_inside_tree():
 			var vector := global_position - area.global_position
-			direction += flock_push * vector.normalized() / vector.length()
+			var distance := vector.length()
+			if distance < 50.0:  # only repel when very close
+				direction += flock_push * vector.normalized() / distance
 		
-	return direction
+	return direction.normalized()
 
 func update_rotation() -> void:
 	if not is_instance_valid(Global.player):
@@ -45,11 +56,9 @@ func can_move_towards_player() -> bool:
 	global_position.distance_to(Global.player.global_position) > 60
 
 func apply_knockback(knock_dir: Vector2, knock_power: float) -> void:
-	knockback_dir = knock_dir
-	knockback_power = knock_power
+	knockback_velocity = knock_dir.normalized() * knock_power * 200.0  # adjust multiplier
 	if knockback_timer.time_left > 0:
 		knockback_timer.stop()
-		reset_knockback()
 	knockback_timer.start()
 	
 	
@@ -60,8 +69,7 @@ func destroy_enemy() -> void:
 	queue_free()
 
 func reset_knockback() -> void:
-	knockback_dir = Vector2.ZERO
-	knockback_power = 0.0
+	knockback_velocity = Vector2.ZERO
 
 func _on_knockback_timer_timeout() -> void:
 	reset_knockback()
@@ -69,6 +77,6 @@ func _on_knockback_timer_timeout() -> void:
 func _on_hurtbox_component_on_damaged(hitbox: HitboxComponent) -> void:
 	super._on_hurtbox_component_on_damaged(hitbox)
 	
-	if hitbox.knockback_power > 0:
+	if hitbox.knockback_power > 0 and is_instance_valid(hitbox.source):
 		var dir := hitbox.source.global_position.direction_to(global_position)
 		apply_knockback(dir, hitbox.knockback_power)
