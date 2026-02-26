@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bqr2tbjs3nfti"]
+[gd_scene load_steps=10 format=3 uid="uid://bqr2tbjs3nfti"]
 
 [ext_resource type="Script" uid="uid://dqwqslnp0v5j1" path="res://scenes/ui/shop_card/shop_card.gd" id="1_32l3b"]
 [ext_resource type="StyleBox" uid="uid://cxtqhn2pkqjsg" path="res://styles/common_styles.tres" id="1_b8qnx"]
@@ -9,8 +9,11 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h66gf"]
 bg_color = Color(0.29411766, 0.29411766, 0.29411766, 0.78431374)
 
-[sub_resource type="LabelSettings" id="LabelSettings_6673v"]
-font_size = 24
+[sub_resource type="LabelSettings" id="LabelSettings_b8qnx"]
+font_size = 22
+
+[sub_resource type="LabelSettings" id="LabelSettings_7csgf"]
+font_size = 32
 
 [sub_resource type="LabelSettings" id="LabelSettings_s6itt"]
 font_size = 40
@@ -58,20 +61,21 @@ stretch_mode = 5
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 118.0
-offset_right = 158.0
-offset_bottom = 20.0
-text = "Item Name"
-label_settings = SubResource("LabelSettings_6673v")
+offset_right = 297.0
+offset_bottom = 99.0
+text = "Gravekeeper's cloak"
+label_settings = SubResource("LabelSettings_b8qnx")
+autowrap_mode = 3
 
 [node name="ItemType" type="Label" parent="MarginContainer/Control"]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 118.0
-offset_top = 51.0
-offset_right = 242.0
-offset_bottom = 80.0
+offset_left = 53.0
+offset_top = -58.0
+offset_right = 219.0
+offset_bottom = -19.333332
 text = "Item Type"
-label_settings = SubResource("LabelSettings_6673v")
+label_settings = SubResource("LabelSettings_7csgf")
 
 [node name="ItemDescription" type="RichTextLabel" parent="MarginContainer/Control"]
 unique_name_in_owner = true

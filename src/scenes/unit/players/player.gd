@@ -8,6 +8,7 @@ class_name Player
 @onready var dash_timer: Timer = $DashTimer
 @onready var dash_cooldown_timer: Timer = $DashCooldownTimer
 @onready var collision: CollisionShape2D = $CollisionShape2D
+@onready var hurtbox: HurtboxComponent = $HurtboxComponent
 @onready var trail: Trail = %Trail
 @onready var weapon_container: WeaponContainer = $WeaponContainer
 
@@ -19,16 +20,19 @@ var dash_available := true
 var moved_right := true
 
 func _ready() -> void:
+	# Duplicate stats resource to prevent modifying the original resource file
+	stats = stats.duplicate()
+	
 	super._ready()
 	dash_timer.wait_time = dash_duration
 	dash_cooldown_timer.wait_time = dash_cooldown
 	
 
-	#add_weapon(preload("uid://bxayqlg74oyri"))
+	add_weapon(preload("uid://bxayqlg74oyri"))
 	#add_weapon(preload("uid://ci0b8f4wu1e2p"))
 	#add_weapon(preload("uid://ci0b8f4wu1e2p"))
 	#add_weapon(preload("uid://ci0b8f4wu1e2p"))
-	add_weapon(preload("uid://cd4k14vsu0efd"))
+	#add_weapon(preload("uid://cd4k14vsu0efd"))
 
 
 func _process(delta: float) -> void:
@@ -87,6 +91,9 @@ func start_dash() -> void:
 	trail.start_trail()
 	visuals.modulate.a = 0.5
 	collision.set_deferred("disabled",true)
+	# Enable invulnerability frames
+	hurtbox.set_deferred("monitoring", false)
+	hurtbox.set_deferred("monitorable", false)
 	
 func can_dash() -> bool:
 	return not is_dashing and dash_cooldown_timer.is_stopped() and\
@@ -106,6 +113,9 @@ func _on_dash_timer_timeout() -> void:
 	visuals.modulate.a = 1.0
 	move_dir = Vector2.ZERO
 	collision.set_deferred("disabled",false)
+	# Disable invulnerability frames
+	hurtbox.set_deferred("monitoring", true)
+	hurtbox.set_deferred("monitorable", true)
 	dash_cooldown_timer.start()
 	
 

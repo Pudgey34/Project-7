@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemPassive" load_steps=3 format=3 uid="uid://bi1wxxo5rdx22"]
+
+[ext_resource type="Texture2D" uid="uid://d3p6i6cxnf1sy" path="res://assets/sprites/Upgrades/4.png" id="1_b54nh"]
+[ext_resource type="Script" uid="uid://dona4k48tjfmp" path="res://resources/items/passives/item_passive.gd" id="2_sffih"]
+
+[resource]
+script = ExtResource("2_sffih")
+add_value = 5.0
+add_stats = "life_steal"
+remove_value = 5.0
+remove_stats = "speed"
+item_name = "Gravekeeper's Cloak"
+item_icon = ExtResource("1_b54nh")
+item_type = 2
+item_cost = 22
+metadata/_custom_type_script = "uid://dona4k48tjfmp"

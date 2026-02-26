@@ -88,6 +88,7 @@ func setup_weapon(data: ItemWeapon) -> void:
 	var circle := collision.shape as CircleShape2D
 	if circle:
 		circle.radius = data.stats.max_range
+	apply_tier_outline()
 	
 func get_idle_rotation() -> float:
 	if Global.player.is_facing_right():
@@ -108,7 +109,13 @@ func update_visuals() -> void:
 func can_use_weapon() -> bool:
 	return cooldown_timer.is_stopped() and closest_target
 	
-
+func apply_tier_outline() -> void:
+	if data.item_tier == Global.UpgradeTier.COMMON:
+		sprite.material = null
+		return
+	
+	var outline_color := Global.TIER_COLORS[data.item_tier]
+	sprite.material.set_shader_parameter("outline_color", outline_color)
 
 func _on_range_area_area_entered(area: Area2D) -> void:
 	targets.push_back(area)

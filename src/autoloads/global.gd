@@ -29,6 +29,13 @@ const SHOP_PROBABILITY_CONFIG = {
 	
 }
 
+const TIER_COLORS: Dictionary[UpgradeTier, Color] = {
+	UpgradeTier.RARE: Color(0.0, 0.557, 0.741),
+	UpgradeTier.EPIC: Color(0.478, 0.251, 0.71),
+	UpgradeTier.LEGENDARY: Color(0.906, 0.212, 0.212)
+	
+}
+
 enum UpgradeTier{
 	COMMON,
 	RARE,
@@ -36,7 +43,7 @@ enum UpgradeTier{
 	LEGENDARY
 }
 
-var coins: int
+var coins := 500
 var player: Player
 var game_paused:= false
 
@@ -44,6 +51,8 @@ var equipped_weapons: Array[ItemWeapon]
 var selected_weapon: ItemWeapon
 
 func get_harvesting_coins() -> void:
+	if not is_instance_valid(player):
+		return
 	coins += player.stats.harvesting
 	
 

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemPassive" load_steps=3 format=3 uid="uid://mjhrkt2w0i6x"]
+
+[ext_resource type="Texture2D" uid="uid://c41e5to043u4m" path="res://assets/sprites/Upgrades/2.png" id="1_8clte"]
+[ext_resource type="Script" uid="uid://dona4k48tjfmp" path="res://resources/items/passives/item_passive.gd" id="2_hdwu5"]
+
+[resource]
+script = ExtResource("2_hdwu5")
+add_value = 5.0
+add_stats = "damage"
+remove_value = 2.0
+remove_stats = "health"
+item_name = "Fire's Blazing Strength"
+item_icon = ExtResource("1_8clte")
+item_type = 2
+item_cost = 30
+metadata/_custom_type_script = "uid://dona4k48tjfmp"
