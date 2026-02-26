@@ -18,6 +18,11 @@ func update_weapons_position(weapons: Array[Weapon]) -> void:
 		4: reference_node = four
 		5: reference_node = five
 		6: reference_node = six
+	
+	# Safety check - if reference_node is null (count > 6), return early
+	if reference_node == null:
+		return
+	
 	var markers := reference_node.get_children()
 	if markers.size() != count:
 		return

@@ -1,5 +1,289 @@
-[gd_scene format=3 uid="uid://bxd0bti563hw2"]
+[gd_scene load_steps=14 format=3 uid="uid://bxd0bti563hw2"]
+
+[ext_resource type="StyleBox" uid="uid://cxtqhn2pkqjsg" path="res://styles/common_styles.tres" id="1_a22ni"]
+[ext_resource type="Script" uid="uid://dlt6f4twq3da4" path="res://scenes/ui/selection_panel/selection_panel.gd" id="1_un15a"]
+[ext_resource type="Script" uid="uid://dfxspktmdyr6c" path="res://resources/units/unit_stats.gd" id="2_rbokc"]
+[ext_resource type="Texture2D" uid="uid://cproxhccob85g" path="res://assets/sprites/Players/Player_1.png" id="2_un15a"]
+[ext_resource type="Resource" uid="uid://h6rpo7vj3tnd" path="res://resources/units/players/stats_player_default.tres" id="3_dh0xd"]
+[ext_resource type="PackedScene" uid="uid://4ob1k1bqlxm" path="res://scenes/ui/custom_button/custom_button.tscn" id="3_mgmnq"]
+[ext_resource type="PackedScene" uid="uid://cxd4eej5fewhn" path="res://scenes/ui/selection_panel/selection_card.tscn" id="4_jgkb1"]
+[ext_resource type="Script" uid="uid://djw4mthlrs7ft" path="res://resources/items/weapons/item_weapon.gd" id="4_m67jx"]
+[ext_resource type="Resource" uid="uid://bxayqlg74oyri" path="res://resources/items/weapons/melee/punch/item_punch_1.tres" id="5_5ne7w"]
+[ext_resource type="Resource" uid="uid://ci0b8f4wu1e2p" path="res://resources/items/weapons/range/pistol/item_pistol_1.tres" id="6_6e6br"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_58qwm"]
+bg_color = Color(0.23921569, 0.23921569, 0.23921569, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_inner_panel"]
+bg_color = Color(0.1764706, 0.1764706, 0.1764706, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.25, 0.25, 0.25, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_8wgut"]
+font_size = 24
 
 [node name="SelectionPanel" type="Panel"]
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_58qwm")
+script = ExtResource("1_un15a")
+players = Array[ExtResource("2_rbokc")]([ExtResource("3_dh0xd")])
+start_weapons = Array[ExtResource("4_m67jx")]([ExtResource("5_5ne7w"), ExtResource("6_6e6br")])
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 64
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 550)
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="MarginContainer/VBoxContainer/Control"]
+custom_minimum_size = Vector2(380, 550)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -190.0
+offset_top = -275.0
+offset_right = 190.0
+offset_bottom = 275.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("1_a22ni")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/Control/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/Control/Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="HeaderPanel" type="Panel" parent="MarginContainer/VBoxContainer/Control/Panel/MarginContainer/Control"]
+custom_minimum_size = Vector2(350, 140)
+layout_mode = 0
+offset_left = 15.0
+offset_top = 15.0
+offset_right = 365.0
+offset_bottom = 155.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_inner_panel")
+
+[node name="PlayerIcon" type="TextureRect" parent="MarginContainer/VBoxContainer/Control/Panel/MarginContainer/Control/HeaderPanel"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = 134.0
+offset_bottom = 134.0
+texture = ExtResource("2_un15a")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PlayerName" type="Label" parent="MarginContainer/VBoxContainer/Control/Panel/MarginContainer/Control/HeaderPanel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 140.0
+offset_top = 12.0
+offset_right = 340.0
+offset_bottom = 41.0
+text = "Player Name"
+label_settings = SubResource("LabelSettings_8wgut")
+
+[node name="PlayerTitle" type="Label" parent="MarginContainer/VBoxContainer/Control/Panel/MarginContainer/Control/HeaderPanel"]
+unique_name_in_owner = true
+visible = false
+modulate = Color(0.8039216, 0.6784314, 0.09803922, 1)
+layout_mode = 0
+offset_left = 140.0
+offset_top = 53.0
+offset_right = 340.0
+offset_bottom = 114.0
+text = "Player
+"
+label_settings = SubResource("LabelSettings_8wgut")
+
+[node name="DescriptionMargin" type="MarginContainer" parent="MarginContainer/VBoxContainer/Control/Panel/MarginContainer/Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -178.0
+offset_top = -377.0
+offset_right = 178.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="PlayerDescription" type="RichTextLabel" parent="MarginContainer/VBoxContainer/Control/Panel/MarginContainer/Control/DescriptionMargin"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(332, 353)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+theme_override_font_sizes/bold_italics_font_size = 24
+theme_override_font_sizes/italics_font_size = 24
+theme_override_font_sizes/mono_font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_inner_panel")
+bbcode_enabled = true
+text = "Description"
+
+[node name="ContinueButton" parent="MarginContainer/VBoxContainer/Control" instance=ExtResource("3_mgmnq")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+offset_left = -171.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 58.0
+grow_horizontal = 0
+grow_vertical = 1
+text = "Continue"
+
+[node name="Items" type="Control" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Items"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="PlayersPanel" type="Panel" parent="MarginContainer/VBoxContainer/Items/VBoxContainer"]
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_inner_panel")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/Items/VBoxContainer/PlayersPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="PlayerContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Items/VBoxContainer/PlayersPanel/MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="SelectionCard" parent="MarginContainer/VBoxContainer/Items/VBoxContainer/PlayersPanel/MarginContainer/PlayerContainer" instance=ExtResource("4_jgkb1")]
+layout_mode = 2
+
+[node name="SelectionCard2" type="Button" parent="MarginContainer/VBoxContainer/Items/VBoxContainer/PlayersPanel/MarginContainer/PlayerContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+theme_override_styles/normal = ExtResource("1_a22ni")
+
+[node name="SelectionCard3" type="Button" parent="MarginContainer/VBoxContainer/Items/VBoxContainer/PlayersPanel/MarginContainer/PlayerContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+theme_override_styles/normal = ExtResource("1_a22ni")
+
+[node name="SelectionCard4" type="Button" parent="MarginContainer/VBoxContainer/Items/VBoxContainer/PlayersPanel/MarginContainer/PlayerContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+theme_override_styles/normal = ExtResource("1_a22ni")
+
+[node name="SelectionCard5" type="Button" parent="MarginContainer/VBoxContainer/Items/VBoxContainer/PlayersPanel/MarginContainer/PlayerContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+theme_override_styles/normal = ExtResource("1_a22ni")
+
+[node name="WeaponsPanel" type="Panel" parent="MarginContainer/VBoxContainer/Items/VBoxContainer"]
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_inner_panel")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/Items/VBoxContainer/WeaponsPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="WeaponContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Items/VBoxContainer/WeaponsPanel/MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="SelectionCard" type="Button" parent="MarginContainer/VBoxContainer/Items/VBoxContainer/WeaponsPanel/MarginContainer/WeaponContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+theme_override_styles/normal = ExtResource("1_a22ni")
+
+[node name="SelectionCard2" type="Button" parent="MarginContainer/VBoxContainer/Items/VBoxContainer/WeaponsPanel/MarginContainer/WeaponContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+theme_override_styles/normal = ExtResource("1_a22ni")
+
+[node name="SelectionCard3" type="Button" parent="MarginContainer/VBoxContainer/Items/VBoxContainer/WeaponsPanel/MarginContainer/WeaponContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+theme_override_styles/normal = ExtResource("1_a22ni")
+
+[node name="SelectionCard4" type="Button" parent="MarginContainer/VBoxContainer/Items/VBoxContainer/WeaponsPanel/MarginContainer/WeaponContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+theme_override_styles/normal = ExtResource("1_a22ni")
+
+[node name="SelectionCard5" type="Button" parent="MarginContainer/VBoxContainer/Items/VBoxContainer/WeaponsPanel/MarginContainer/WeaponContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+theme_override_styles/normal = ExtResource("1_a22ni")
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Control/ContinueButton" to="." method="_on_continue_button_pressed"]

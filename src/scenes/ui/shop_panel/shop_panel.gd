@@ -39,6 +39,11 @@ func create_item_card() -> ItemCard:
 	var item_card := Global.ITEM_CARD_SCENE.instantiate() as ItemCard
 	item_card.on_item_card_selected.connect(_on_item_card_selected)
 	return item_card
+	
+func create_item_weapon(weapon: ItemWeapon) -> void:
+	var card := create_item_card()
+	weapons_container.add_child(card)
+	card.item = weapon
 		
 
 
@@ -47,6 +52,10 @@ func _on_new_wave_button_pressed() -> void:
 
 func _on_item_purchased(item: ItemBase) -> void:
 	if item.item_type == ItemBase.ItemType.WEAPON:
+		# Cap at 6 weapons (prevention happens in shop_card.gd)
+		if Global.equipped_weapons.size() >= 6:
+			return
+		
 		var item_card := create_item_card()
 		weapons_container.add_child(item_card)
 		var weapon := item as ItemWeapon

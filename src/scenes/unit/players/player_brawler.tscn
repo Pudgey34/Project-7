@@ -1,5 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://d1y5pr3q07hsr"]
-
-[ext_resource type="PackedScene" uid="uid://v3s585564nk4" path="res://scenes/unit/players/player_default.tscn" id="1_21iwi"]
-
-[node name="PlayerBrawler" instance=ExtResource("1_21iwi")]

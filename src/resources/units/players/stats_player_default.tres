@@ -1,10 +1,13 @@
-[gd_resource type="Resource" script_class="UnitStats" load_steps=2 format=3 uid="uid://h6rpo7vj3tnd"]
+[gd_resource type="Resource" script_class="UnitStats" load_steps=3 format=3 uid="uid://h6rpo7vj3tnd"]
 
 [ext_resource type="Script" uid="uid://dfxspktmdyr6c" path="res://resources/units/unit_stats.gd" id="1_ji22r"]
+[ext_resource type="Texture2D" uid="uid://cproxhccob85g" path="res://assets/sprites/Players/Player_1.png" id="2_player_icon"]
 
 [resource]
 script = ExtResource("1_ji22r")
-name = "Default"
+name = "Egg"
+icon = ExtResource("2_player_icon")
+description = "perfectly normal egg"
 health = 15
 health_increase_per_wave = 0.0
 damage = 0.0

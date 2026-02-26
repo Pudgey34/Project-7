@@ -8,13 +8,15 @@ signal on_upgrade_selected
 signal on_enemy_died(enemy: Enemy)
 const COINS_SCENE = preload("uid://dkvbklgbghtf3")
 const FLASH_MATERIAL = preload("uid://bys1rfyuawvhe")
+const SPAWN_EFFECT_SCENE = preload("uid://c340vhcs6rned")
+
 const FLOATING_TEXT_SCENE = preload("uid://cnjxlvdplj5ds")
 const ITEM_CARD_SCENE = preload("uid://c8bnprxgjttxt")
 const COMMON_STYLE = preload("uid://cxtqhn2pkqjsg")
 const EPIC_STYLE = preload("uid://duhsf70p3qe8m")
 const LEGENDARY_STYLE = preload("uid://bls2cae0qlmoq")
 const RARE_STYLE = preload("uid://c8jt2o1rli1d6")
-
+const SELECTION_CARD_SCENE = preload("uid://cxd4eej5fewhn")
 
 const UPGRADE_PROBABILITY_CONFIG = {
 	"rare": { "start_wave": 2, "base_multi": 0.06 },
@@ -43,12 +45,16 @@ enum UpgradeTier{
 	LEGENDARY
 }
 
-var coins := 500
+var available_players: Dictionary[String, PackedScene] = {
+	"Egg" : preload("uid://v3s585564nk4")
+}
+var coins := 0
 var player: Player
 var game_paused:= false
-
 var equipped_weapons: Array[ItemWeapon]
 var selected_weapon: ItemWeapon
+var main_player_selected: UnitStats
+var main_weapon_selected: ItemWeapon
 
 func get_harvesting_coins() -> void:
 	if not is_instance_valid(player):
@@ -61,6 +67,12 @@ func get_chance_success(chance: float) -> bool:
 	if random < chance:
 		return true
 	return false
+	
+func get_selected_player() -> Player:
+	var player_scene := available_players[main_player_selected.name]
+	var player_instance := player_scene.instantiate()
+	player = player_instance
+	return player
 	
 func apply_life_steal(weapon: Weapon) -> void:
 	var steal_chance := (player.stats.life_steal / 100.0) + weapon.data.stats.life_steal

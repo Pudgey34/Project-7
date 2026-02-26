@@ -21,15 +21,11 @@ var gold_list: Array[Coins]
 
 
 func _ready() -> void:
-	Global.player = player
 	Global.on_create_block_text.connect(_on_create_block_text)
 	Global.on_create_damage_text.connect(_on_create_damage_text)
 	Global.on_upgrade_selected.connect(_on_upgrade_selected)
 	Global.on_create_heal_text.connect(_on_create_heal_text)
 	Global.on_enemy_died.connect(_on_enemy_died)
-	spawner.start_wave()
-	
-	shop_panel.load_shop(7)
 
 func _process(delta:float) -> void:
 	if Global.game_paused: return
@@ -65,6 +61,7 @@ func clean_arena() -> void:
 				var gold_item := gold as Coins
 				gold_item.set_collection_target(target_center_pos)
 	gold_list.clear()
+	spawner.clear_enemies()
 	
 
 func wait_for_coins_collection() -> void:
@@ -138,3 +135,15 @@ func _on_shop_panel_on_shop_next_wave() -> void:
 	
 func _on_enemy_died(enemy: Enemy) -> void:
 	spawn_coins(enemy)
+
+
+func _on_selection_panel_on_selection_completed() -> void:
+	var player := Global.get_selected_player()
+	add_child(player)
+	player.add_weapon(Global.main_weapon_selected)
+	shop_panel.create_item_weapon(Global.main_weapon_selected)
+	Global.equipped_weapons.append(Global.main_weapon_selected)
+	
+	shop_panel.load_shop(spawner.wave_index)
+	spawner.start_wave()
+	Global.game_paused = false
