@@ -51,6 +51,7 @@ func increment_stack() -> void:
 	stack_count += 1
 
 func _on_pressed() -> void:
+	SoundManager.play_sound(SoundManager.Sound.UI)
 	if item.item_type == ItemBase.ItemType.WEAPON:
 		#Global.selected_weapon = item as ItemWeapon
 		on_item_card_selected.emit(self)

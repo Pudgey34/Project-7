@@ -9,6 +9,7 @@ func execute_attack() -> void:
 	weapon.is_attacking = true
 
 	create_projectile()
+	SoundManager.play_sound(SoundManager.Sound.FIRE)
 	
 	var tween := create_tween()
 	
