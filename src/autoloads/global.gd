@@ -48,7 +48,7 @@ enum UpgradeTier{
 var available_players: Dictionary[String, PackedScene] = {
 	"Egg" : preload("uid://v3s585564nk4")
 }
-var coins := 0
+var coins := 500
 var player: Player
 var game_paused:= false
 var equipped_weapons: Array[ItemWeapon]

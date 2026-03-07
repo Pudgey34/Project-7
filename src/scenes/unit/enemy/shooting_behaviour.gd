@@ -42,7 +42,7 @@ func shoot() -> void:
 		
 		var rotated_direction := direction.rotated(deg_to_rad(start_angle + angle_step * i))
 		var velocity := rotated_direction * projectile_speed
-		projectile.set_projectile(velocity, enemy.stats.damage, false, 0, enemy)
+		projectile.set_projectile(velocity, enemy.stats.damage, false, 0, enemy, null)
 		
 	await get_tree().create_timer(1).timeout
 	

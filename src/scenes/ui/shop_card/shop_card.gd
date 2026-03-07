@@ -26,13 +26,9 @@ func _set_shop_item(value: ItemBase) -> void:
 
 
 func _on_buy_button_pressed() -> void:
-	# Prevent weapon purchases if at max (6 weapons)
-	#if shop_item.item_type == ItemBase.ItemType.WEAPON and Global.equipped_weapons.size() >= 6:
-	#	print("Cannot buy weapon: already at max capacity (6 weapons)")
-	#	return
 	SoundManager.play_sound(SoundManager.Sound.UI)
-	
-	if Global.equipped_weapons.size() >= 6:
+
+	if shop_item.item_type == ItemBase.ItemType.WEAPON and Global.equipped_weapons.size() >= 6:
 		return
 	
 	if Global.coins >= shop_item.item_cost:

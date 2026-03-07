@@ -9,6 +9,7 @@ class_name Player
 @onready var dash_cooldown_timer: Timer = $DashCooldownTimer
 @onready var collision: CollisionShape2D = $CollisionShape2D
 @onready var hurtbox: HurtboxComponent = $HurtboxComponent
+@onready var coin_pickup_collision: CollisionShape2D = $CoinPickupArea/CollisionShape2D
 @onready var trail: Trail = %Trail
 @onready var weapon_container: WeaponContainer = $WeaponContainer
 
@@ -18,6 +19,7 @@ var move_dir: Vector2
 var is_dashing := false
 var dash_available := true
 var moved_right := true
+var base_coin_pickup_radius := 0.0
 
 func _ready() -> void:
 	# Duplicate stats resource to prevent modifying the original resource file
@@ -26,6 +28,7 @@ func _ready() -> void:
 	super._ready()
 	dash_timer.wait_time = dash_duration
 	dash_cooldown_timer.wait_time = dash_cooldown
+	setup_coin_pickup_radius()
 	
 
 	#add_weapon(preload("uid://bxayqlg74oyri"))
@@ -33,6 +36,21 @@ func _ready() -> void:
 	#add_weapon(preload("uid://ci0b8f4wu1e2p"))
 	#add_weapon(preload("uid://ci0b8f4wu1e2p"))
 	#add_weapon(preload("uid://cd4k14vsu0efd"))
+
+
+func setup_coin_pickup_radius() -> void:
+	if not coin_pickup_collision:
+		return
+
+	var coin_shape := coin_pickup_collision.shape as CircleShape2D
+	if not coin_shape:
+		return
+
+	coin_shape = coin_shape.duplicate()
+	coin_pickup_collision.shape = coin_shape
+
+	base_coin_pickup_radius = coin_shape.radius
+	coin_shape.radius = base_coin_pickup_radius * max(0.1, stats.pickup_range)
 
 
 func _process(delta: float) -> void:

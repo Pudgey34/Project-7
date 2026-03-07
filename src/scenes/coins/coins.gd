@@ -33,5 +33,8 @@ func set_collection_target(screen_pos: Vector2) -> void:
 	
 
 func _on_area_entered(area: Area2D) -> void:
+	if (area.collision_layer & 64) == 0:
+		return
+
 	collected = true
 	

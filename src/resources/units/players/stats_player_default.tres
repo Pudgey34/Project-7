@@ -15,4 +15,5 @@ damage_increase_per_wave = 0.0
 luck = 5.0
 block_chance = 1.0
 gold_drop = 0
+pickup_range = 500.0
 metadata/_custom_type_script = "uid://dfxspktmdyr6c"
