@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Global="*res://autoloads/global.gd"
 SoundManager="*res://autoloads/sound_manager.tscn"
+ProgressData="*res://autoloads/progress_data.gd"
 
 [display]
 
@@ -29,6 +30,10 @@ window/stretch/mode="canvas_items"
 [dotnet]
 
 project/assembly_name="Project7"
+
+[global_group]
+
+arena=""
 
 [gui]
 

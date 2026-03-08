@@ -26,12 +26,13 @@ font_size = 64
 [sub_resource type="LabelSettings" id="LabelSettings_6w4xk"]
 font_size = 64
 
-[node name="Arena" type="Node2D"]
+[node name="Arena" type="Node2D" groups=["arena"]]
 script = ExtResource("1_asdgj")
 normal_color = Color(1, 1, 1, 1)
 blocked_color = Color(0.007027667, 0.22946626, 0.975107, 1)
 critical_color = Color(0.64518213, 0.73819697, 0, 1)
 hp_color = Color(0, 0.627451, 0.48235294, 1)
+use_save_data = true
 
 [node name="BlackBG" type="Sprite2D" parent="."]
 scale = Vector2(2, 2)
@@ -98,6 +99,7 @@ visible = false
 unique_name_in_owner = true
 
 [node name="SelectionPanel" parent="GameUI" instance=ExtResource("12_vmsrg")]
+unique_name_in_owner = true
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_s83md")
