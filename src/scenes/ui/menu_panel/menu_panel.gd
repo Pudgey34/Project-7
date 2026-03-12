@@ -1,7 +1,6 @@
 extends Panel
 
 const ARENA_SCENE_PATH := "res://scenes/arena/arena.tscn"
-const MIN_DB := -40.0
 const BG_MUSIC := preload("res://assets/audio/Bg Music.mp3")
 
 @onready var new_game_button: Button = %NewGameButton
@@ -40,13 +39,18 @@ func _ready() -> void:
 
 
 func _update_continue_button_state() -> void:
-	var has_save := ProgressData.has_save_file()
+	var save_summary := ProgressData.get_save_summary()
+	var has_save: bool = save_summary.get("has_save", false)
 	continue_button.disabled = not has_save
 
 	if has_save:
+		var player_name: String = save_summary.get("player_name", "Unknown")
+		var wave: int = save_summary.get("wave", 1)
+		continue_button.text = "Continue\n%s - Wave %d" % [player_name, wave]
 		continue_button.modulate = Color(1, 1, 1, 1)
 		continue_button.tooltip_text = ""
 	else:
+		continue_button.text = "Continue"
 		continue_button.modulate = Color(0.55, 0.55, 0.55, 1)
 		continue_button.tooltip_text = "No save data found"
 
@@ -94,52 +98,26 @@ func _set_options_visible(value: bool) -> void:
 
 
 func _sync_options_ui_from_current_settings() -> void:
-	master_slider.value = _get_bus_linear_volume("Master", 1.0)
-	music_slider.value = _get_bus_linear_volume("Music", 1.0)
-	sfx_slider.value = _get_bus_linear_volume("SFX", 1.0)
-
-	fullscreen_toggle.button_pressed = DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN
-
-
-func _get_bus_linear_volume(bus_name: String, default_value: float) -> float:
-	var bus_index := AudioServer.get_bus_index(bus_name)
-	if bus_index < 0:
-		return default_value
-
-	return db_to_linear(AudioServer.get_bus_volume_db(bus_index))
-
-
-func _set_bus_from_slider(bus_name: String, value: float) -> void:
-	var bus_index := AudioServer.get_bus_index(bus_name)
-	if bus_index < 0:
-		return
-
-	if value <= 0.0:
-		AudioServer.set_bus_mute(bus_index, true)
-		AudioServer.set_bus_volume_db(bus_index, MIN_DB)
-		return
-
-	AudioServer.set_bus_mute(bus_index, false)
-	AudioServer.set_bus_volume_db(bus_index, linear_to_db(value))
+	master_slider.set_value_no_signal(ProgressData.master_volume)
+	music_slider.set_value_no_signal(ProgressData.music_volume)
+	sfx_slider.set_value_no_signal(ProgressData.sfx_volume)
+	fullscreen_toggle.set_pressed_no_signal(ProgressData.fullscreen_enabled)
 
 
 func _on_master_slider_value_changed(value: float) -> void:
-	_set_bus_from_slider("Master", value)
+	ProgressData.set_master_volume(value)
 
 
 func _on_music_slider_value_changed(value: float) -> void:
-	_set_bus_from_slider("Music", value)
+	ProgressData.set_music_volume(value)
 
 
 func _on_sfx_slider_value_changed(value: float) -> void:
-	_set_bus_from_slider("SFX", value)
+	ProgressData.set_sfx_volume(value)
 
 
 func _on_fullscreen_toggle_toggled(button_pressed: bool) -> void:
-	if button_pressed:
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
-	else:
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+	ProgressData.set_fullscreen_enabled(button_pressed)
 
 
 func _unhandled_input(event: InputEvent) -> void:

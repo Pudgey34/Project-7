@@ -7,7 +7,11 @@
 [ext_resource type="Texture2D" uid="uid://chm4srsn6xd8y" path="res://assets/sprites/Gold/gold_1.png" id="5_moip7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h66gf"]
-bg_color = Color(0.29411766, 0.29411766, 0.29411766, 0.78431374)
+bg_color = Color(0.21, 0.21, 0.22, 0.9)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
 
 [sub_resource type="LabelSettings" id="LabelSettings_b8qnx"]
 font_size = 22

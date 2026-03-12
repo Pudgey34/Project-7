@@ -31,6 +31,7 @@ func load_players() -> void:
 		var card: SelectionCard = Global.SELECTION_CARD_SCENE.instantiate()
 		card.pressed.connect(_on_player_selected.bind(player))
 		player_container.add_child(card)
+		_apply_character_select_card_palette(card)
 		card.set_icon(player.icon)
 	if is_instance_valid(first_player):
 		_on_player_selected(first_player)
@@ -45,6 +46,7 @@ func load_weapons() -> void:
 		var card: SelectionCard = Global.SELECTION_CARD_SCENE.instantiate()
 		card.pressed.connect(_on_weapon_selected.bind(weapon))
 		weapon_container.add_child(card)
+		_apply_character_select_card_palette(card)
 		card.icon = weapon.item_icon
 
 	if is_instance_valid(first_weapon):
@@ -69,6 +71,27 @@ func _on_player_selected(player: UnitStats) -> void:
 	
 func _on_weapon_selected(weapon: ItemWeapon) -> void:
 	Global.main_weapon_selected = weapon
+
+
+func _apply_character_select_card_palette(card: SelectionCard) -> void:
+	var base_style := card.get_theme_stylebox("normal") as StyleBoxFlat
+	if base_style == null:
+		return
+
+	var normal_style := base_style.duplicate() as StyleBoxFlat
+	normal_style.bg_color = normal_style.bg_color.lightened(0.10)
+
+	var active_style := normal_style.duplicate() as StyleBoxFlat
+	active_style.border_width_left = 2
+	active_style.border_width_top = 2
+	active_style.border_width_right = 2
+	active_style.border_width_bottom = 2
+	active_style.border_color = Color(0.82, 0.82, 0.82, 1)
+
+	card.add_theme_stylebox_override("normal", normal_style)
+	card.add_theme_stylebox_override("hover", active_style)
+	card.add_theme_stylebox_override("pressed", active_style)
+	card.add_theme_stylebox_override("focus", active_style)
 
 
 func _on_continue_button_pressed() -> void:

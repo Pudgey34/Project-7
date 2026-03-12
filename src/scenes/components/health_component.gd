@@ -20,6 +20,9 @@ func take_damage(value: float) -> void:
 		
 	current_health -= value
 	current_health = max(current_health,0)
+
+	if owner is Player:
+		SoundManager.play_sound(SoundManager.Sound.ENEMY_HIT)
 	
 	on_unit_hit.emit()
 	on_health_changed.emit(current_health, max_health)

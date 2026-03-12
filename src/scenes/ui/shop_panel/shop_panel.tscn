@@ -18,7 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://c8bnprxgjttxt" path="res://scenes/ui/item_card/item_card.tscn" id="13_jqy7g"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_chkkr"]
-bg_color = Color(0.20392157, 0.20392157, 0.20392157, 1)
+bg_color = Color(0.24477637, 0.24477643, 0.24477634, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_ws1b3"]
 font_size = 64

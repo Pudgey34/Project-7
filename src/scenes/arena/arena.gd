@@ -23,6 +23,7 @@ const MAIN_MENU_SCENE_PATH := "res://scenes/ui/menu_panel/menu_panel.tscn"
 @onready var coins_bag: CoinsBag = %CoinsBag
 @onready var selection_panel: SelectionPanel = %SelectionPanel
 @onready var pause_menu: PauseMenu = %PauseMenu
+@onready var game_over_screen: GameOverScreen = %GameOverScreen
 
 var gold_list: Array[Coins]
 var should_advance_wave_on_shop_continue := true
@@ -64,6 +65,7 @@ func _ready() -> void:
 			
 			Global.player = player_scene.instantiate()
 			add_child(Global.player)
+			_setup_player_runtime(Global.player)
 			
 			for stat_name in ProgressData.player_stats:
 				Global.player.stats.set(stat_name, ProgressData.player_stats[stat_name])
@@ -124,7 +126,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _can_toggle_pause_menu() -> bool:
-	return not selection_panel.visible and not shop_panel.visible and not upgrade_panel.visible
+	return not selection_panel.visible and not shop_panel.visible and not upgrade_panel.visible and not game_over_screen.visible
 
 
 func _open_pause_menu() -> void:
@@ -137,6 +139,22 @@ func _close_pause_menu() -> void:
 	pause_menu.close_menu()
 	spawner.resume_wave_timers()
 	Global.game_paused = false
+
+
+func _setup_player_runtime(player_instance: Player) -> void:
+	if player_instance == null:
+		return
+
+	if not player_instance.health_component.on_unit_died.is_connected(_on_player_died):
+		player_instance.health_component.on_unit_died.connect(_on_player_died)
+
+
+func _on_player_died() -> void:
+	Global.game_paused = true
+	ProgressData.clear_save_game()
+	spawner.pause_wave_timers()
+	pause_menu.close_menu()
+	game_over_screen.open_screen()
 	
 	
 	
@@ -251,6 +269,7 @@ func _on_enemy_died(enemy: Enemy) -> void:
 func _on_selection_panel_on_selection_completed() -> void:
 	var player := Global.get_selected_player()
 	add_child(player)
+	_setup_player_runtime(player)
 	player.add_weapon(Global.main_weapon_selected)
 	shop_panel.create_item_weapon(Global.main_weapon_selected)
 	Global.equipped_weapons.append(Global.main_weapon_selected)
@@ -273,3 +292,8 @@ func _on_pause_menu_back_to_main_menu_requested() -> void:
 
 func _on_pause_menu_quit_requested() -> void:
 	get_tree().quit()
+
+
+func _on_game_over_screen_back_to_main_menu_requested() -> void:
+	Global.game_paused = false
+	get_tree().change_scene_to_file(MAIN_MENU_SCENE_PATH)

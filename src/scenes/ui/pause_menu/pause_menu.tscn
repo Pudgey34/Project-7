@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://4ob1k1bqlxm" path="res://scenes/ui/custom_button/custom_button.tscn" id="3_button"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card"]
-bg_color = Color(0.1764706, 0.1764706, 0.1764706, 1)
+bg_color = Color(0.16, 0.16, 0.17, 1)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
