@@ -38,12 +38,17 @@ func load_players() -> void:
 func load_weapons() -> void:
 	if start_weapons.is_empty():
 		return
+
+	var first_weapon: ItemWeapon = start_weapons[0]
 	
 	for weapon: ItemWeapon in start_weapons:
 		var card: SelectionCard = Global.SELECTION_CARD_SCENE.instantiate()
 		card.pressed.connect(_on_weapon_selected.bind(weapon))
 		weapon_container.add_child(card)
 		card.icon = weapon.item_icon
+
+	if is_instance_valid(first_weapon):
+		_on_weapon_selected(first_weapon)
 	
 func show_player_info(value: bool) -> void:
 	player_icon.visible = value

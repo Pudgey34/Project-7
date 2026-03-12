@@ -1,0 +1,231 @@
+[gd_scene load_steps=7 format=3 uid="uid://bspcj40txb34x"]
+
+[ext_resource type="StyleBox" uid="uid://cxtqhn2pkqjsg" path="res://styles/common_styles.tres" id="1_ms7fa"]
+[ext_resource type="PackedScene" uid="uid://4ob1k1bqlxm" path="res://scenes/ui/custom_button/custom_button.tscn" id="2_btnt8"]
+[ext_resource type="Script" uid="uid://dgpmsl6y0sisj" path="res://scenes/ui/menu_panel/menu_panel.gd" id="3_gdscript"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_title"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.1764706, 0.1764706, 0.1764706, 1)
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="LabelSettings" id="LabelSettings_title"]
+font_size = 72
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_menu"]
+bg_color = Color(0.1764706, 0.1764706, 0.1764706, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_options"]
+font_size = 42
+
+[node name="MenuPanel" type="Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("1_ms7fa")
+script = ExtResource("3_gdscript")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 80
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_right = 80
+theme_override_constants/margin_bottom = 80
+
+[node name="RootLayout" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 36
+
+[node name="TitleCard" type="PanelContainer" parent="MarginContainer/RootLayout"]
+custom_minimum_size = Vector2(0, 140)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_title")
+
+[node name="TitleContainer" type="CenterContainer" parent="MarginContainer/RootLayout/TitleCard"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Title" type="Label" parent="MarginContainer/RootLayout/TitleCard/TitleContainer"]
+layout_mode = 2
+text = "Main Menu"
+label_settings = SubResource("LabelSettings_title")
+horizontal_alignment = 1
+
+[node name="MenuCenter" type="CenterContainer" parent="MarginContainer/RootLayout"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MenuCard" type="PanelContainer" parent="MarginContainer/RootLayout/MenuCenter"]
+custom_minimum_size = Vector2(560, 460)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_menu")
+
+[node name="MenuPadding" type="MarginContainer" parent="MarginContainer/RootLayout/MenuCenter/MenuCard"]
+layout_mode = 2
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_top = 28
+theme_override_constants/margin_right = 28
+theme_override_constants/margin_bottom = 28
+
+[node name="Content" type="VBoxContainer" parent="MarginContainer/RootLayout/MenuCenter/MenuCard/MenuPadding"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="NewGameButton" parent="MarginContainer/RootLayout/MenuCenter/MenuCard/MenuPadding/Content" instance=ExtResource("2_btnt8")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+text = "New Game"
+
+[node name="ContinueButton" parent="MarginContainer/RootLayout/MenuCenter/MenuCard/MenuPadding/Content" instance=ExtResource("2_btnt8")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Continue"
+
+[node name="OptionsButton" parent="MarginContainer/RootLayout/MenuCenter/MenuCard/MenuPadding/Content" instance=ExtResource("2_btnt8")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Options"
+
+[node name="QuitButton" parent="MarginContainer/RootLayout/MenuCenter/MenuCard/MenuPadding/Content" instance=ExtResource("2_btnt8")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Quit"
+
+[node name="OptionsOverlay" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("1_ms7fa")
+
+[node name="CenterContainer" type="CenterContainer" parent="OptionsOverlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="OptionsCard" type="PanelContainer" parent="OptionsOverlay/CenterContainer"]
+custom_minimum_size = Vector2(640, 560)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_menu")
+
+[node name="MarginContainer" type="MarginContainer" parent="OptionsOverlay/CenterContainer/OptionsCard"]
+layout_mode = 2
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_top = 28
+theme_override_constants/margin_right = 28
+theme_override_constants/margin_bottom = 28
+
+[node name="OptionsContent" type="VBoxContainer" parent="OptionsOverlay/CenterContainer/OptionsCard/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="OptionsTitle" type="Label" parent="OptionsOverlay/CenterContainer/OptionsCard/MarginContainer/OptionsContent"]
+layout_mode = 2
+text = "Options"
+label_settings = SubResource("LabelSettings_options")
+horizontal_alignment = 1
+
+[node name="MasterRow" type="HBoxContainer" parent="OptionsOverlay/CenterContainer/OptionsCard/MarginContainer/OptionsContent"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="MasterLabel" type="Label" parent="OptionsOverlay/CenterContainer/OptionsCard/MarginContainer/OptionsContent/MasterRow"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+text = "Master Volume"
+vertical_alignment = 1
+
+[node name="MasterSlider" type="HSlider" parent="OptionsOverlay/CenterContainer/OptionsCard/MarginContainer/OptionsContent/MasterRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(320, 36)
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="MusicRow" type="HBoxContainer" parent="OptionsOverlay/CenterContainer/OptionsCard/MarginContainer/OptionsContent"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="MusicLabel" type="Label" parent="OptionsOverlay/CenterContainer/OptionsCard/MarginContainer/OptionsContent/MusicRow"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+text = "Music Volume"
+vertical_alignment = 1
+
+[node name="MusicSlider" type="HSlider" parent="OptionsOverlay/CenterContainer/OptionsCard/MarginContainer/OptionsContent/MusicRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(320, 36)
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 0.8
+
+[node name="SfxRow" type="HBoxContainer" parent="OptionsOverlay/CenterContainer/OptionsCard/MarginContainer/OptionsContent"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="SfxLabel" type="Label" parent="OptionsOverlay/CenterContainer/OptionsCard/MarginContainer/OptionsContent/SfxRow"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+text = "SFX Volume"
+vertical_alignment = 1
+
+[node name="SfxSlider" type="HSlider" parent="OptionsOverlay/CenterContainer/OptionsCard/MarginContainer/OptionsContent/SfxRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(320, 36)
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 0.8
+
+[node name="FullscreenToggle" type="CheckButton" parent="OptionsOverlay/CenterContainer/OptionsCard/MarginContainer/OptionsContent"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Fullscreen"
+
+[node name="Spacer" type="Control" parent="OptionsOverlay/CenterContainer/OptionsCard/MarginContainer/OptionsContent"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="BackButton" parent="OptionsOverlay/CenterContainer/OptionsCard/MarginContainer/OptionsContent" instance=ExtResource("2_btnt8")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Back"
+

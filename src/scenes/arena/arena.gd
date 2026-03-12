@@ -2,6 +2,9 @@ extends Node2D
 
 class_name Arena
 
+const BG_MUSIC := preload("res://assets/audio/Bg Music.mp3")
+const MAIN_MENU_SCENE_PATH := "res://scenes/ui/menu_panel/menu_panel.tscn"
+
 @export var player: Player
 
 @export var normal_color: Color
@@ -19,26 +22,46 @@ class_name Arena
 @onready var upgrade_panel: UpgradePanel = %UpgradePanel
 @onready var coins_bag: CoinsBag = %CoinsBag
 @onready var selection_panel: SelectionPanel = %SelectionPanel
+@onready var pause_menu: PauseMenu = %PauseMenu
 
 var gold_list: Array[Coins]
 var should_advance_wave_on_shop_continue := true
 
 
 func _ready() -> void:
+	SoundManager.play_music(BG_MUSIC)
+
 	Global.on_create_block_text.connect(_on_create_block_text)
 	Global.on_create_damage_text.connect(_on_create_damage_text)
 	Global.on_upgrade_selected.connect(_on_upgrade_selected)
 	Global.on_create_heal_text.connect(_on_create_heal_text)
 	Global.on_enemy_died.connect(_on_enemy_died)
 	
-	if use_save_data:
+	var should_use_save_data := use_save_data
+	if ProgressData.menu_start_mode != ProgressData.MENU_START_UNSET:
+		should_use_save_data = ProgressData.menu_start_mode == ProgressData.MENU_START_CONTINUE
+		ProgressData.menu_start_mode = ProgressData.MENU_START_UNSET
+	
+	if should_use_save_data:
 		ProgressData.load_game()
 		if ProgressData.has_saved_game:
 			selection_panel.hide()
-			shop_panel.show()
-			should_advance_wave_on_shop_continue = false
+			shop_panel.hide()
+			upgrade_panel.hide()
+			should_advance_wave_on_shop_continue = true
 			
-			var player_scene = Global.available_players[ProgressData.current_player_name]
+			var player_scene: PackedScene = null
+			if not ProgressData.current_player_name.is_empty():
+				player_scene = Global.available_players.get(ProgressData.current_player_name, null)
+
+			# Fallback to the first available player if save key is missing/invalid.
+			if player_scene == null:
+				var available_scenes: Array = Global.available_players.values()
+				if available_scenes.is_empty():
+					push_error("No available player scenes found in Global.available_players.")
+					return
+				player_scene = available_scenes[0] as PackedScene
+			
 			Global.player = player_scene.instantiate()
 			add_child(Global.player)
 			
@@ -70,13 +93,50 @@ func _ready() -> void:
 				item_card.stack_count = max(1, passive_stack_count)
 				
 			spawner.wave_index = ProgressData.current_wave
-			shop_panel.load_shop(spawner.wave_index)
-			Global.game_paused = true
+
+			if ProgressData.resume_from_shop:
+				shop_panel.show()
+				should_advance_wave_on_shop_continue = false
+				shop_panel.load_shop(spawner.wave_index)
+				Global.game_paused = true
+			else:
+				Global.game_paused = false
+				spawner.start_wave()
 
 func _process(delta:float) -> void:
 	if Global.game_paused: return
 	wave_index_label.text = spawner.get_wave_text()
 	wave_time_label.text = spawner.get_wave_timer_text()
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if not event.is_action_pressed("ui_cancel"):
+		return
+
+	if _can_toggle_pause_menu() and not pause_menu.visible:
+		_open_pause_menu()
+		get_viewport().set_input_as_handled()
+		return
+
+	if pause_menu.visible:
+		_close_pause_menu()
+		get_viewport().set_input_as_handled()
+
+
+func _can_toggle_pause_menu() -> bool:
+	return not selection_panel.visible and not shop_panel.visible and not upgrade_panel.visible
+
+
+func _open_pause_menu() -> void:
+	Global.game_paused = true
+	spawner.pause_wave_timers()
+	pause_menu.open_menu()
+
+
+func _close_pause_menu() -> void:
+	pause_menu.close_menu()
+	spawner.resume_wave_timers()
+	Global.game_paused = false
 	
 	
 	
@@ -198,3 +258,18 @@ func _on_selection_panel_on_selection_completed() -> void:
 	shop_panel.load_shop(spawner.wave_index)
 	spawner.start_wave()
 	Global.game_paused = false
+
+
+func _on_pause_menu_resumed() -> void:
+	_close_pause_menu()
+
+
+func _on_pause_menu_back_to_main_menu_requested() -> void:
+	# Persist the current run before returning to menu so Continue picks this session.
+	ProgressData.save_game()
+	Global.game_paused = false
+	get_tree().change_scene_to_file(MAIN_MENU_SCENE_PATH)
+
+
+func _on_pause_menu_quit_requested() -> void:
+	get_tree().quit()

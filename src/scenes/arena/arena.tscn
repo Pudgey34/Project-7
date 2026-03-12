@@ -12,13 +12,13 @@
 [ext_resource type="Resource" uid="uid://ca6jnd7rfx1a" path="res://resources/units/enemies/stats_enemy_chaser_mid.tres" id="10_tp84n"]
 [ext_resource type="Resource" uid="uid://buam76n5o5dnf" path="res://resources/units/enemies/stats_enemy_chaser_fast.tres" id="11_8kk48"]
 [ext_resource type="PackedScene" uid="uid://cnn4gyprded0k" path="res://scenes/ui/coins_bag/coins_bag.tscn" id="11_xgbxb"]
-[ext_resource type="AudioStream" uid="uid://prc8bub0x4s1" path="res://assets/audio/Bg Music.mp3" id="12_s83md"]
 [ext_resource type="PackedScene" uid="uid://bxd0bti563hw2" path="res://scenes/ui/selection_panel/selection_panel.tscn" id="12_vmsrg"]
 [ext_resource type="Resource" uid="uid://bb606qbg3wrac" path="res://resources/units/enemies/stats_enemy_charger.tres" id="13_wqbss"]
 [ext_resource type="Resource" uid="uid://d1a6qg5m27xcm" path="res://resources/units/enemies/stats_enemy_shooter.tres" id="14_fir7s"]
 [ext_resource type="Script" uid="uid://cpmg5v8e6qfik" path="res://scenes/arena/spawner.gd" id="17_8kk48"]
 [ext_resource type="Script" uid="uid://dqblj6x37v5ae" path="res://resources/waves/wave_data.gd" id="18_wqbss"]
 [ext_resource type="Resource" uid="uid://5saifmsegxtw" path="res://resources/waves/data/wave_1_to_5.tres" id="19_fir7s"]
+[ext_resource type="PackedScene" path="res://scenes/ui/pause_menu/pause_menu.tscn" id="20_pause"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ii07k"]
 font_size = 64
@@ -101,14 +101,14 @@ unique_name_in_owner = true
 [node name="SelectionPanel" parent="GameUI" instance=ExtResource("12_vmsrg")]
 unique_name_in_owner = true
 
-[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("12_s83md")
-volume_db = -30.0
-autoplay = true
-bus = &"Music"
+[node name="PauseMenu" parent="GameUI" instance=ExtResource("20_pause")]
+unique_name_in_owner = true
 
 [connection signal="on_wave_completed" from="Spawner" to="." method="_on_spawner_on_wave_completed"]
 [connection signal="timeout" from="Spawner/SpawnTimer" to="Spawner" method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="Spawner/WaveTimer" to="Spawner" method="_on_wave_timer_timeout"]
+[connection signal="back_to_main_menu_requested" from="GameUI/PauseMenu" to="." method="_on_pause_menu_back_to_main_menu_requested"]
+[connection signal="quit_requested" from="GameUI/PauseMenu" to="." method="_on_pause_menu_quit_requested"]
+[connection signal="resumed" from="GameUI/PauseMenu" to="." method="_on_pause_menu_resumed"]
 [connection signal="on_shop_next_wave" from="GameUI/ShopPanel" to="." method="_on_shop_panel_on_shop_next_wave"]
 [connection signal="on_selection_completed" from="GameUI/SelectionPanel" to="." method="_on_selection_panel_on_selection_completed"]

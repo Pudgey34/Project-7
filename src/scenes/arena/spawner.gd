@@ -91,6 +91,16 @@ func get_wave_text() -> String:
 func get_wave_timer_text() -> String:
 	return str(max(0, int(wave_timer.time_left)))
 
+
+func pause_wave_timers() -> void:
+	wave_timer.paused = true
+	spawn_timer.paused = true
+
+
+func resume_wave_timers() -> void:
+	wave_timer.paused = false
+	spawn_timer.paused = false
+
 func _on_spawn_timer_timeout() -> void:
 	if not current_wave_data or wave_timer.is_stopped():
 		spawn_timer.stop()

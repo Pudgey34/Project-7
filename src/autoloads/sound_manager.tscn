@@ -45,3 +45,6 @@ bus = &"SFX"
 [node name="AudioStreamPlayer10" type="AudioStreamPlayer" parent="."]
 volume_db = -15.0
 bus = &"SFX"
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"Music"

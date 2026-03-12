@@ -1,19 +1,52 @@
 extends Node
 
 const save_path: String = "user://data.sav"
+const MENU_START_UNSET := -1
+const MENU_START_NEW_GAME := 0
+const MENU_START_CONTINUE := 1
 
 var current_wave: int
 var player_stats: Dictionary = {}
 var current_player_name: String
 var my_weapons: Array = []
 var my_passives: Array = []
+var resume_from_shop: bool = true
 
 var has_saved_game: bool = false
+var menu_start_mode: int = MENU_START_UNSET
+
+
+func has_save_file() -> bool:
+	return FileAccess.file_exists(save_path)
+
+
+func set_menu_start_mode(mode: int) -> void:
+	menu_start_mode = mode
+	if mode == MENU_START_NEW_GAME:
+		_prepare_new_game_state()
+
+
+func _prepare_new_game_state() -> void:
+	current_wave = 0
+	player_stats.clear()
+	current_player_name = ""
+	my_weapons.clear()
+	my_passives.clear()
+	resume_from_shop = true
+	has_saved_game = false
+
+	Global.game_paused = false
+	Global.player = null
+	Global.equipped_weapons.clear()
+	Global.main_player_selected = null
+	Global.main_weapon_selected = null
+	Global.coins = 500
 
 func save_game() -> void:
 	var save_dict: Dictionary = {
 		"coins": Global.coins,
 		"current_wave": 0,
+		"resume_from_shop": true,
 		"player_stats": {},
 		"current_player_name": "",
 		"equipped_weapons": [],
@@ -33,6 +66,7 @@ func save_game() -> void:
 
 	var arena = get_tree().get_first_node_in_group("arena") as Arena
 	save_dict["current_wave"] = arena.spawner.wave_index
+	save_dict["resume_from_shop"] = arena.shop_panel.visible or arena.upgrade_panel.visible
 	for weapon in Global.equipped_weapons:
 		save_dict["equipped_weapons"].append(weapon.resource_path)
 		
@@ -52,6 +86,7 @@ func save_game() -> void:
 	file.close()
 	
 func load_game() -> void:
+	has_saved_game = false
 	if not FileAccess.file_exists(save_path):
 		return
 	var file = FileAccess.open(save_path, FileAccess.READ)
@@ -61,6 +96,7 @@ func load_game() -> void:
 	
 	Global.coins = data.get("coins", 0)
 	current_wave = data.get("current_wave", 1)
+	resume_from_shop = data.get("resume_from_shop", true)
 	current_player_name = data.get("current_player_name", "")
 	
 	my_weapons.clear()

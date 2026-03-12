@@ -13,6 +13,9 @@ var sound_dictionary: Dictionary[Sound, Resource] = {
 }
 
 @export var stream_players: Array[AudioStreamPlayer]
+@onready var music_player: AudioStreamPlayer = $MusicPlayer
+
+var current_music: AudioStream
 
 func play_sound(type: int) -> void:
 	var stream := get_free_stream_player()
@@ -23,6 +26,24 @@ func play_sound(type: int) -> void:
 	stream.stream = audio
 	stream.pitch_scale = randf_range(0.8, 1.3)
 	stream.play()
+
+
+func play_music(stream: AudioStream, restart: bool = false, volume_db: float = -30.0) -> void:
+	if stream == null:
+		return
+
+	if not restart and music_player.playing and current_music == stream:
+		return
+
+	current_music = stream
+	music_player.volume_db = volume_db
+	music_player.stream = stream
+	music_player.play()
+
+
+func stop_music() -> void:
+	current_music = null
+	music_player.stop()
 		
 
 func get_free_stream_player() -> AudioStreamPlayer:
