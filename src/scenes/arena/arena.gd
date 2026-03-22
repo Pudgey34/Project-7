@@ -27,6 +27,7 @@ const MAIN_MENU_SCENE_PATH := "res://scenes/ui/menu_panel/menu_panel.tscn"
 
 var gold_list: Array[Coins]
 var should_advance_wave_on_shop_continue := true
+var wave_start_coins := 500
 
 
 func _ready() -> void:
@@ -103,7 +104,14 @@ func _ready() -> void:
 				Global.game_paused = true
 			else:
 				Global.game_paused = false
+				_begin_wave_checkpoint()
 				spawner.start_wave()
+
+func get_wave_start_coins() -> int:
+	return wave_start_coins
+
+func _begin_wave_checkpoint() -> void:
+	wave_start_coins = Global.coins
 
 func _process(delta:float) -> void:
 	if Global.game_paused: return
@@ -175,6 +183,7 @@ func start_new_wave() -> void:
 	Global.game_paused = false
 	Global.player.update_player_new_wave()
 	spawner.wave_index += 1
+	_begin_wave_checkpoint()
 	spawner.start_wave()
 	
 func clean_arena() -> void:
@@ -260,6 +269,7 @@ func _on_shop_panel_on_shop_next_wave() -> void:
 	else:
 		should_advance_wave_on_shop_continue = true
 		Global.game_paused = false
+		_begin_wave_checkpoint()
 		spawner.start_wave()
 	
 func _on_enemy_died(enemy: Enemy) -> void:
@@ -275,6 +285,7 @@ func _on_selection_panel_on_selection_completed() -> void:
 	Global.equipped_weapons.append(Global.main_weapon_selected)
 	
 	shop_panel.load_shop(spawner.wave_index)
+	_begin_wave_checkpoint()
 	spawner.start_wave()
 	Global.game_paused = false
 

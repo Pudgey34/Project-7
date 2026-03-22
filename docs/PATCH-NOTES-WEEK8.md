@@ -7,4 +7,9 @@ things to add:
     Audio for character selection: EGG!
     More indepth stats viewing 
 
-2026-03-07 6:00 PM - 6:45 PM
+2026-03-11 6:00 PM - 10:00 PM
+
+Main Menu
+Options
+Game Screen
+Working Basic Version of Game

@@ -16,6 +16,7 @@ func _ready() -> void:
 func _set_item(value: ItemBase) -> void:
 	item = value
 	item_icon.texture = item.item_icon
+	tooltip_text = _get_plain_tooltip_text(item)
 	
 	var style := Global.get_tier_style(item.item_tier)
 	
@@ -55,3 +56,17 @@ func _on_pressed() -> void:
 	if item.item_type == ItemBase.ItemType.WEAPON:
 		#Global.selected_weapon = item as ItemWeapon
 		on_item_card_selected.emit(self)
+
+func _get_plain_tooltip_text(value: ItemBase) -> String:
+	var description := value.get_description()
+	if description.is_empty():
+		return value.item_name
+
+	var regex := RegEx.new()
+	regex.compile("\\[[^\\]]*\\]")
+	var plain_description := regex.sub(description, "", true).strip_edges()
+
+	if plain_description.is_empty():
+		return value.item_name
+
+	return "%s\n%s" % [value.item_name, plain_description]

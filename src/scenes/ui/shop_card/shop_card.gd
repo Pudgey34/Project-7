@@ -19,9 +19,24 @@ func _set_shop_item(value: ItemBase) -> void:
 	item_type.text = ItemBase.ItemType.keys()[value.item_type]
 	item_description.text = value.get_description()
 	coins_label.text = str(value.item_cost)
+	tooltip_text = _get_plain_tooltip_text(value)
 	
 	var style := Global.get_tier_style(value.item_tier)
 	add_theme_stylebox_override("panel", style)
+
+func _get_plain_tooltip_text(value: ItemBase) -> String:
+	var description := value.get_description()
+	if description.is_empty():
+		return value.item_name
+
+	var regex := RegEx.new()
+	regex.compile("\\[[^\\]]*\\]")
+	var plain_description := regex.sub(description, "", true).strip_edges()
+
+	if plain_description.is_empty():
+		return value.item_name
+
+	return "%s\n%s" % [value.item_name, plain_description]
 	
 
 

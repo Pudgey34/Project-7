@@ -11,13 +11,16 @@ func get_description() -> String:
 	var description := "[code]"
 	
 	if add_value != 0:
-		description += "[color=green]+%s %s[/color]\n" % [add_value, add_stats]
+		description += "[color=green]+%s %s[/color]\n" % [add_value, _format_stat_name(add_stats)]
 
 	if remove_value !=0:
-		description += "[color=red]-%s %s[/color]\n" % [remove_value, remove_stats]	
+		description += "[color=red]-%s %s[/color]\n" % [remove_value, _format_stat_name(remove_stats)]	
 			
 	description += "[/code]"
 	return description
+
+func _format_stat_name(stat_name: String) -> String:
+	return stat_name.replace("_", " ")
 	
 func apply_passive() -> void:
 	if add_value != 0:

@@ -186,9 +186,17 @@ func _set_bus_from_linear(bus_name: String, value: float) -> void:
 	AudioServer.set_bus_mute(bus_index, false)
 	AudioServer.set_bus_volume_db(bus_index, linear_to_db(value))
 
-func save_game() -> void:
+func save_game(coins_override: int = -1) -> void:
+	var coins_to_save := Global.coins
+	var arena := get_tree().get_first_node_in_group("arena") as Arena
+
+	if coins_override >= 0:
+		coins_to_save = coins_override
+	elif arena and not (arena.shop_panel.visible or arena.upgrade_panel.visible):
+		coins_to_save = arena.get_wave_start_coins()
+
 	var save_dict: Dictionary = {
-		"coins": Global.coins,
+		"coins": coins_to_save,
 		"current_wave": 0,
 		"resume_from_shop": true,
 		"player_stats": {},
@@ -208,7 +216,9 @@ func save_game() -> void:
 		print(save_dict["player_stats"])
 
 
-	var arena = get_tree().get_first_node_in_group("arena") as Arena
+	if arena == null:
+		return
+
 	save_dict["current_wave"] = arena.spawner.wave_index
 	save_dict["resume_from_shop"] = arena.shop_panel.visible or arena.upgrade_panel.visible
 	for weapon in Global.equipped_weapons:

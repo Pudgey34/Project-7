@@ -1,0 +1,225 @@
+Developer Time Budget Checkpoint
+
+Current Budget Position
+- Total EstimatedHours (all task rows from CSV): 84.50 hours
+- Total ActualHours to date (PowerBI + Planner actual sum): 54.50 hours
+- Variance to date: -33.00 hours (under estimate at this checkpoint)
+- Completion by effort: 64% of estimated hours consumed
+
+
+1. Performance
+Status: In Progress
+EstimatedHours: 3.00
+ActualHours: 0.00
+Variance: -3.00
+Explanation: Ongoing. Currently no dedicated time needed towards this.
+
+2. Maintainability
+Status: In Progress
+EstimatedHours: 2.00
+ActualHours: 0.00
+Variance: -2.00
+Explanation: All scripts and UI elements are made to be as modular and easy to update as possible.
+
+3. Audio, Feedback, & Cues
+Status: Completed
+EstimatedHours: 3.00
+ActualHours: 1.00
+Variance: -2.00
+Explanation: I kept this to placeholder audio only, so the scope stayed small.
+
+4. Game Over Screen
+Status: Completed
+EstimatedHours: 0.50
+ActualHours: 0.50
+Variance: 0.00
+Explanation: Small task that didn't take long at all.
+
+5. Save / Load System
+Status: Completed
+EstimatedHours: 2.00
+ActualHours: 1.00
+Variance: -1.00
+Explanation: I limited this to essential JSON data only, which kept it much shorter than estimated.
+
+6. Options Menu
+Status: Completed
+EstimatedHours: 2.00
+ActualHours: 1.00
+Variance: -1.00
+Explanation: Made intentionally simple and reused shared option controls.
+
+7. Title / Main Menu
+Status: Completed
+EstimatedHours: 2.00
+ActualHours: 1.50
+Variance: -0.50
+Explanation: I reused UI scripts and patterns, so this took less time.
+
+8. HUD / UI
+Status: Completed
+EstimatedHours: 2.00
+ActualHours: 4.00
+Variance: +2.00
+Explanation: HUD updates were more involved than expected and required additional iteration.
+
+9. Passives / Levelup
+Status: In Progress
+EstimatedHours: 4.00
+ActualHours: 5.50
+Variance: +1.50
+Explanation: The first version was quicker to build in some places because I reused systems, but this area still needed extra implementation time overall.
+
+10. Complex Enemy Variants
+Status: In Progress
+EstimatedHours: 3.00
+ActualHours: 0.50
+Variance: -2.50
+Explanation: Base enemy behavior works and I spent some time tuning AI and adding variants. There is still more to do here.
+
+11. Tooltips
+Status: In Progress
+EstimatedHours: 1.00
+ActualHours: 0.00
+Variance: -1.00
+Explanation: Planned but not implemented correctly yet.
+
+12. Wave Progression
+Status: In Progress
+EstimatedHours: 2.00
+ActualHours: 1.00
+Variance: -1.00
+Explanation: Initial progression works, but rebalance is still left to do.
+
+13. Shop System
+Status: In Progress
+EstimatedHours: 4.00
+ActualHours: 11.00
+Variance: +7.00
+Explanation: More complicated than expected. Required a lot of bugfixing and refining visual details. It is in a working state but I would still like to invest more time into some extra details like a refresh button and a lock button.
+
+14. Currency
+Status: Completed
+EstimatedHours: 1.00
+ActualHours: 1.00
+Variance: 0.00
+Explanation: This matched the estimate.
+
+15. Experience and Orbs
+Status: Blocked
+EstimatedHours: 3.00
+ActualHours: 2.00
+Variance: -3.00
+Explanation: Implemented but not quite working like I want it to. Leaving it until I finish other systems.
+
+16. Ranged Weapons
+Status: In Progress
+EstimatedHours: 5.00
+ActualHours: 1.00
+Variance: -4.00
+Explanation: Existing combat and input code made the first pass faster to add. Still needs a little more work. Extra weapon types and art needed.
+
+17. Pause Menu
+Status: Completed
+EstimatedHours: 3.00
+ActualHours: 1.00
+Variance: -3.00
+Explanation: Completed earlier than expected with AI assistance. 
+
+18. Enemy Variants
+Status: Completed
+EstimatedHours: 8.00
+ActualHours: 2.00
+Variance: -6.00
+Explanation: This encompasses advanced enemies but not boss enemies. Still needs more work but is in acceptable shape.
+
+19. Enemy Spawning
+Status: Completed
+EstimatedHours: 3.00
+ActualHours: 2.00
+Variance: -1.00
+Explanation: Spawning was faster because the scene and spawner setup already existed.
+
+20. Invulnerability Frames
+Status: Completed
+EstimatedHours: 3.00
+ActualHours: 1.00
+Variance: -2.00
+Explanation: This fit into existing combat timing, so implementation was pretty quick.
+
+21. Melee Attacks
+Status: In Progress
+EstimatedHours: 5.00
+ActualHours: 5.00
+Variance: 0.00
+Explanation: This one came out almost exactly as estimated. Still needs more animations and weapon types.
+
+22. Player Health Bar
+Status: Completed
+EstimatedHours: 2.00
+ActualHours: 1.00
+Variance: -1.00
+Explanation: The health and UI pieces were already set up, so this was easy to complete.
+
+23. Enemy Health Bar
+Status: Completed
+EstimatedHours: 2.00
+ActualHours: 0.50
+Variance: -1.50
+Explanation: Health bars were done as a simple UI overlay, so this was quick.
+
+24. Basic Enemy Implementation
+Status: Completed
+EstimatedHours: 6.00
+ActualHours: 4.00
+Variance: -2.00
+Explanation: Base chase AI was implemented with less time than estimated.
+
+25. Player Dash
+Status: Completed
+EstimatedHours: 3.00
+ActualHours: 1.50
+Variance: -1.50
+Explanation: The movement code already supported this, so it was quick to finish.
+
+26. Environment / Arena
+Status: Completed
+EstimatedHours: 2.00
+ActualHours: 0.50
+Variance: -1.50
+Explanation: I kept the environment target minimal for now, so it took less time.
+
+27. Player Movement
+Status: Completed
+EstimatedHours: 8.00
+ActualHours: 5.00
+Variance: -3.00
+Explanation: This part was straightforward, so it took less time than planned.
+
+Blockers and Risk Statement
+- Current blocker status: Passives / Levelup system is currently put on hold until other systems are finished
+- Main risk is the amount of feature depth still left in combat/content work.
+- If that scope grows, hours can go up later in the schedule.
+
+Variance Analysis Summary
+- Over estimate area: Shop System is +7.00 hours because it needed more bug fixing and polish than expected.
+- Other over estimate areas include HUD (+2.00) and Passive Abilities (+1.50) where implementation depth ended up bigger than first pass estimates.
+- Enemy Variants & AI is currently under estimate at -10.50 hours, but this requirement is still in progress and expected to grow as boss/variant work continues.
+- Weapons could take a considerable amount of time depending on how interesting I want them to be. 
+
+Why The Project Is Currently Running Smoothly
+The project is stable at this checkpoint because core systems are done, there are no major blockers, and several early features were scoped as simple first versions. Reusing existing patterns also helped keep a lot of work under estimate.
+
+Remaining Work and Schedule Impact
+Remaining planned work includes:
+- Tooltip functionality
+- More enemy types (including at least one boss)
+- Wave progression rebalance
+- Passives revamp to be more interesting
+- Weapons revamp to be more interesting
+- Artstyle update (optional if time allows)
+
+Forecast impact:
+- With 54.50 hours used against 84.50 estimated across all task rows, approximately 30.00 hours remain in the current budget.
+- Most remaining effort is in content and balancing, not core systems.
+- If the optional artstyle work gets bigger, that can add variance and should stay lower priority than gameplay completion.
