@@ -109,6 +109,7 @@ func _prepare_new_game_state() -> void:
 	Global.main_player_selected = null
 	Global.main_weapon_selected = null
 	Global.coins = 0
+	
 
 
 func load_settings() -> void:

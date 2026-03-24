@@ -16,6 +16,6 @@ func get_damage() -> float:
 	if Global.get_chance_success(crit_chance):
 		critical = true
 		damage = ceil(damage * weapon.data.stats.crit_damage)
-	return damage
+	return max(1.0, damage)
 		
 	

@@ -16,7 +16,7 @@
 [ext_resource type="Resource" uid="uid://mjhrkt2w0i6x" path="res://resources/items/passives/data/passive_fires_blazing_strength.tres" id="11_l4hq1"]
 [ext_resource type="Resource" uid="uid://bi1wxxo5rdx22" path="res://resources/items/passives/data/passive_gravekeepers_cloak.tres" id="12_f1e0c"]
 [ext_resource type="PackedScene" uid="uid://c8bnprxgjttxt" path="res://scenes/ui/item_card/item_card.tscn" id="13_jqy7g"]
-[ext_resource type="Resource" path="res://resources/items/passives/data/passive_blood_rush.tres" id="14_blood"]
+[ext_resource type="Resource" uid="uid://c44ksl4etjuri" path="res://resources/items/passives/data/passive_blood_rush.tres" id="14_blood"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_chkkr"]
 bg_color = Color(0.24477637, 0.24477643, 0.24477634, 1)
@@ -172,10 +172,10 @@ layout_mode = 2
 
 [node name="StatsContainer" parent="MarginContainer/Control" instance=ExtResource("3_o7w7v")]
 layout_mode = 0
-offset_left = 1380.0
-offset_top = 178.0
-offset_right = 1860.0
-offset_bottom = 728.0
+offset_left = 1385.0
+offset_top = 100.0
+offset_right = 1865.0
+offset_bottom = 650.0
 
 [node name="PassivesBox" type="Panel" parent="MarginContainer/Control"]
 layout_mode = 0
@@ -366,9 +366,9 @@ theme_override_styles/normal = ExtResource("4_1gnn5")
 custom_minimum_size = Vector2(350, 250)
 layout_mode = 0
 offset_left = 1440.0
-offset_top = 768.0
+offset_top = 679.0
 offset_right = 1790.0
-offset_bottom = 1018.0
+offset_bottom = 1049.0
 theme_override_constants/separation = 16
 alignment = 1
 
@@ -380,13 +380,23 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_hover")
 theme_override_styles/focus = SubResource("StyleBoxFlat_focus_whl1y")
 text = "next wave"
 
+[node name="RerollButton" type="Button" parent="MarginContainer/Control/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxFlat_o7w7v")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hover")
+theme_override_styles/focus = SubResource("StyleBoxFlat_focus_o7w7v")
+text = "reroll
+(10)"
+
 [node name="CombineButton" type="Button" parent="MarginContainer/Control/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
 theme_override_styles/normal = SubResource("StyleBoxFlat_o7w7v")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_disabled_o7w7v")
 theme_override_styles/hover = SubResource("StyleBoxFlat_hover")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_disabled_o7w7v")
 theme_override_styles/focus = SubResource("StyleBoxFlat_focus_o7w7v")
 text = "combine"
 
@@ -400,5 +410,6 @@ text = "sell
 "
 
 [connection signal="pressed" from="MarginContainer/Control/VBoxContainer/NewWaveButton" to="." method="_on_new_wave_button_pressed"]
+[connection signal="pressed" from="MarginContainer/Control/VBoxContainer/RerollButton" to="." method="_on_reroll_button_pressed"]
 [connection signal="pressed" from="MarginContainer/Control/VBoxContainer/CombineButton" to="." method="_on_combine_button_pressed"]
 [connection signal="pressed" from="MarginContainer/Control/VBoxContainer/SellButton" to="." method="_on_sell_button_pressed"]

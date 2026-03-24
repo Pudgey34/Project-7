@@ -6,13 +6,17 @@ signal on_shop_next_wave
 const SHOP_CARD_SCENE = preload("uid://bqr2tbjs3nfti")
 const WEAPONS_TITLE_BASE := "Weapons"
 const SELL_BUTTON_BASE := "Sell Weapon"
+const REROLL_BUTTON_BASE := "reroll"
 
 @export var shop_items: Array[ItemBase]
+@export var reroll_base_cost := 10
+@export var reroll_cost_step := 5
 
 @onready var items_container: HBoxContainer = %ItemsContainer
 @onready var passives_container: GridContainer = %PassivesContainer
 @onready var weapons_container: GridContainer = %WeaponsContainer
 @onready var weapons_title: Label = $"MarginContainer/Control/WeaponsTitle"
+@onready var reroll_button: Button = %RerollButton
 
 @onready var combine_button: Button = %CombineButton
 @onready var sell_button: Button = $"MarginContainer/Control/VBoxContainer/SellButton"
@@ -20,14 +24,18 @@ const SELL_BUTTON_BASE := "Sell Weapon"
 
 
 var context_card: ItemCard
+var reroll_cost := 0
+var current_shop_wave := 1
 
 func _ready() -> void: 
 	for child in passives_container.get_children(): child.queue_free()
 	for child in weapons_container.get_children(): child.queue_free()
 	combine_button.disabled = true
+	reroll_cost = max(0, reroll_base_cost)
 	_wire_shop_card_signals()
 	_update_weapons_title()
 	_update_sell_button_text()
+	_update_reroll_button_text()
 
 func _update_weapons_title() -> void:
 	if not is_instance_valid(weapons_title):
@@ -57,6 +65,29 @@ func _update_sell_button_text() -> void:
 
 	sell_button.text = text
 
+func _update_reroll_button_text() -> void:
+	if not is_instance_valid(reroll_button):
+		return
+
+	reroll_button.text = "%s\n(%d)" % [REROLL_BUTTON_BASE, reroll_cost]
+
+func _clear_shop_offer_cards() -> void:
+	for child in items_container.get_children():
+		items_container.remove_child(child)
+		child.queue_free()
+
+func _populate_shop_offer_cards(current_wave: int) -> void:
+	_clear_shop_offer_cards()
+
+	var config := Global.SHOP_PROBABILITY_CONFIG
+	var selected_items := Global.select_items_for_offer(shop_items, current_wave, config)
+	for shop_item : ItemBase in selected_items:
+		var card_instance := SHOP_CARD_SCENE.instantiate() as ShopCard
+		items_container.add_child(card_instance)
+		card_instance.shop_item = shop_item
+
+	_wire_shop_card_signals()
+
 func _wire_shop_card_signals() -> void:
 	for child in items_container.get_children():
 		if child is ShopCard:
@@ -68,17 +99,10 @@ func _wire_shop_card_signals() -> void:
 	
 	
 func load_shop(current_wave: int) -> void:
-	for child in items_container.get_children(): child.queue_free()
-	
-	
-	var config := Global.SHOP_PROBABILITY_CONFIG
-	var selected_items := Global.select_items_for_offer(shop_items, current_wave, config)
-	for shop_item : ItemBase in selected_items:
-		var card_instance := SHOP_CARD_SCENE.instantiate() as ShopCard
-		items_container.add_child(card_instance)
-		card_instance.shop_item = shop_item
-
-	_wire_shop_card_signals()
+	current_shop_wave = current_wave
+	reroll_cost = max(0, reroll_base_cost)
+	_populate_shop_offer_cards(current_wave)
+	_update_reroll_button_text()
 	_update_weapons_title()
 		
 func create_item_card() -> ItemCard:
@@ -96,6 +120,18 @@ func create_item_weapon(weapon: ItemWeapon) -> void:
 func _on_new_wave_button_pressed() -> void:
 	SoundManager.play_sound(SoundManager.Sound.UI)
 	on_shop_next_wave.emit()
+
+func _on_reroll_button_pressed() -> void:
+	if Global.coins < reroll_cost:
+		SoundManager.play_sound(SoundManager.Sound.ERROR, false, 0.82, -8.0)
+		_show_shop_popup("Insufficient Funds", Color(1.0, 0.40, 0.40, 1.0))
+		return
+
+	Global.coins -= reroll_cost
+	reroll_cost += max(0, reroll_cost_step)
+	_populate_shop_offer_cards(current_shop_wave)
+	SoundManager.play_sound(SoundManager.Sound.UI)
+	_update_reroll_button_text()
 
 func _on_item_purchased(item: ItemBase) -> void:
 	if item.item_type == ItemBase.ItemType.WEAPON:

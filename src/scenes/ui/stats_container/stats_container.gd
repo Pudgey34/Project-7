@@ -65,15 +65,15 @@ func _setup_stat_pages() -> void:
 		stats_health_panel,
 		stats_hp_regen_panel,
 		stats_life_steal_panel,
-		stats_damage_panel,
-		stats_range_panel,
-		stats_luck_panel,
-		stats_speed_panel,
-		stats_attack_speed_panel,
-		stats_pickup_range_panel,
 		stats_block_panel,
+		stats_damage_panel,
+		stats_attack_speed_panel,
+		stats_range_panel,
+		stats_speed_panel,
+		stats_pickup_range_panel,
 		stats_harvesting_panel,
 		stats_max_weapons_panel,
+		stats_luck_panel,
 	]
 
 	total_pages = maxi(1, int(ceil(float(stat_panels.size()) / float(STATS_PER_PAGE))))
