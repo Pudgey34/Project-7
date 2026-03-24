@@ -24,7 +24,14 @@ func _format_stat_name(stat_name: String) -> String:
 	
 func apply_passive() -> void:
 	if add_value != 0:
-		Global.player.stats[add_stats] += add_value
+		Global.player.stats[add_stats] += _get_applied_stat_delta(add_stats, add_value)
 		
 	if remove_value != 0:
-		Global.player.stats[remove_stats] -= remove_value
+		Global.player.stats[remove_stats] -= _get_applied_stat_delta(remove_stats, remove_value)
+
+
+func _get_applied_stat_delta(stat_name: String, value: float) -> float:
+	if stat_name == "attack_speed":
+		return value / 100.0
+
+	return value

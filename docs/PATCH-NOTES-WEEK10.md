@@ -18,3 +18,4 @@ Enemy animation implemented
 Health bar moved
 Dash bar moved
 sounds
+Merging Added

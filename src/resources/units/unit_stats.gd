@@ -25,3 +25,4 @@ enum UnitType {
 @export var life_steal := 0.0
 @export var harvesting := 0.0
 @export var max_weapons := 2
+@export var attack_speed := 1.0

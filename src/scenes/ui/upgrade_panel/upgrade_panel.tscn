@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://diqciy5rkrlo8"]
+[gd_scene load_steps=43 format=3 uid="uid://diqciy5rkrlo8"]
 
 [ext_resource type="Script" uid="uid://1opp027u1yi3" path="res://scenes/ui/upgrade_panel/upgrade_panel.gd" id="1_l8hix"]
 [ext_resource type="Script" uid="uid://cir86i0cvp8gh" path="res://resources/items/upgrades/item_upgrade.gd" id="2_aghkh"]
@@ -36,6 +36,10 @@
 [ext_resource type="Resource" uid="uid://b4018o5qmopim" path="res://resources/items/upgrades/data/speed/upgrade_speed_10.tres" id="45_1121e"]
 [ext_resource type="Resource" uid="uid://bk16w8e7dx5um" path="res://resources/items/upgrades/data/speed/upgrade_speed_15.tres" id="47_eyac8"]
 [ext_resource type="Resource" uid="uid://6wjvxltxc0mh" path="res://resources/items/upgrades/data/speed/upgrade_speed_20.tres" id="48_4hygx"]
+[ext_resource type="Resource" path="res://resources/items/upgrades/data/attack_speed/upgrade_attack_speed_10.tres" id="49_as10"]
+[ext_resource type="Resource" path="res://resources/items/upgrades/data/attack_speed/upgrade_attack_speed_20.tres" id="50_as20"]
+[ext_resource type="Resource" path="res://resources/items/upgrades/data/attack_speed/upgrade_attack_speed_35.tres" id="51_as35"]
+[ext_resource type="Resource" path="res://resources/items/upgrades/data/attack_speed/upgrade_attack_speed_50.tres" id="52_as50"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oekas"]
 bg_color = Color(0.20392157, 0.20392157, 0.20392157, 1)
@@ -51,7 +55,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_oekas")
 script = ExtResource("1_l8hix")
-upgrade_list = Array[ExtResource("2_aghkh")]([ExtResource("3_oekas"), ExtResource("5_l4p84"), ExtResource("7_rm2kw"), ExtResource("8_kbsgn"), ExtResource("9_a1b4m"), ExtResource("11_u36xe"), ExtResource("13_vmsa8"), ExtResource("14_bppm0"), ExtResource("15_lo8g7"), ExtResource("17_0na6y"), ExtResource("19_5j17u"), ExtResource("20_0vvts"), ExtResource("21_bir3b"), ExtResource("23_5000v"), ExtResource("25_p6etl"), ExtResource("26_1tim8"), ExtResource("27_eakci"), ExtResource("28_l6ohj"), ExtResource("29_agreq"), ExtResource("30_7uwbt"), ExtResource("31_e51u4"), ExtResource("33_if5nx"), ExtResource("35_5x8vq"), ExtResource("36_0mn6i"), ExtResource("37_ibvf6"), ExtResource("39_x24kl"), ExtResource("41_2maa3"), ExtResource("42_u7vwi"), ExtResource("43_4dvkj"), ExtResource("45_1121e"), ExtResource("47_eyac8"), ExtResource("48_4hygx")])
+upgrade_list = Array[ExtResource("2_aghkh")]([ExtResource("3_oekas"), ExtResource("5_l4p84"), ExtResource("7_rm2kw"), ExtResource("8_kbsgn"), ExtResource("9_a1b4m"), ExtResource("11_u36xe"), ExtResource("13_vmsa8"), ExtResource("14_bppm0"), ExtResource("15_lo8g7"), ExtResource("17_0na6y"), ExtResource("19_5j17u"), ExtResource("20_0vvts"), ExtResource("21_bir3b"), ExtResource("23_5000v"), ExtResource("25_p6etl"), ExtResource("26_1tim8"), ExtResource("27_eakci"), ExtResource("28_l6ohj"), ExtResource("29_agreq"), ExtResource("30_7uwbt"), ExtResource("31_e51u4"), ExtResource("33_if5nx"), ExtResource("35_5x8vq"), ExtResource("36_0mn6i"), ExtResource("37_ibvf6"), ExtResource("39_x24kl"), ExtResource("41_2maa3"), ExtResource("42_u7vwi"), ExtResource("43_4dvkj"), ExtResource("45_1121e"), ExtResource("47_eyac8"), ExtResource("48_4hygx"), ExtResource("49_as10"), ExtResource("50_as20"), ExtResource("51_as35"), ExtResource("52_as50")])
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1

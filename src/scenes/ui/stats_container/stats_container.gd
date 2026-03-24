@@ -9,6 +9,7 @@ const STATS_PER_PAGE := 7
 @onready var life_steal_label: Label = %LifeStealLabel
 @onready var luck_label: Label = %LuckLabel
 @onready var speed_label: Label = %SpeedLabel
+@onready var attack_speed_label: Label = %AttackSpeedLabel
 @onready var block_label: Label = %BlockLabel
 @onready var harvesting_label: Label = %HarvestingLabel
 @onready var max_weapons_label: Label = %MaxWeaponsLabel
@@ -21,6 +22,7 @@ const STATS_PER_PAGE := 7
 @onready var stats_damage_panel: Panel = $MarginContainer/VBoxContainer/StatsDamage
 @onready var stats_luck_panel: Panel = $MarginContainer/VBoxContainer/StatsLuck
 @onready var stats_speed_panel: Panel = $MarginContainer/VBoxContainer/StatsSpeed
+@onready var stats_attack_speed_panel: Panel = $MarginContainer/VBoxContainer/StatsAttackSpeed
 @onready var stats_block_panel: Panel = $MarginContainer/VBoxContainer/StatsBlock
 @onready var stats_harvesting_panel: Panel = $MarginContainer/VBoxContainer/StatsHarvesting
 @onready var stats_max_weapons_panel: Panel = $MarginContainer/VBoxContainer/StatsMaxWeapons
@@ -51,6 +53,7 @@ func _process(_delta: float) -> void:
 	range_label.text = str(_get_max_weapon_range())
 	luck_label.text = str(Global.player.stats.luck)
 	speed_label.text = str(Global.player.stats.speed)
+	attack_speed_label.text = "%s%%" % _format_compact_number(Global.player.stats.attack_speed * 100.0)
 	pickup_range_label.text = str(snappedf(Global.player.stats.pickup_range, 0.01))
 	block_label.text = str(Global.player.stats.block_chance) + "%"
 	harvesting_label.text = str(Global.player.stats.harvesting)
@@ -66,6 +69,7 @@ func _setup_stat_pages() -> void:
 		stats_range_panel,
 		stats_luck_panel,
 		stats_speed_panel,
+		stats_attack_speed_panel,
 		stats_pickup_range_panel,
 		stats_block_panel,
 		stats_harvesting_panel,
@@ -115,6 +119,7 @@ func _setup_stat_tooltips() -> void:
 	_set_tooltip_for_stat(stats_range_panel, "Range. Maximum range among your equipped weapons.")
 	_set_tooltip_for_stat(stats_luck_panel, "Luck. Improves odds for better upgrade and item choices.")
 	_set_tooltip_for_stat(stats_speed_panel, "Speed. Increases movement speed.")
+	_set_tooltip_for_stat(stats_attack_speed_panel, "Attack Speed. Increases attack frequency. 100% is base speed.")
 	_set_tooltip_for_stat(stats_pickup_range_panel, "Pickup Range. Multiplier for how far away you can collect drops.")
 	_set_tooltip_for_stat(stats_block_panel, "Block. Chance to negate incoming damage.")
 	_set_tooltip_for_stat(stats_harvesting_panel, "Harvesting. Extra coins gained at the end of each wave.")
@@ -134,3 +139,10 @@ func _get_max_weapon_range() -> float:
 
 func _set_tooltip_for_stat(panel: Control, description: String) -> void:
 	panel.tooltip_text = description
+
+
+func _format_compact_number(value: float) -> String:
+	if is_equal_approx(value, round(value)):
+		return str(int(round(value)))
+
+	return str(snappedf(value, 0.1))

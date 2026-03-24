@@ -57,8 +57,16 @@ func use_weapon() -> void:
 	weapon_spread = 0.0
 	calculate_spread()
 	weapon_behaviour.execute_attack()
-	cooldown_timer.wait_time = data.stats.cooldown
+	cooldown_timer.wait_time = _get_attack_cooldown()
 	cooldown_timer.start() 
+
+
+func _get_attack_cooldown() -> float:
+	var attack_speed_multiplier := 1.0
+	if is_instance_valid(Global.player):
+		attack_speed_multiplier = max(0.1, Global.player.stats.attack_speed)
+
+	return max(0.05, data.stats.cooldown / attack_speed_multiplier)
 	
 	
 func rotate_to_target() -> void:

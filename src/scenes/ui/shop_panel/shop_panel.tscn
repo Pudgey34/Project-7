@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://cm770pssjgj1u"]
+[gd_scene load_steps=30 format=3 uid="uid://cm770pssjgj1u"]
 
 [ext_resource type="Script" uid="uid://cwww8pq6isn0e" path="res://scenes/ui/shop_panel/shop_panel.gd" id="1_chkkr"]
 [ext_resource type="Script" uid="uid://bf5u2syoyq8rw" path="res://resources/items/item_base.gd" id="2_5uj72"]
@@ -16,6 +16,7 @@
 [ext_resource type="Resource" uid="uid://mjhrkt2w0i6x" path="res://resources/items/passives/data/passive_fires_blazing_strength.tres" id="11_l4hq1"]
 [ext_resource type="Resource" uid="uid://bi1wxxo5rdx22" path="res://resources/items/passives/data/passive_gravekeepers_cloak.tres" id="12_f1e0c"]
 [ext_resource type="PackedScene" uid="uid://c8bnprxgjttxt" path="res://scenes/ui/item_card/item_card.tscn" id="13_jqy7g"]
+[ext_resource type="Resource" path="res://resources/items/passives/data/passive_blood_rush.tres" id="14_blood"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_chkkr"]
 bg_color = Color(0.24477637, 0.24477643, 0.24477634, 1)
@@ -121,7 +122,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_chkkr")
 script = ExtResource("1_chkkr")
-shop_items = Array[ExtResource("2_5uj72")]([ExtResource("3_21wy5"), ExtResource("4_jqy7g"), ExtResource("5_l4hq1"), ExtResource("6_f1e0c"), ExtResource("7_x6dh5"), ExtResource("8_h8ew1"), ExtResource("9_1rtbb"), ExtResource("10_akg8r"), ExtResource("11_l4hq1"), ExtResource("12_f1e0c")])
+shop_items = Array[ExtResource("2_5uj72")]([ExtResource("3_21wy5"), ExtResource("4_jqy7g"), ExtResource("5_l4hq1"), ExtResource("6_f1e0c"), ExtResource("7_x6dh5"), ExtResource("8_h8ew1"), ExtResource("9_1rtbb"), ExtResource("10_akg8r"), ExtResource("11_l4hq1"), ExtResource("12_f1e0c"), ExtResource("14_blood")])
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
