@@ -7,12 +7,11 @@
 script = ExtResource("1_ji22r")
 name = "Egg"
 icon = ExtResource("2_player_icon")
-description = "perfectly normal egg"
+description = "Well rounded character with no strengths or weaknesses."
 health = 15
 health_increase_per_wave = 0.0
 damage = 0.0
 damage_increase_per_wave = 0.0
 luck = 5.0
-block_chance = 1.0
 gold_drop = 0
 metadata/_custom_type_script = "uid://dfxspktmdyr6c"

@@ -1,5 +1,5 @@
 2026-03-24
-8:00pm-12:00am
+8:00pm-2:00am
 Bug fixes
 Game over fade in
 Enemies hitting while paused
@@ -19,3 +19,5 @@ Health bar moved
 Dash bar moved
 sounds
 Merging Added
+Attack speed Refined
+Rerolls added

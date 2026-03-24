@@ -39,6 +39,9 @@ func create_projectile() -> void:
 	
 	
 	var velocity := Vector2.RIGHT.rotated(weapon.rotation) * weapon.data.stats.projectile_speed 
-	
-	instance.set_projectile(velocity, get_damage(), critical, weapon.data.stats.knockback, weapon.get_parent(), weapon, weapon.data.stats.pierce)
+	var total_pierce := weapon.data.stats.pierce
+	if is_instance_valid(Global.player):
+		total_pierce += max(0, Global.player.stats.pierce)
+
+	instance.set_projectile(velocity, get_damage(), critical, weapon.data.stats.knockback, weapon.get_parent(), weapon, total_pierce)
 	

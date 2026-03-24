@@ -9,8 +9,7 @@ const SELL_BUTTON_BASE := "Sell Weapon"
 const REROLL_BUTTON_BASE := "reroll"
 
 @export var shop_items: Array[ItemBase]
-@export var reroll_base_cost := 10
-@export var reroll_cost_step := 5
+@export var reroll_wave_multiplier := 1
 
 @onready var items_container: HBoxContainer = %ItemsContainer
 @onready var passives_container: GridContainer = %PassivesContainer
@@ -26,12 +25,14 @@ const REROLL_BUTTON_BASE := "reroll"
 var context_card: ItemCard
 var reroll_cost := 0
 var current_shop_wave := 1
+var reroll_uses_this_wave := 0
 
 func _ready() -> void: 
 	for child in passives_container.get_children(): child.queue_free()
 	for child in weapons_container.get_children(): child.queue_free()
 	combine_button.disabled = true
-	reroll_cost = max(0, reroll_base_cost)
+	reroll_uses_this_wave = 0
+	_refresh_reroll_cost()
 	_wire_shop_card_signals()
 	_update_weapons_title()
 	_update_sell_button_text()
@@ -71,6 +72,12 @@ func _update_reroll_button_text() -> void:
 
 	reroll_button.text = "%s\n(%d)" % [REROLL_BUTTON_BASE, reroll_cost]
 
+func _get_base_reroll_cost() -> int:
+	return max(1, current_shop_wave * reroll_wave_multiplier)
+
+func _refresh_reroll_cost() -> void:
+	reroll_cost = int(round(float(_get_base_reroll_cost()) * pow(2.0, float(reroll_uses_this_wave))))
+
 func _clear_shop_offer_cards() -> void:
 	for child in items_container.get_children():
 		items_container.remove_child(child)
@@ -100,7 +107,8 @@ func _wire_shop_card_signals() -> void:
 	
 func load_shop(current_wave: int) -> void:
 	current_shop_wave = current_wave
-	reroll_cost = max(0, reroll_base_cost)
+	reroll_uses_this_wave = 0
+	_refresh_reroll_cost()
 	_populate_shop_offer_cards(current_wave)
 	_update_reroll_button_text()
 	_update_weapons_title()
@@ -128,7 +136,8 @@ func _on_reroll_button_pressed() -> void:
 		return
 
 	Global.coins -= reroll_cost
-	reroll_cost += max(0, reroll_cost_step)
+	reroll_uses_this_wave += 1
+	_refresh_reroll_cost()
 	_populate_shop_offer_cards(current_shop_wave)
 	SoundManager.play_sound(SoundManager.Sound.UI)
 	_update_reroll_button_text()

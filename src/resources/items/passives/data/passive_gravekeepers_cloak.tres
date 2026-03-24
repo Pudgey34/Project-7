@@ -11,6 +11,7 @@ remove_value = 5.0
 remove_stats = "speed"
 item_name = "Gravekeeper's Cloak"
 item_icon = ExtResource("1_b54nh")
+item_tier = 1
 item_type = 2
 item_cost = 22
 metadata/_custom_type_script = "uid://dona4k48tjfmp"

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemUpgrade" load_steps=3 format=3 uid="uid://5451u1ug1f04"]
+
+[ext_resource type="Texture2D" uid="uid://dyvhlxy2ogrl5" path="res://assets/sprites/Upgrades/9.png" id="1_icon"]
+[ext_resource type="Script" uid="uid://cir86i0cvp8gh" path="res://resources/items/upgrades/item_upgrade.gd" id="2_script"]
+
+[resource]
+script = ExtResource("2_script")
+value = 10.0
+description = "+10"
+stat_id = "range"
+item_name = "Range"
+item_icon = ExtResource("1_icon")
+item_type = 1

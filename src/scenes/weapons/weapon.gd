@@ -40,6 +40,7 @@ func get_closest_target() -> Node2D:
 func _process(delta: float) -> void:
 	cooldown_timer.paused = Global.game_paused
 	if Global.game_paused: return
+	_update_range_radius()
 	if not is_attacking:
 		if targets.size() > 0:
 			update_closest_target()
@@ -94,10 +95,22 @@ func setup_weapon(data: ItemWeapon) -> void:
 	self.data = data
 	if collision.shape:
 		collision.shape = collision.shape.duplicate()
-	var circle := collision.shape as CircleShape2D
-	if circle:
-		circle.radius = data.stats.max_range
+	_update_range_radius()
 	apply_tier_outline()
+
+func _update_range_radius() -> void:
+	if not data or not data.stats:
+		return
+
+	var circle := collision.shape as CircleShape2D
+	if not circle:
+		return
+
+	var range_bonus: float = 0.0
+	if is_instance_valid(Global.player):
+		range_bonus = float(Global.player.stats.range)
+
+	circle.radius = max(0.0, data.stats.max_range + range_bonus)
 	
 func get_idle_rotation() -> float:
 	if Global.player.is_facing_right():

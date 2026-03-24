@@ -19,15 +19,15 @@ const RARE_STYLE = preload("uid://c8jt2o1rli1d6")
 const SELECTION_CARD_SCENE = preload("uid://cxd4eej5fewhn")
 
 const UPGRADE_PROBABILITY_CONFIG = {
-	"rare": { "start_wave": 2, "base_multi": 0.06 },
-	"epic": { "start_wave": 4, "base_multi": 0.02 },
-	"legendary": { "start_wave": 7, "base_multi": 0.0023 },
+	"rare": { "start_wave": 1, "base_multi": 0.06 },
+	"epic": { "start_wave": 2, "base_multi": 0.02 },
+	"legendary": { "start_wave": 3, "base_multi": 0.0023 },
 	
 }
 const SHOP_PROBABILITY_CONFIG = {
-	"rare": { "start_wave": 2, "base_multi": 0.1 },
-	"epic": { "start_wave": 4, "base_multi": 0.06 },
-	"legendary": { "start_wave": 7, "base_multi": 0.01 },
+	"rare": { "start_wave": 1, "base_multi": 0.1 },
+	"epic": { "start_wave": 2, "base_multi": 0.06 },
+	"legendary": { "start_wave": 3, "base_multi": 0.01 },
 	
 }
 
@@ -97,17 +97,15 @@ func calculate_tier_probability(current_wave: int, config: Dictionary) -> Array[
 	var epic_chance := 0.0
 	var legendary_chance := 0.0
 	
-	# starts increasing at wave 2, base 0%
+	# each tier starts from its configured wave and scales by base multiplier
 	if current_wave >= config.rare.start_wave: 
-		rare_chance = min(1.0, (current_wave - 1) * config.rare.base_multi)
+		rare_chance = min(1.0, (current_wave - (config.rare.start_wave - 1)) * config.rare.base_multi)
 		
-	# starts increasing at wave 4, base 0%
 	if current_wave >= config.epic.start_wave:
-		epic_chance = min(1.0, (current_wave - 3) * config.epic.base_multi)
+		epic_chance = min(1.0, (current_wave - (config.epic.start_wave - 1)) * config.epic.base_multi)
 		
-	# starts increasing at wave 7, base 0%
 	if current_wave >= config.legendary.start_wave:
-		legendary_chance = min(1.0, (current_wave - 6) * config.legendary.base_multi)
+		legendary_chance = min(1.0, (current_wave - (config.legendary.start_wave - 1)) * config.legendary.base_multi)
 	
 	# 10 luck = 10% chance of higher tier 
 	var luck_factor := 1.0 + (Global.player.stats.luck/ 100.0)

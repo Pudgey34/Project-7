@@ -16,7 +16,9 @@ enum UnitType {
 @export var health_increase_per_wave := 1.0
 @export var damage := 1.0
 @export var damage_increase_per_wave := 1.0
+@export var pierce := 0
 @export var speed := 300
+@export var range := 0.0
 @export var luck := 1.0
 @export var block_chance := 0.0
 @export var gold_drop := 1

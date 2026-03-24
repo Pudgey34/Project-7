@@ -11,16 +11,22 @@ func get_description() -> String:
 	var description := "[code]"
 	
 	if add_value != 0:
-		description += "[color=green]+%s %s[/color]\n" % [add_value, _format_stat_name(add_stats)]
+		description += "[color=green]+%s %s[/color]\n" % [_format_stat_value(add_stats, add_value), _format_stat_name(add_stats)]
 
 	if remove_value !=0:
-		description += "[color=red]-%s %s[/color]\n" % [remove_value, _format_stat_name(remove_stats)]	
+		description += "[color=red]-%s %s[/color]\n" % [_format_stat_value(remove_stats, remove_value), _format_stat_name(remove_stats)]	
 			
 	description += "[/code]"
 	return description
 
 func _format_stat_name(stat_name: String) -> String:
 	return stat_name.replace("_", " ")
+
+func _format_stat_value(stat_name: String, value: float) -> String:
+	if _is_percentage_stat(stat_name):
+		return "%s%%" % _format_number(value)
+
+	return _format_number(value)
 	
 func apply_passive() -> void:
 	if add_value != 0:
@@ -35,3 +41,12 @@ func _get_applied_stat_delta(stat_name: String, value: float) -> float:
 		return value / 100.0
 
 	return value
+
+func _is_percentage_stat(stat_name: String) -> bool:
+	return stat_name == "attack_speed" or stat_name == "life_steal" or stat_name == "block_chance"
+
+func _format_number(value: float) -> String:
+	if is_equal_approx(value, round(value)):
+		return str(int(round(value)))
+
+	return str(snappedf(value, 0.1))

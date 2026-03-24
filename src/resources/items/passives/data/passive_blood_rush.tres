@@ -11,5 +11,6 @@ remove_value = 2.0
 remove_stats = "damage"
 item_name = "Blood Rush"
 item_icon = ExtResource("1_icon")
+item_tier = 2
 item_type = 2
 item_cost = 28

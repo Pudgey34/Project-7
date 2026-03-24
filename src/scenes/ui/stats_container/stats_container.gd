@@ -10,6 +10,7 @@ const STATS_PER_PAGE := 7
 @onready var luck_label: Label = %LuckLabel
 @onready var speed_label: Label = %SpeedLabel
 @onready var attack_speed_label: Label = %AttackSpeedLabel
+@onready var pierce_label: Label = %PierceLabel
 @onready var block_label: Label = %BlockLabel
 @onready var harvesting_label: Label = %HarvestingLabel
 @onready var max_weapons_label: Label = %MaxWeaponsLabel
@@ -23,6 +24,7 @@ const STATS_PER_PAGE := 7
 @onready var stats_luck_panel: Panel = $MarginContainer/VBoxContainer/StatsLuck
 @onready var stats_speed_panel: Panel = $MarginContainer/VBoxContainer/StatsSpeed
 @onready var stats_attack_speed_panel: Panel = $MarginContainer/VBoxContainer/StatsAttackSpeed
+@onready var stats_pierce_panel: Panel = $MarginContainer/VBoxContainer/StatsPierce
 @onready var stats_block_panel: Panel = $MarginContainer/VBoxContainer/StatsBlock
 @onready var stats_harvesting_panel: Panel = $MarginContainer/VBoxContainer/StatsHarvesting
 @onready var stats_max_weapons_panel: Panel = $MarginContainer/VBoxContainer/StatsMaxWeapons
@@ -50,7 +52,8 @@ func _process(_delta: float) -> void:
 	hp_regen_label.text = str(Global.player.stats.hp_regen)
 	life_steal_label.text = str(Global.player.stats.life_steal) + "%"
 	damage_label.text = str(Global.player.stats.damage)
-	range_label.text = str(_get_max_weapon_range())
+	pierce_label.text = str(Global.player.stats.pierce)
+	range_label.text = str(snappedf(Global.player.stats.range, 0.01))
 	luck_label.text = str(Global.player.stats.luck)
 	speed_label.text = str(Global.player.stats.speed)
 	attack_speed_label.text = "%s%%" % _format_compact_number(Global.player.stats.attack_speed * 100.0)
@@ -67,6 +70,7 @@ func _setup_stat_pages() -> void:
 		stats_life_steal_panel,
 		stats_block_panel,
 		stats_damage_panel,
+		stats_pierce_panel,
 		stats_attack_speed_panel,
 		stats_range_panel,
 		stats_speed_panel,
@@ -116,7 +120,8 @@ func _setup_stat_tooltips() -> void:
 	_set_tooltip_for_stat(stats_hp_regen_panel, "HP Regen. Amount of health restored over time.")
 	_set_tooltip_for_stat(stats_life_steal_panel, "Life Steal. Chance to heal when your attacks hit.")
 	_set_tooltip_for_stat(stats_damage_panel, "Damage. Added to your weapons to increase hit damage.")
-	_set_tooltip_for_stat(stats_range_panel, "Range. Maximum range among your equipped weapons.")
+	_set_tooltip_for_stat(stats_pierce_panel, "Pierce. Adds extra enemies your ranged attacks can pass through.")
+	_set_tooltip_for_stat(stats_range_panel, "Range. Flat bonus added to your weapons' range.")
 	_set_tooltip_for_stat(stats_luck_panel, "Luck. Improves odds for better upgrade and item choices.")
 	_set_tooltip_for_stat(stats_speed_panel, "Speed. Increases movement speed.")
 	_set_tooltip_for_stat(stats_attack_speed_panel, "Attack Speed. Increases attack frequency. 100% is base speed.")
@@ -131,9 +136,10 @@ func _get_max_weapon_range() -> float:
 		return 0.0
 
 	var max_range := 0.0
+	var range_bonus: float = float(Global.player.stats.range)
 	for weapon in Global.player.current_weapons:
 		if weapon and weapon.data and weapon.data.stats:
-			max_range = max(max_range, weapon.data.stats.max_range)
+			max_range = max(max_range, weapon.data.stats.max_range + range_bonus)
 
 	return max_range
 

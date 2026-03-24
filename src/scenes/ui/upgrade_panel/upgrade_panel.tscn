@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://diqciy5rkrlo8"]
+[gd_scene load_steps=44 format=3 uid="uid://diqciy5rkrlo8"]
 
 [ext_resource type="Script" uid="uid://1opp027u1yi3" path="res://scenes/ui/upgrade_panel/upgrade_panel.gd" id="1_l8hix"]
 [ext_resource type="Script" uid="uid://cir86i0cvp8gh" path="res://resources/items/upgrades/item_upgrade.gd" id="2_aghkh"]
@@ -40,12 +40,44 @@
 [ext_resource type="Resource" path="res://resources/items/upgrades/data/attack_speed/upgrade_attack_speed_20.tres" id="50_as20"]
 [ext_resource type="Resource" path="res://resources/items/upgrades/data/attack_speed/upgrade_attack_speed_35.tres" id="51_as35"]
 [ext_resource type="Resource" path="res://resources/items/upgrades/data/attack_speed/upgrade_attack_speed_50.tres" id="52_as50"]
+[ext_resource type="Resource" path="res://resources/items/upgrades/data/range/upgrade_range_10.tres" id="53_rg10"]
+[ext_resource type="Resource" path="res://resources/items/upgrades/data/range/upgrade_range_20.tres" id="54_rg20"]
+[ext_resource type="Resource" path="res://resources/items/upgrades/data/range/upgrade_range_35.tres" id="55_rg35"]
+[ext_resource type="Resource" path="res://resources/items/upgrades/data/range/upgrade_range_50.tres" id="56_rg50"]
+[ext_resource type="Resource" path="res://resources/items/upgrades/data/pierce/upgrade_pierce_1.tres" id="57_pc1"]
+[ext_resource type="Resource" path="res://resources/items/upgrades/data/pierce/upgrade_pierce_2.tres" id="58_pc2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oekas"]
 bg_color = Color(0.20392157, 0.20392157, 0.20392157, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_mfnog"]
 font_size = 120
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_reroll_normal"]
+bg_color = Color(0.18431373, 0.4392157, 0.43529412, 0.6)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_reroll_hover"]
+bg_color = Color(0.09411765, 0.62352943, 0.74509805, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_reroll_focus"]
+bg_color = Color(0.18431373, 0.4392157, 0.43529412, 0.6)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
 
 [node name="UpgradePanel" type="Panel"]
 anchors_preset = 15
@@ -55,7 +87,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_oekas")
 script = ExtResource("1_l8hix")
-upgrade_list = Array[ExtResource("2_aghkh")]([ExtResource("3_oekas"), ExtResource("5_l4p84"), ExtResource("7_rm2kw"), ExtResource("8_kbsgn"), ExtResource("9_a1b4m"), ExtResource("11_u36xe"), ExtResource("13_vmsa8"), ExtResource("14_bppm0"), ExtResource("15_lo8g7"), ExtResource("17_0na6y"), ExtResource("19_5j17u"), ExtResource("20_0vvts"), ExtResource("21_bir3b"), ExtResource("23_5000v"), ExtResource("25_p6etl"), ExtResource("26_1tim8"), ExtResource("27_eakci"), ExtResource("28_l6ohj"), ExtResource("29_agreq"), ExtResource("30_7uwbt"), ExtResource("31_e51u4"), ExtResource("33_if5nx"), ExtResource("35_5x8vq"), ExtResource("36_0mn6i"), ExtResource("37_ibvf6"), ExtResource("39_x24kl"), ExtResource("41_2maa3"), ExtResource("42_u7vwi"), ExtResource("43_4dvkj"), ExtResource("45_1121e"), ExtResource("47_eyac8"), ExtResource("48_4hygx"), ExtResource("49_as10"), ExtResource("50_as20"), ExtResource("51_as35"), ExtResource("52_as50")])
+upgrade_list = Array[ExtResource("2_aghkh")]([ExtResource("3_oekas"), ExtResource("5_l4p84"), ExtResource("7_rm2kw"), ExtResource("8_kbsgn"), ExtResource("9_a1b4m"), ExtResource("11_u36xe"), ExtResource("13_vmsa8"), ExtResource("14_bppm0"), ExtResource("15_lo8g7"), ExtResource("17_0na6y"), ExtResource("19_5j17u"), ExtResource("20_0vvts"), ExtResource("21_bir3b"), ExtResource("23_5000v"), ExtResource("25_p6etl"), ExtResource("26_1tim8"), ExtResource("27_eakci"), ExtResource("28_l6ohj"), ExtResource("29_agreq"), ExtResource("30_7uwbt"), ExtResource("31_e51u4"), ExtResource("33_if5nx"), ExtResource("35_5x8vq"), ExtResource("36_0mn6i"), ExtResource("37_ibvf6"), ExtResource("39_x24kl"), ExtResource("41_2maa3"), ExtResource("42_u7vwi"), ExtResource("43_4dvkj"), ExtResource("45_1121e"), ExtResource("47_eyac8"), ExtResource("48_4hygx"), ExtResource("49_as10"), ExtResource("50_as20"), ExtResource("51_as35"), ExtResource("52_as50"), ExtResource("53_rg10"), ExtResource("54_rg20"), ExtResource("55_rg35"), ExtResource("56_rg50"), ExtResource("57_pc1"), ExtResource("58_pc2")])
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -85,6 +117,16 @@ horizontal_alignment = 1
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 24
+
+[node name="RerollButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(240, 90)
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxFlat_reroll_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_reroll_hover")
+theme_override_styles/focus = SubResource("StyleBoxFlat_reroll_focus")
+text = "Reroll\n(0)"
 
 [node name="UpgradeCard" parent="MarginContainer/HBoxContainer/VBoxContainer/ItemsContainer" instance=ExtResource("2_vxs30")]
 layout_mode = 2
