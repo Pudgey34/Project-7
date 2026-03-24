@@ -1,0 +1,40 @@
+[gd_scene load_steps=8 format=3 uid="uid://bh34p30unx5eq"]
+
+[ext_resource type="PackedScene" uid="uid://by0cvj61konn2" path="res://scenes/weapons/weapon_base.tscn" id="1_base"]
+[ext_resource type="Shader" uid="uid://dlh1c1y15i2px" path="res://shaders/outline.gdshader" id="2_ej1rg"]
+[ext_resource type="Texture2D" uid="uid://2fk3slrab3bp" path="res://assets/sprites/Weapons/Melee/Weapon_sword.png" id="2_sword"]
+[ext_resource type="PackedScene" uid="uid://cy7i75brgp0g5" path="res://scenes/components/hitbox_component.tscn" id="3_hitbox"]
+[ext_resource type="Script" uid="uid://cvne02e67cd0f" path="res://scenes/weapons/melee/sword_behaviour.gd" id="4_behaviour"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3wm1q"]
+resource_local_to_scene = true
+shader = ExtResource("2_ej1rg")
+shader_parameter/outline_color = Color(0.9079417, 0.9079417, 0.90794164, 1)
+shader_parameter/outline_width = 5.0000002375
+shader_parameter/glow_intensity = 4.00000019
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_blade"]
+size = Vector2(177.14288, 68.571434)
+
+[node name="WeaponSword" instance=ExtResource("1_base")]
+
+[node name="Sprite2D" parent="." index="0"]
+material = SubResource("ShaderMaterial_3wm1q")
+position = Vector2(0, -2)
+offset = Vector2(38, 0)
+texture = ExtResource("2_sword")
+
+[node name="HitboxComponent" parent="Sprite2D" index="0" instance=ExtResource("3_hitbox")]
+z_index = 1
+collision_layer = 16
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/HitboxComponent" index="0"]
+position = Vector2(52, -2)
+shape = SubResource("RectangleShape2D_blade")
+debug_color = Color(0.9582171, 0, 0.53098524, 0.41960785)
+
+[node name="WeaponBehaviour" parent="." index="3" node_paths=PackedStringArray("hitbox", "weapon")]
+script = ExtResource("4_behaviour")
+hitbox = NodePath("../Sprite2D/HitboxComponent")
+weapon = NodePath("..")

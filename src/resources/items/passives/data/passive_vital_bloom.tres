@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="ItemPassive" load_steps=3 format=3]
+[gd_resource type="Resource" script_class="ItemPassive" load_steps=3 format=3 uid="uid://ctw80g51dosme"]
 
-[ext_resource type="Texture2D" path="res://assets/sprites/Upgrades/3.png" id="1_icon"]
-[ext_resource type="Script" path="res://resources/items/passives/item_passive.gd" id="2_script"]
+[ext_resource type="Texture2D" uid="uid://dxl550mv1d5l6" path="res://assets/sprites/Upgrades/3.png" id="1_icon"]
+[ext_resource type="Script" uid="uid://dona4k48tjfmp" path="res://resources/items/passives/item_passive.gd" id="2_script"]
 
 [resource]
 script = ExtResource("2_script")
@@ -11,6 +11,5 @@ remove_value = 1.0
 remove_stats = "damage"
 item_name = "Vital Bloom"
 item_icon = ExtResource("1_icon")
-item_tier = 0
 item_type = 2
 item_cost = 16

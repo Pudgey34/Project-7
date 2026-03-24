@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemWeapon" load_steps=6 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/sprites/Weapons/Icons/weapon_sword_icon.png" id="1_icon"]
+[ext_resource type="PackedScene" path="res://scenes/weapons/melee/weapon_sword.tscn" id="2_scene"]
+[ext_resource type="Script" path="res://resources/items/weapons/item_weapon.gd" id="3_script"]
+[ext_resource type="Resource" path="res://resources/items/weapons/melee/sword/stats_sword_3.tres" id="4_stats"]
+[ext_resource type="Resource" path="res://resources/items/weapons/melee/sword/item_sword_4.tres" id="5_upgrade"]
+
+[resource]
+script = ExtResource("3_script")
+scene = ExtResource("2_scene")
+stats = ExtResource("4_stats")
+upgrade_to = ExtResource("5_upgrade")
+item_name = "Sword III"
+item_icon = ExtResource("1_icon")
+item_tier = 2
+item_cost = 88

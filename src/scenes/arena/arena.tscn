@@ -1,4 +1,4 @@
-[gd_scene load_steps=129 format=3 uid="uid://b4ifpsnkclb5q"]
+[gd_scene load_steps=131 format=3 uid="uid://b4ifpsnkclb5q"]
 
 [ext_resource type="Texture2D" uid="uid://cy4xfx762bxgb" path="res://assets/sprites/BG.png" id="1_5tue2"]
 [ext_resource type="Script" uid="uid://dx6ay2e086uwg" path="res://scenes/arena/arena.gd" id="1_asdgj"]
@@ -126,6 +126,8 @@
 [ext_resource type="Resource" path="res://resources/items/passives/data/passive_sprinter_greed.tres" id="119_xve6l"]
 [ext_resource type="Resource" path="res://resources/items/passives/data/passive_stone_sigil.tres" id="120_er6xv"]
 [ext_resource type="Resource" path="res://resources/items/passives/data/passive_vital_bloom.tres" id="121_h8nn0"]
+[ext_resource type="Resource" path="res://resources/items/weapons/melee/sword/item_sword_1.tres" id="122_a1ejh"]
+[ext_resource type="Script" uid="uid://djw4mthlrs7ft" path="res://resources/items/weapons/item_weapon.gd" id="126_b4h7k"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ii07k"]
 font_size = 64
@@ -202,7 +204,7 @@ upgrade_list = Array[ExtResource("25_rvsgk")]([ExtResource("26_dlje5"), ExtResou
 [node name="ShopPanel" parent="GameUI" instance=ExtResource("10_2ml6w")]
 unique_name_in_owner = true
 visible = false
-shop_items = Array[ExtResource("69_b2a0l")]([ExtResource("70_gtcva"), ExtResource("71_a1ejh"), ExtResource("72_b4h7k"), ExtResource("73_2l10b"), ExtResource("74_y1ias"), ExtResource("75_3xutc"), ExtResource("76_aqtxl"), ExtResource("77_f772w"), ExtResource("78_27j65"), ExtResource("79_yp53l"), ExtResource("80_bdqta"), ExtResource("81_n0rh3"), ExtResource("82_v8b4h"), ExtResource("83_hfltd"), ExtResource("84_dloyk"), ExtResource("85_wkndr"), ExtResource("86_5t7vk"), ExtResource("87_iedlo"), ExtResource("88_dyjsr"), ExtResource("89_jkblg"), ExtResource("90_65pvm"), ExtResource("91_58ww3"), ExtResource("92_mruwx"), ExtResource("93_odits"), ExtResource("94_v7k8q"), ExtResource("95_3yxfe"), ExtResource("96_kqa81"), ExtResource("97_3q8tj"), ExtResource("98_ub4ky"), ExtResource("99_l45ga"), ExtResource("100_hxd5i"), ExtResource("101_8j8l2"), ExtResource("102_0aggx"), ExtResource("103_cmqfc"), ExtResource("104_5lqyc"), ExtResource("105_3u5el"), ExtResource("106_lw83e"), ExtResource("107_6vqs6"), ExtResource("108_k3t35"), ExtResource("109_byxsd"), ExtResource("110_srphe"), ExtResource("111_q4l7f"), ExtResource("112_tfsal"), ExtResource("113_hf0tj"), ExtResource("114_k132i"), ExtResource("115_qnffx"), ExtResource("116_nrujq"), ExtResource("117_e0uac"), ExtResource("118_wvmkp"), ExtResource("119_xve6l"), ExtResource("120_er6xv"), ExtResource("121_h8nn0")])
+shop_items = Array[ExtResource("69_b2a0l")]([ExtResource("70_gtcva"), ExtResource("71_a1ejh"), ExtResource("72_b4h7k"), ExtResource("73_2l10b"), ExtResource("74_y1ias"), ExtResource("75_3xutc"), ExtResource("76_aqtxl"), ExtResource("77_f772w"), ExtResource("78_27j65"), ExtResource("79_yp53l"), ExtResource("80_bdqta"), ExtResource("81_n0rh3"), ExtResource("82_v8b4h"), ExtResource("83_hfltd"), ExtResource("84_dloyk"), ExtResource("85_wkndr"), ExtResource("86_5t7vk"), ExtResource("87_iedlo"), ExtResource("88_dyjsr"), ExtResource("89_jkblg"), ExtResource("90_65pvm"), ExtResource("91_58ww3"), ExtResource("92_mruwx"), ExtResource("93_odits"), ExtResource("94_v7k8q"), ExtResource("95_3yxfe"), ExtResource("96_kqa81"), ExtResource("97_3q8tj"), ExtResource("98_ub4ky"), ExtResource("99_l45ga"), ExtResource("100_hxd5i"), ExtResource("101_8j8l2"), ExtResource("102_0aggx"), ExtResource("103_cmqfc"), ExtResource("104_5lqyc"), ExtResource("105_3u5el"), ExtResource("106_lw83e"), ExtResource("107_6vqs6"), ExtResource("108_k3t35"), ExtResource("109_byxsd"), ExtResource("110_srphe"), ExtResource("111_q4l7f"), ExtResource("112_tfsal"), ExtResource("113_hf0tj"), ExtResource("114_k132i"), ExtResource("115_qnffx"), ExtResource("116_nrujq"), ExtResource("117_e0uac"), ExtResource("118_wvmkp"), ExtResource("119_xve6l"), ExtResource("120_er6xv"), ExtResource("121_h8nn0"), ExtResource("122_a1ejh")])
 
 [node name="CoinsBag" parent="GameUI" instance=ExtResource("11_xgbxb")]
 unique_name_in_owner = true
@@ -212,6 +214,7 @@ anchors_preset = 2
 
 [node name="SelectionPanel" parent="GameUI" instance=ExtResource("12_vmsrg")]
 unique_name_in_owner = true
+start_weapons = Array[ExtResource("126_b4h7k")]([ExtResource("70_gtcva"), ExtResource("74_y1ias"), ExtResource("122_a1ejh")])
 
 [node name="PauseMenu" parent="GameUI" instance=ExtResource("20_pause")]
 unique_name_in_owner = true
