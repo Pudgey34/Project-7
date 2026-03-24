@@ -10,6 +10,9 @@ var active_hitboxes: Array[HitboxComponent] = []
 var damage_timer: float = 0.0
 
 func _process(delta: float) -> void:
+	if Global.game_paused:
+		return
+
 	# Only apply continuous damage for the player
 	if not owner is Player:
 		return
@@ -25,6 +28,9 @@ func _process(delta: float) -> void:
 				on_damaged.emit(hitbox)
 
 func _on_area_entered(area: Area2D) -> void:
+	if Global.game_paused:
+		return
+
 	if area is HitboxComponent:
 		on_damaged.emit(area)
 		# Only track active hitboxes for the player

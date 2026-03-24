@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="WaveData" load_steps=9 format=3 uid="uid://cdpjef7tyigni"]
+
+[ext_resource type="Script" uid="uid://dqblj6x37v5ae" path="res://resources/waves/wave_data.gd" id="1"]
+[ext_resource type="Script" uid="uid://dgn2irjw1bxqy" path="res://resources/waves/wave_unit_data.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://cjkpq563q15pt" path="res://scenes/unit/enemy/enemy_chaser_slow.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://ryafurhmlwtn" path="res://scenes/unit/enemy/enemy_chaser_mid.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://dwfk13cyivxjk" path="res://scenes/unit/enemy/enemy_chaser_fast.tscn" id="5"]
+
+[sub_resource type="Resource" id="1"]
+script = ExtResource("2")
+unit_scene = ExtResource("3")
+weight = 25.0
+
+[sub_resource type="Resource" id="2"]
+script = ExtResource("2")
+unit_scene = ExtResource("4")
+weight = 45.0
+
+[sub_resource type="Resource" id="3"]
+script = ExtResource("2")
+unit_scene = ExtResource("5")
+weight = 30.0
+
+[resource]
+script = ExtResource("1")
+from = 5
+to = 5
+wave_time = 28.0
+units = Array[ExtResource("2")]([SubResource("1"), SubResource("2"), SubResource("3")])
+spawn_type = 0
+fixed_spawn_time = 0.8
+spawn_count_per_tick = 2

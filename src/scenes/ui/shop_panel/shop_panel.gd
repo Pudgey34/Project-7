@@ -53,8 +53,10 @@ func _on_new_wave_button_pressed() -> void:
 
 func _on_item_purchased(item: ItemBase) -> void:
 	if item.item_type == ItemBase.ItemType.WEAPON:
-		# Cap at 6 weapons (prevention happens in shop_card.gd)
-		if Global.equipped_weapons.size() >= 6:
+		if not is_instance_valid(Global.player):
+			return
+
+		if Global.equipped_weapons.size() >= Global.player.stats.max_weapons:
 			return
 		
 		var item_card := create_item_card()

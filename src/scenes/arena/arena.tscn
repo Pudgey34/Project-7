@@ -1,10 +1,9 @@
-[gd_scene load_steps=23 format=3 uid="uid://b4ifpsnkclb5q"]
+[gd_scene load_steps=33 format=3 uid="uid://b4ifpsnkclb5q"]
 
 [ext_resource type="Texture2D" uid="uid://cy4xfx762bxgb" path="res://assets/sprites/BG.png" id="1_5tue2"]
 [ext_resource type="Script" uid="uid://dx6ay2e086uwg" path="res://scenes/arena/arena.gd" id="1_asdgj"]
 [ext_resource type="Texture2D" uid="uid://ov4fmsbglo55" path="res://assets/sprites/Map.png" id="2_aj7ud"]
 [ext_resource type="Script" uid="uid://ccgcwy5sr1qo2" path="res://scenes/arena/camera_2d.gd" id="5_jx0ua"]
-[ext_resource type="Resource" uid="uid://c3xmisc0ibw73" path="res://resources/waves/data/wave_6_to_11.tres" id="8_8kk48"]
 [ext_resource type="Script" uid="uid://dfxspktmdyr6c" path="res://resources/units/unit_stats.gd" id="8_t3vx8"]
 [ext_resource type="PackedScene" uid="uid://diqciy5rkrlo8" path="res://scenes/ui/upgrade_panel/upgrade_panel.tscn" id="9_6w4xk"]
 [ext_resource type="Resource" uid="uid://b830d1rb8ka51" path="res://resources/units/enemies/stats_enemy_chaser_slow.tres" id="9_rhjlh"]
@@ -12,14 +11,25 @@
 [ext_resource type="Resource" uid="uid://ca6jnd7rfx1a" path="res://resources/units/enemies/stats_enemy_chaser_mid.tres" id="10_tp84n"]
 [ext_resource type="Resource" uid="uid://buam76n5o5dnf" path="res://resources/units/enemies/stats_enemy_chaser_fast.tres" id="11_8kk48"]
 [ext_resource type="PackedScene" uid="uid://cnn4gyprded0k" path="res://scenes/ui/coins_bag/coins_bag.tscn" id="11_xgbxb"]
+[ext_resource type="PackedScene" path="res://scenes/ui/player_hud/player_hud.tscn" id="12_hud"]
 [ext_resource type="PackedScene" uid="uid://bxd0bti563hw2" path="res://scenes/ui/selection_panel/selection_panel.tscn" id="12_vmsrg"]
 [ext_resource type="Resource" uid="uid://bb606qbg3wrac" path="res://resources/units/enemies/stats_enemy_charger.tres" id="13_wqbss"]
 [ext_resource type="Resource" uid="uid://d1a6qg5m27xcm" path="res://resources/units/enemies/stats_enemy_shooter.tres" id="14_fir7s"]
 [ext_resource type="Script" uid="uid://cpmg5v8e6qfik" path="res://scenes/arena/spawner.gd" id="17_8kk48"]
 [ext_resource type="Script" uid="uid://dqblj6x37v5ae" path="res://resources/waves/wave_data.gd" id="18_wqbss"]
-[ext_resource type="Resource" uid="uid://5saifmsegxtw" path="res://resources/waves/data/wave_1_to_5.tres" id="19_fir7s"]
+[ext_resource type="Resource" uid="uid://ct4al0e6gd8tv" path="res://resources/waves/data/wave_1.tres" id="19_w1"]
 [ext_resource type="PackedScene" path="res://scenes/ui/pause_menu/pause_menu.tscn" id="20_pause"]
 [ext_resource type="PackedScene" path="res://scenes/ui/game_over/game_over_screen.tscn" id="21_gameover"]
+[ext_resource type="Resource" uid="uid://cpm0avsri658u" path="res://resources/waves/data/wave_2.tres" id="22_w2"]
+[ext_resource type="Resource" uid="uid://b82q1uonydlu6" path="res://resources/waves/data/wave_3.tres" id="23_w3"]
+[ext_resource type="Resource" uid="uid://cakyqqi340ocm" path="res://resources/waves/data/wave_4.tres" id="24_w4"]
+[ext_resource type="Resource" uid="uid://cdpjef7tyigni" path="res://resources/waves/data/wave_5.tres" id="25_w5"]
+[ext_resource type="Resource" uid="uid://bdw2vhars35er" path="res://resources/waves/data/wave_6.tres" id="26_w6"]
+[ext_resource type="Resource" uid="uid://nac262w5c4wm" path="res://resources/waves/data/wave_7.tres" id="27_w7"]
+[ext_resource type="Resource" uid="uid://d4mkb44k80yt7" path="res://resources/waves/data/wave_8.tres" id="28_w8"]
+[ext_resource type="Resource" uid="uid://b1f7fcegy03cj" path="res://resources/waves/data/wave_9.tres" id="29_w9"]
+[ext_resource type="Resource" uid="uid://vrj5c1wrym57" path="res://resources/waves/data/wave_10.tres" id="30_w10"]
+[ext_resource type="Resource" uid="uid://djfsg0cvg7vc6" path="res://resources/waves/data/wave_11.tres" id="31_w11"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ii07k"]
 font_size = 64
@@ -49,7 +59,7 @@ script = ExtResource("5_jx0ua")
 
 [node name="Spawner" type="Node2D" parent="."]
 script = ExtResource("17_8kk48")
-waves_data = Array[ExtResource("18_wqbss")]([ExtResource("19_fir7s"), ExtResource("8_8kk48")])
+waves_data = Array[ExtResource("18_wqbss")]([ExtResource("19_w1"), ExtResource("22_w2"), ExtResource("23_w3"), ExtResource("24_w4"), ExtResource("25_w5"), ExtResource("26_w6"), ExtResource("27_w7"), ExtResource("28_w8"), ExtResource("29_w9"), ExtResource("30_w10"), ExtResource("31_w11")])
 enemy_collection = Array[ExtResource("8_t3vx8")]([ExtResource("9_rhjlh"), ExtResource("10_tp84n"), ExtResource("11_8kk48"), ExtResource("13_wqbss"), ExtResource("14_fir7s")])
 
 [node name="SpawnTimer" type="Timer" parent="Spawner"]
@@ -97,6 +107,9 @@ unique_name_in_owner = true
 visible = false
 
 [node name="CoinsBag" parent="GameUI" instance=ExtResource("11_xgbxb")]
+unique_name_in_owner = true
+
+[node name="PlayerHud" parent="GameUI" instance=ExtResource("12_hud")]
 unique_name_in_owner = true
 
 [node name="SelectionPanel" parent="GameUI" instance=ExtResource("12_vmsrg")]

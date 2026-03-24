@@ -20,6 +20,7 @@ func get_description() -> String:
 	desc += "Accuracy: [color=green]%s%%[/color]\n" % (stats.accuracy * 100)
 	desc += "Critical: [color=green]%s%%[/color]\n" % (stats.crit_chance * 100)
 	desc += "Crit Damage: [color=green]%sx[/color]\n" % stats.crit_damage
+	desc += "Pierce: [color=green]%s[/color]\n" % stats.pierce
 	if stats.knockback > 0:
 		desc += "Knockback: [color=green]%s[/color]\n" % stats.knockback
 	if stats.life_steal > 0:

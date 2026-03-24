@@ -14,6 +14,9 @@ func _ready() -> void:
 
 
 func _on_hurtbox_component_on_damaged(hitbox: HitboxComponent) -> void:
+	if Global.game_paused:
+		return
+
 	if health_component.current_health <= 0:
 		return
 		

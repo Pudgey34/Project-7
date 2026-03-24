@@ -26,6 +26,7 @@ func _process(delta: float) -> void:
 		
 func add_coins() -> void:
 	Global.coins += value
+	SoundManager.play_sound(SoundManager.Sound.COIN)
 	queue_free()
 
 func set_collection_target(screen_pos: Vector2) -> void:

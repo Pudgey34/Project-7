@@ -41,13 +41,19 @@ func _get_plain_tooltip_text(value: ItemBase) -> String:
 
 
 func _on_buy_button_pressed() -> void:
-	SoundManager.play_sound(SoundManager.Sound.UI)
+	var max_weapons := 2
+	if is_instance_valid(Global.player):
+		max_weapons = Global.player.stats.max_weapons
 
-	if shop_item.item_type == ItemBase.ItemType.WEAPON and Global.equipped_weapons.size() >= 6:
+	if shop_item.item_type == ItemBase.ItemType.WEAPON and Global.equipped_weapons.size() >= max_weapons:
+		SoundManager.play_sound(SoundManager.Sound.ERROR, false)
 		return
 	
 	if Global.coins >= shop_item.item_cost:
 		Global.coins -= shop_item.item_cost
+		SoundManager.play_sound(SoundManager.Sound.PURCHASE, false)
 		on_item_purchased.emit(shop_item)
 		queue_free()
+	else:
+		SoundManager.play_sound(SoundManager.Sound.ERROR, false)
 		

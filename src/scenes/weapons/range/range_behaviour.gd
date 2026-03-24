@@ -40,5 +40,5 @@ func create_projectile() -> void:
 	
 	var velocity := Vector2.RIGHT.rotated(weapon.rotation) * weapon.data.stats.projectile_speed 
 	
-	instance.set_projectile(velocity, get_damage(), critical, weapon.data.stats.knockback, weapon.get_parent(), weapon)
+	instance.set_projectile(velocity, get_damage(), critical, weapon.data.stats.knockback, weapon.get_parent(), weapon, weapon.data.stats.pierce)
 	

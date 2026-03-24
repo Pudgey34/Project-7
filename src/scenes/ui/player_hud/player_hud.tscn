@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scenes/ui/player_hud/player_hud.gd" id="1_hud"]
+[ext_resource type="PackedScene" uid="uid://c2s1ovs001wtm" path="res://scenes/ui/health_bar/health_bar.tscn" id="2_health"]
+[ext_resource type="PackedScene" uid="uid://dij17rgw5ak1j" path="res://scenes/ui/dash_indicator/dash_indicator.tscn" id="3_dash"]
+
+[node name="PlayerHud" type="HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(420, 74)
+anchors_preset = 3
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -98.0
+offset_right = 444.0
+offset_bottom = -24.0
+grow_vertical = 0
+theme_override_constants/separation = 16
+script = ExtResource("1_hud")
+
+[node name="HealthBar" parent="." instance=ExtResource("2_health")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(340, 74)
+layout_mode = 2
+back_color = Color(0.13725491, 0.019607844, 0.02745098, 1)
+fill_color = Color(1, 0.2901961, 0.45490196, 1)
+
+[node name="DashIndicator" parent="." instance=ExtResource("3_dash")]
+custom_minimum_size = Vector2(58, 74)
+layout_mode = 2

@@ -31,7 +31,24 @@ func _process(delta: float) -> void:
 		movement = get_move_direction() * stats.speed
 	
 	position += (movement + knockback_velocity) * delta
+	update_animations(movement)
 	update_rotation()
+
+
+func update_animations(movement: Vector2) -> void:
+	var is_moving := movement.length_squared() > 0.0
+	var walk_anim := ""
+
+	if anim_player.has_animation("walk"):
+		walk_anim = "walk"
+	elif anim_player.has_animation("move"):
+		walk_anim = "move"
+
+	if is_moving and walk_anim != "":
+		if anim_player.current_animation != walk_anim:
+			anim_player.play(walk_anim)
+	elif anim_player.has_animation("idle") and anim_player.current_animation != "idle":
+		anim_player.play("idle")
 		
 func get_move_direction() -> Vector2:
 	if not is_instance_valid(Global.player):

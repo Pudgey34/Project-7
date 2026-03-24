@@ -48,6 +48,7 @@ func load_weapons() -> void:
 		weapon_container.add_child(card)
 		_apply_character_select_card_palette(card)
 		card.icon = weapon.item_icon
+		card.tooltip_text = _get_weapon_tooltip_text(weapon)
 
 	if is_instance_valid(first_weapon):
 		_on_weapon_selected(first_weapon)
@@ -71,6 +72,21 @@ func _on_player_selected(player: UnitStats) -> void:
 	
 func _on_weapon_selected(weapon: ItemWeapon) -> void:
 	Global.main_weapon_selected = weapon
+
+
+func _get_weapon_tooltip_text(weapon: ItemWeapon) -> String:
+	var description := weapon.get_description()
+	if description.is_empty():
+		return weapon.item_name
+
+	var regex := RegEx.new()
+	regex.compile("\\[[^\\]]*\\]")
+	var plain_description := regex.sub(description, "", true).strip_edges()
+
+	if plain_description.is_empty():
+		return weapon.item_name
+
+	return "%s\n%s" % [weapon.item_name, plain_description]
 
 
 func _apply_character_select_card_palette(card: SelectionCard) -> void:

@@ -33,6 +33,9 @@ func take_damage(value: float) -> void:
 		die()
 		
 func die() -> void:
+	# Player death is handled in the player script so the animation can finish.
+	if owner is Player:
+		return
 	owner.queue_free()
 	
 func heal(amount: float) -> void:

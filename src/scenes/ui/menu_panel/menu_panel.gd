@@ -85,6 +85,7 @@ func _on_options_pressed() -> void:
 
 func _on_quit_pressed() -> void:
 	SoundManager.play_sound(SoundManager.Sound.UI)
+	ProgressData.save_game()
 	get_tree().quit()
 
 

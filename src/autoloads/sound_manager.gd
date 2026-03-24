@@ -3,13 +3,19 @@ extends Node
 enum Sound {
 	ENEMY_HIT,
 	FIRE,
-	UI
+	UI,
+	COIN,
+	PURCHASE,
+	ERROR
 }
 
 var sound_dictionary: Dictionary[Sound, Resource] = {
 	Sound.ENEMY_HIT: preload("uid://blonjlaa37md0"),
 	Sound.FIRE: preload("uid://g72hyxdnaath"),
-	Sound.UI: preload("uid://6nolwqlami52")
+	Sound.UI: preload("uid://6nolwqlami52"),
+	Sound.COIN: preload("res://assets/audio/coin.mp3"),
+	Sound.PURCHASE: preload("res://assets/audio/purchase.mp3"),
+	Sound.ERROR: preload("res://assets/audio/error.mp3")
 }
 
 @export var stream_players: Array[AudioStreamPlayer]
@@ -17,14 +23,17 @@ var sound_dictionary: Dictionary[Sound, Resource] = {
 
 var current_music: AudioStream
 
-func play_sound(type: int) -> void:
+func play_sound(type: int, randomize_pitch: bool = true) -> void:
 	var stream := get_free_stream_player()
 	if not stream:
 		return
 	
 	var audio := sound_dictionary[type]
 	stream.stream = audio
-	stream.pitch_scale = randf_range(0.8, 1.3)
+	if randomize_pitch:
+		stream.pitch_scale = randf_range(0.8, 1.3)
+	else:
+		stream.pitch_scale = 1.0
 	stream.play()
 
 

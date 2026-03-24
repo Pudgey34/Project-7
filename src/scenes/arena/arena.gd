@@ -4,6 +4,7 @@ class_name Arena
 
 const BG_MUSIC := preload("res://assets/audio/Bg Music.mp3")
 const MAIN_MENU_SCENE_PATH := "res://scenes/ui/menu_panel/menu_panel.tscn"
+const FIRST_WAVE_TUTORIAL_TEXT := "WASD - Move\nSpacebar - Dodge (invulnerable while dodging)"
 
 @export var player: Player
 
@@ -27,11 +28,14 @@ const MAIN_MENU_SCENE_PATH := "res://scenes/ui/menu_panel/menu_panel.tscn"
 
 var gold_list: Array[Coins]
 var should_advance_wave_on_shop_continue := true
-var wave_start_coins := 500
+var wave_start_coins := 0
+var first_wave_tutorial_label: Label
+var first_wave_tutorial_shown := false
 
 
 func _ready() -> void:
 	SoundManager.play_music(BG_MUSIC)
+	_setup_first_wave_tutorial_label()
 
 	Global.on_create_block_text.connect(_on_create_block_text)
 	Global.on_create_damage_text.connect(_on_create_damage_text)
@@ -107,6 +111,40 @@ func _ready() -> void:
 				_begin_wave_checkpoint()
 				spawner.start_wave()
 
+
+func _setup_first_wave_tutorial_label() -> void:
+	first_wave_tutorial_label = Label.new()
+	first_wave_tutorial_label.name = "FirstWaveTutorialLabel"
+	first_wave_tutorial_label.text = FIRST_WAVE_TUTORIAL_TEXT
+	first_wave_tutorial_label.visible = false
+	first_wave_tutorial_label.z_index = 100
+	first_wave_tutorial_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	first_wave_tutorial_label.add_theme_font_size_override("font_size", 28)
+	first_wave_tutorial_label.add_theme_color_override("font_color", Color(1, 1, 1, 1))
+	first_wave_tutorial_label.add_theme_color_override("font_outline_color", Color(0, 0, 0, 1))
+	first_wave_tutorial_label.add_theme_constant_override("outline_size", 3)
+	first_wave_tutorial_label.anchors_preset = Control.PRESET_TOP_WIDE
+	first_wave_tutorial_label.offset_top = 180
+	first_wave_tutorial_label.offset_bottom = 280
+	$GameUI.add_child(first_wave_tutorial_label)
+
+
+func _show_first_wave_tutorial() -> void:
+	if first_wave_tutorial_shown:
+		return
+
+	if spawner.wave_index != 1:
+		return
+
+	if first_wave_tutorial_label == null or not is_instance_valid(first_wave_tutorial_label):
+		return
+
+	first_wave_tutorial_shown = true
+	first_wave_tutorial_label.visible = true
+	await get_tree().create_timer(7.0).timeout
+	if is_instance_valid(first_wave_tutorial_label):
+		first_wave_tutorial_label.visible = false
+
 func get_wave_start_coins() -> int:
 	return wave_start_coins
 
@@ -162,6 +200,7 @@ func _on_player_died() -> void:
 	ProgressData.clear_save_game()
 	spawner.pause_wave_timers()
 	pause_menu.close_menu()
+	await get_tree().create_timer(1.0).timeout
 	game_over_screen.open_screen()
 	
 	
@@ -201,6 +240,7 @@ func wait_for_coins_collection() -> void:
 	var max_wait_time := 5.0  # Maximum 5 seconds to wait
 	var elapsed_time := 0.0
 	var check_interval := 0.05
+	var found_any_coins := false
 	
 	while elapsed_time < max_wait_time:
 		var has_coins = false
@@ -211,12 +251,16 @@ func wait_for_coins_collection() -> void:
 				var target_center_pos := coins_bag.global_position + coins_bag.size / 2.0
 				coin.set_collection_target(target_center_pos)
 				has_coins = true
+				found_any_coins = true
 		
 		if not has_coins:
 			break
 		
 		await get_tree().create_timer(check_interval).timeout
 		elapsed_time += check_interval
+
+	if not found_any_coins:
+		await get_tree().create_timer(1.0).timeout
 
 func spawn_coins(enemy: Enemy) -> void:
 	var random_angle := randf_range(0, TAU)
@@ -288,6 +332,7 @@ func _on_selection_panel_on_selection_completed() -> void:
 	_begin_wave_checkpoint()
 	spawner.start_wave()
 	Global.game_paused = false
+	_show_first_wave_tutorial()
 
 
 func _on_pause_menu_resumed() -> void:
@@ -302,6 +347,8 @@ func _on_pause_menu_back_to_main_menu_requested() -> void:
 
 
 func _on_pause_menu_quit_requested() -> void:
+	# Persist current run so Continue works after quitting mid-wave.
+	ProgressData.save_game()
 	get_tree().quit()
 
 

@@ -16,6 +16,7 @@ enum SpawnType {
 @export var fixed_spawn_time := 1.0
 @export var min_spawn_time := 1.0
 @export var max_spawn_time := 1.0
+@export_range(1, 20, 1) var spawn_count_per_tick := 1
 
 func get_random_unit_scene() -> PackedScene:
 	if units.is_empty():

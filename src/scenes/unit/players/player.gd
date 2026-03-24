@@ -7,6 +7,7 @@ class_name Player
 
 @onready var dash_timer: Timer = $DashTimer
 @onready var dash_cooldown_timer: Timer = $DashCooldownTimer
+@onready var hp_regen_timer: Timer = $HPRegenTimer
 @onready var collision: CollisionShape2D = $CollisionShape2D
 @onready var hurtbox: HurtboxComponent = $HurtboxComponent
 @onready var coin_pickup_collision: CollisionShape2D = $CoinPickupArea/CollisionShape2D
@@ -20,12 +21,23 @@ var is_dashing := false
 var dash_available := true
 var moved_right := true
 var base_coin_pickup_radius := 0.0
+var is_dead := false
 
 func _ready() -> void:
 	# Duplicate stats resource to prevent modifying the original resource file
 	stats = stats.duplicate()
 	
 	super._ready()
+	var world_health_bar := get_node_or_null("HealthBar") as Control
+	if world_health_bar:
+		world_health_bar.hide()
+
+	var world_dash_indicator := get_node_or_null("DashIndicator") as Control
+	if world_dash_indicator:
+		world_dash_indicator.hide()
+
+	if not health_component.on_unit_died.is_connected(_on_health_component_on_unit_died):
+		health_component.on_unit_died.connect(_on_health_component_on_unit_died)
 	dash_timer.wait_time = dash_duration
 	dash_cooldown_timer.wait_time = dash_cooldown
 	setup_coin_pickup_radius()
@@ -54,6 +66,7 @@ func setup_coin_pickup_radius() -> void:
 
 
 func _process(delta: float) -> void:
+	_sync_pause_dependent_timers()
 	if Global.game_paused: return
 	move_dir = Input.get_vector("move_left","move_right","move_up","move_down")
 	
@@ -71,6 +84,13 @@ func _process(delta: float) -> void:
 		
 	update_animations()
 	update_rotation()
+
+
+func _sync_pause_dependent_timers() -> void:
+	var should_pause := Global.game_paused
+	dash_timer.paused = should_pause
+	dash_cooldown_timer.paused = should_pause
+	hp_regen_timer.paused = should_pause
 	
 	
 func update_animations() -> void:
@@ -94,6 +114,9 @@ func update_rotation() -> void:
 	visuals.scale.y = 0.5
 	
 func add_weapon(data: ItemWeapon) -> void:
+	if current_weapons.size() >= stats.max_weapons:
+		return
+
 	var weapon := data.scene.instantiate() as Weapon
 	add_child(weapon)
 	
@@ -146,3 +169,25 @@ func _on_hp_regen_timer_timeout() -> void:
 		var heal := stats.hp_regen
 		health_component.heal(heal)
 		Global.on_create_heal_text.emit(self, heal)
+
+
+func _on_health_component_on_unit_died() -> void:
+	if is_dead:
+		return
+
+	is_dead = true
+	is_dashing = false
+	dash_timer.stop()
+	dash_cooldown_timer.stop()
+	collision.set_deferred("disabled", true)
+	hurtbox.set_deferred("monitoring", false)
+	hurtbox.set_deferred("monitorable", false)
+	coin_pickup_collision.set_deferred("disabled", true)
+
+	if anim_player.has_animation("die"):
+		anim_player.play("die")
+		await anim_player.animation_finished
+	else:
+		await get_tree().create_timer(0.5).timeout
+
+	queue_free()

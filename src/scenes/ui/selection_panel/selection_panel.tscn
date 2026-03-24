@@ -12,7 +12,7 @@
 [ext_resource type="Resource" uid="uid://ci0b8f4wu1e2p" path="res://resources/items/weapons/range/pistol/item_pistol_1.tres" id="6_6e6br"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_58qwm"]
-bg_color = Color(0.10, 0.10, 0.11, 1)
+bg_color = Color(0.19317096, 0.19317225, 0.20538026, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_inner_panel"]
 content_margin_left = 10.0

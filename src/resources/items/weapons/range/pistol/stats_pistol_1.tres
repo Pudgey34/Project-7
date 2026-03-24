@@ -10,6 +10,7 @@ accuracy = 0.85
 cooldown = 0.8
 max_range = 350.0
 knockback = 1.0
+pierce = 1
 projectile_scene = ExtResource("1_eqhys")
 projectile_speed = 1700.0
 metadata/_custom_type_script = "uid://cj5gl53yq56xm"

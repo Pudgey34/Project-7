@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cm770pssjgj1u"]
+[gd_scene load_steps=28 format=3 uid="uid://cm770pssjgj1u"]
 
 [ext_resource type="Script" uid="uid://cwww8pq6isn0e" path="res://scenes/ui/shop_panel/shop_panel.gd" id="1_chkkr"]
 [ext_resource type="Script" uid="uid://bf5u2syoyq8rw" path="res://resources/items/item_base.gd" id="2_5uj72"]
@@ -22,6 +22,22 @@ bg_color = Color(0.24477637, 0.24477643, 0.24477634, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_ws1b3"]
 font_size = 64
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_inner_panel"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.16524136, 0.1652413, 0.16962507, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.22, 0.22, 0.23, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [sub_resource type="LabelSettings" id="LabelSettings_fjhgy"]
 font_size = 32
@@ -153,6 +169,24 @@ offset_top = 178.0
 offset_right = 1860.0
 offset_bottom = 728.0
 
+[node name="PassivesBox" type="Panel" parent="MarginContainer/Control"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 748.0
+offset_right = 782.0
+offset_bottom = 1028.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_inner_panel")
+
+[node name="ItemsTitle" type="Label" parent="MarginContainer/Control"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 700.0
+offset_right = 782.0
+offset_bottom = 742.0
+text = "Items"
+label_settings = SubResource("LabelSettings_fjhgy")
+horizontal_alignment = 1
+
 [node name="Passives" type="VBoxContainer" parent="MarginContainer/Control"]
 custom_minimum_size = Vector2(752, 250)
 layout_mode = 0
@@ -163,96 +197,114 @@ offset_bottom = 1018.0
 theme_override_constants/separation = 16
 alignment = 1
 
-[node name="Label" type="Label" parent="MarginContainer/Control/Passives"]
+[node name="PassivesScroll" type="ScrollContainer" parent="MarginContainer/Control/Passives"]
+custom_minimum_size = Vector2(0, 190)
 layout_mode = 2
-text = "Items"
-label_settings = SubResource("LabelSettings_fjhgy")
-horizontal_alignment = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="PassivesContainer" type="GridContainer" parent="MarginContainer/Control/Passives"]
+[node name="PassivesContainer" type="GridContainer" parent="MarginContainer/Control/Passives/PassivesScroll"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/h_separation = 16
 theme_override_constants/v_separation = 16
 columns = 8
 
-[node name="ItemCard" parent="MarginContainer/Control/Passives/PassivesContainer" instance=ExtResource("13_jqy7g")]
+[node name="ItemCard" parent="MarginContainer/Control/Passives/PassivesScroll/PassivesContainer" instance=ExtResource("13_jqy7g")]
 layout_mode = 2
 
-[node name="ItemCard2" type="Button" parent="MarginContainer/Control/Passives/PassivesContainer"]
+[node name="ItemCard2" type="Button" parent="MarginContainer/Control/Passives/PassivesScroll/PassivesContainer"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 theme_override_styles/normal = ExtResource("4_1gnn5")
 
-[node name="ItemCard3" type="Button" parent="MarginContainer/Control/Passives/PassivesContainer"]
+[node name="ItemCard3" type="Button" parent="MarginContainer/Control/Passives/PassivesScroll/PassivesContainer"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 theme_override_styles/normal = ExtResource("4_1gnn5")
 
-[node name="ItemCard4" type="Button" parent="MarginContainer/Control/Passives/PassivesContainer"]
+[node name="ItemCard4" type="Button" parent="MarginContainer/Control/Passives/PassivesScroll/PassivesContainer"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 theme_override_styles/normal = ExtResource("4_1gnn5")
 
-[node name="ItemCard5" type="Button" parent="MarginContainer/Control/Passives/PassivesContainer"]
+[node name="ItemCard5" type="Button" parent="MarginContainer/Control/Passives/PassivesScroll/PassivesContainer"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 theme_override_styles/normal = ExtResource("4_1gnn5")
 
-[node name="ItemCard6" type="Button" parent="MarginContainer/Control/Passives/PassivesContainer"]
+[node name="ItemCard6" type="Button" parent="MarginContainer/Control/Passives/PassivesScroll/PassivesContainer"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 theme_override_styles/normal = ExtResource("4_1gnn5")
 
-[node name="ItemCard7" type="Button" parent="MarginContainer/Control/Passives/PassivesContainer"]
+[node name="ItemCard7" type="Button" parent="MarginContainer/Control/Passives/PassivesScroll/PassivesContainer"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 theme_override_styles/normal = ExtResource("4_1gnn5")
 
-[node name="ItemCard8" type="Button" parent="MarginContainer/Control/Passives/PassivesContainer"]
+[node name="ItemCard8" type="Button" parent="MarginContainer/Control/Passives/PassivesScroll/PassivesContainer"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 theme_override_styles/normal = ExtResource("4_1gnn5")
 
-[node name="ItemCard9" type="Button" parent="MarginContainer/Control/Passives/PassivesContainer"]
+[node name="ItemCard9" type="Button" parent="MarginContainer/Control/Passives/PassivesScroll/PassivesContainer"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 theme_override_styles/normal = ExtResource("4_1gnn5")
 
-[node name="ItemCard10" type="Button" parent="MarginContainer/Control/Passives/PassivesContainer"]
+[node name="ItemCard10" type="Button" parent="MarginContainer/Control/Passives/PassivesScroll/PassivesContainer"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 theme_override_styles/normal = ExtResource("4_1gnn5")
 
-[node name="ItemCard11" type="Button" parent="MarginContainer/Control/Passives/PassivesContainer"]
+[node name="ItemCard11" type="Button" parent="MarginContainer/Control/Passives/PassivesScroll/PassivesContainer"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 theme_override_styles/normal = ExtResource("4_1gnn5")
 
-[node name="ItemCard12" type="Button" parent="MarginContainer/Control/Passives/PassivesContainer"]
+[node name="ItemCard12" type="Button" parent="MarginContainer/Control/Passives/PassivesScroll/PassivesContainer"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 theme_override_styles/normal = ExtResource("4_1gnn5")
 
-[node name="ItemCard13" type="Button" parent="MarginContainer/Control/Passives/PassivesContainer"]
+[node name="ItemCard13" type="Button" parent="MarginContainer/Control/Passives/PassivesScroll/PassivesContainer"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 theme_override_styles/normal = ExtResource("4_1gnn5")
 
-[node name="ItemCard14" type="Button" parent="MarginContainer/Control/Passives/PassivesContainer"]
+[node name="ItemCard14" type="Button" parent="MarginContainer/Control/Passives/PassivesScroll/PassivesContainer"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 theme_override_styles/normal = ExtResource("4_1gnn5")
 
-[node name="ItemCard15" type="Button" parent="MarginContainer/Control/Passives/PassivesContainer"]
+[node name="ItemCard15" type="Button" parent="MarginContainer/Control/Passives/PassivesScroll/PassivesContainer"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 theme_override_styles/normal = ExtResource("4_1gnn5")
 
-[node name="ItemCard16" type="Button" parent="MarginContainer/Control/Passives/PassivesContainer"]
+[node name="ItemCard16" type="Button" parent="MarginContainer/Control/Passives/PassivesScroll/PassivesContainer"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 theme_override_styles/normal = ExtResource("4_1gnn5")
+
+[node name="WeaponsBox" type="Panel" parent="MarginContainer/Control"]
+layout_mode = 0
+offset_left = 988.0
+offset_top = 748.0
+offset_right = 1358.0
+offset_bottom = 1028.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_inner_panel")
+
+[node name="WeaponsTitle" type="Label" parent="MarginContainer/Control"]
+layout_mode = 0
+offset_left = 988.0
+offset_top = 700.0
+offset_right = 1358.0
+offset_bottom = 742.0
+text = "Weapons"
+label_settings = SubResource("LabelSettings_fjhgy")
+horizontal_alignment = 1
 
 [node name="Weapons" type="VBoxContainer" parent="MarginContainer/Control"]
 custom_minimum_size = Vector2(350, 250)
@@ -263,12 +315,6 @@ offset_right = 1348.0
 offset_bottom = 1018.0
 theme_override_constants/separation = 16
 alignment = 1
-
-[node name="Label" type="Label" parent="MarginContainer/Control/Weapons"]
-layout_mode = 2
-text = "Weapons"
-label_settings = SubResource("LabelSettings_fjhgy")
-horizontal_alignment = 1
 
 [node name="WeaponsContainer" type="GridContainer" parent="MarginContainer/Control/Weapons"]
 unique_name_in_owner = true
