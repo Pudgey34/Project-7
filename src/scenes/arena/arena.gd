@@ -226,6 +226,8 @@ func start_new_wave() -> void:
 	spawner.start_wave()
 	
 func clean_arena() -> void:
+	clear_projectiles()
+
 	if gold_list.size() > 0:
 		var target_center_pos := coins_bag.global_position + coins_bag.size / 2.0
 		for gold in gold_list:
@@ -234,6 +236,12 @@ func clean_arena() -> void:
 				gold_item.set_collection_target(target_center_pos)
 	gold_list.clear()
 	spawner.clear_enemies()
+
+
+func clear_projectiles() -> void:
+	for child in get_tree().root.get_children():
+		if child is Projectile:
+			child.queue_free()
 	
 
 func wait_for_coins_collection() -> void:

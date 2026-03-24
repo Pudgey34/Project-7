@@ -129,6 +129,7 @@ func add_weapon(data: ItemWeapon) -> void:
 func start_dash() -> void:
 	is_dashing = true
 	dash_timer.start()
+	SoundManager.play_sound(SoundManager.Sound.DASH, false, -1.0, -4.0)
 	trail.start_trail()
 	visuals.modulate.a = 0.5
 	collision.set_deferred("disabled",true)

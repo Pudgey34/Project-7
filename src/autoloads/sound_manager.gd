@@ -6,7 +6,10 @@ enum Sound {
 	UI,
 	COIN,
 	PURCHASE,
-	ERROR
+	ERROR,
+	DASH,
+	SELL,
+	SATISFYING
 }
 
 var sound_dictionary: Dictionary[Sound, Resource] = {
@@ -15,7 +18,10 @@ var sound_dictionary: Dictionary[Sound, Resource] = {
 	Sound.UI: preload("uid://6nolwqlami52"),
 	Sound.COIN: preload("res://assets/audio/coin.mp3"),
 	Sound.PURCHASE: preload("res://assets/audio/purchase.mp3"),
-	Sound.ERROR: preload("res://assets/audio/error.mp3")
+	Sound.ERROR: preload("res://assets/audio/error.mp3"),
+	Sound.DASH: preload("res://assets/audio/dash.mp3"),
+	Sound.SELL: preload("res://assets/audio/sell.mp3"),
+	Sound.SATISFYING: preload("res://assets/audio/satisfying.mp3")
 }
 
 @export var stream_players: Array[AudioStreamPlayer]
@@ -23,14 +29,17 @@ var sound_dictionary: Dictionary[Sound, Resource] = {
 
 var current_music: AudioStream
 
-func play_sound(type: int, randomize_pitch: bool = true) -> void:
+func play_sound(type: int, randomize_pitch: bool = true, pitch_override: float = -1.0, volume_db_override: float = 0.0) -> void:
 	var stream := get_free_stream_player()
 	if not stream:
 		return
 	
 	var audio := sound_dictionary[type]
 	stream.stream = audio
-	if randomize_pitch:
+	stream.volume_db = volume_db_override
+	if pitch_override > 0.0:
+		stream.pitch_scale = pitch_override
+	elif randomize_pitch:
 		stream.pitch_scale = randf_range(0.8, 1.3)
 	else:
 		stream.pitch_scale = 1.0

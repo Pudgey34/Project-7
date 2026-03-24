@@ -110,7 +110,7 @@ visible = false
 unique_name_in_owner = true
 
 [node name="PlayerHud" parent="GameUI" instance=ExtResource("12_hud")]
-unique_name_in_owner = true
+anchors_preset = 2
 
 [node name="SelectionPanel" parent="GameUI" instance=ExtResource("12_vmsrg")]
 unique_name_in_owner = true

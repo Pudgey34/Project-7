@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cm770pssjgj1u"]
+[gd_scene load_steps=29 format=3 uid="uid://cm770pssjgj1u"]
 
 [ext_resource type="Script" uid="uid://cwww8pq6isn0e" path="res://scenes/ui/shop_panel/shop_panel.gd" id="1_chkkr"]
 [ext_resource type="Script" uid="uid://bf5u2syoyq8rw" path="res://resources/items/item_base.gd" id="2_5uj72"]
@@ -82,6 +82,13 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_disabled_o7w7v"]
+bg_color = Color(0.18431373, 0.4392157, 0.43529412, 0.28)
 corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
@@ -377,6 +384,7 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
 theme_override_styles/normal = SubResource("StyleBoxFlat_o7w7v")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_disabled_o7w7v")
 theme_override_styles/hover = SubResource("StyleBoxFlat_hover")
 theme_override_styles/focus = SubResource("StyleBoxFlat_focus_o7w7v")
 text = "combine"
