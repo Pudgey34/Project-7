@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=3 uid="uid://cm770pssjgj1u"]
+[gd_scene load_steps=79 format=3 uid="uid://cm770pssjgj1u"]
 
 [ext_resource type="Script" uid="uid://cwww8pq6isn0e" path="res://scenes/ui/shop_panel/shop_panel.gd" id="1_chkkr"]
 [ext_resource type="Script" uid="uid://bf5u2syoyq8rw" path="res://resources/items/item_base.gd" id="2_5uj72"]
@@ -62,6 +62,10 @@
 [ext_resource type="Resource" path="res://resources/items/passives/data/passive_legendary_starline_scope.tres" id="53_lrange"]
 [ext_resource type="Resource" path="res://resources/items/passives/data/passive_legendary_bastion_organ.tres" id="54_lblock"]
 [ext_resource type="Resource" path="res://resources/items/passives/data/passive_legendary_abyssal_drill.tres" id="55_lpierce"]
+[ext_resource type="Resource" path="res://resources/items/passives/data/passive_keen_whetstone.tres" id="60_pvcritc"]
+[ext_resource type="Resource" path="res://resources/items/passives/data/passive_predator_charm.tres" id="61_pvcritr"]
+[ext_resource type="Resource" path="res://resources/items/passives/data/passive_executioner_sigil.tres" id="62_pvcrite"]
+[ext_resource type="Resource" path="res://resources/items/passives/data/passive_doomsight_prism.tres" id="63_pvcritl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_chkkr"]
 bg_color = Color(0.24477637, 0.24477643, 0.24477634, 1)
@@ -167,7 +171,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_chkkr")
 script = ExtResource("1_chkkr")
-shop_items = Array[ExtResource("2_5uj72")]([ExtResource("3_21wy5"), ExtResource("4_jqy7g"), ExtResource("5_l4hq1"), ExtResource("6_f1e0c"), ExtResource("56_sword1"), ExtResource("57_sword2"), ExtResource("58_sword3"), ExtResource("59_sword4"), ExtResource("7_x6dh5"), ExtResource("8_h8ew1"), ExtResource("9_1rtbb"), ExtResource("10_akg8r"), ExtResource("11_l4hq1"), ExtResource("12_f1e0c"), ExtResource("14_blood"), ExtResource("15_pvhlth"), ExtResource("16_pvhprg"), ExtResource("17_pvharv"), ExtResource("18_pvspeed"), ExtResource("19_pvluck"), ExtResource("20_pvrange"), ExtResource("21_pvblock"), ExtResource("22_pvpierce"), ExtResource("23_rhealth"), ExtResource("24_rdamage"), ExtResource("25_rregen"), ExtResource("26_rsteal"), ExtResource("27_rharv"), ExtResource("28_rspeed"), ExtResource("29_raspd"), ExtResource("30_rluck"), ExtResource("31_rrange"), ExtResource("32_rblock"), ExtResource("33_rpierce"), ExtResource("34_ehealth"), ExtResource("35_edamage"), ExtResource("36_eregen"), ExtResource("37_esteal"), ExtResource("38_eharv"), ExtResource("39_espeed"), ExtResource("40_easpd"), ExtResource("41_eluck"), ExtResource("42_erange"), ExtResource("43_eblock"), ExtResource("44_epierce"), ExtResource("45_lhealth"), ExtResource("46_ldamage"), ExtResource("47_lregen"), ExtResource("48_lsteal"), ExtResource("49_lharv"), ExtResource("50_lspeed"), ExtResource("51_laspd"), ExtResource("52_lluck"), ExtResource("53_lrange"), ExtResource("54_lblock"), ExtResource("55_lpierce")])
+shop_items = Array[ExtResource("2_5uj72")]([ExtResource("3_21wy5"), ExtResource("4_jqy7g"), ExtResource("5_l4hq1"), ExtResource("6_f1e0c"), ExtResource("56_sword1"), ExtResource("57_sword2"), ExtResource("58_sword3"), ExtResource("59_sword4"), ExtResource("7_x6dh5"), ExtResource("8_h8ew1"), ExtResource("9_1rtbb"), ExtResource("10_akg8r"), ExtResource("11_l4hq1"), ExtResource("12_f1e0c"), ExtResource("14_blood"), ExtResource("15_pvhlth"), ExtResource("16_pvhprg"), ExtResource("17_pvharv"), ExtResource("18_pvspeed"), ExtResource("19_pvluck"), ExtResource("20_pvrange"), ExtResource("21_pvblock"), ExtResource("22_pvpierce"), ExtResource("23_rhealth"), ExtResource("24_rdamage"), ExtResource("25_rregen"), ExtResource("26_rsteal"), ExtResource("27_rharv"), ExtResource("28_rspeed"), ExtResource("29_raspd"), ExtResource("30_rluck"), ExtResource("31_rrange"), ExtResource("32_rblock"), ExtResource("33_rpierce"), ExtResource("34_ehealth"), ExtResource("35_edamage"), ExtResource("36_eregen"), ExtResource("37_esteal"), ExtResource("38_eharv"), ExtResource("39_espeed"), ExtResource("40_easpd"), ExtResource("41_eluck"), ExtResource("42_erange"), ExtResource("43_eblock"), ExtResource("44_epierce"), ExtResource("45_lhealth"), ExtResource("46_ldamage"), ExtResource("47_lregen"), ExtResource("48_lsteal"), ExtResource("49_lharv"), ExtResource("50_lspeed"), ExtResource("51_laspd"), ExtResource("52_lluck"), ExtResource("53_lrange"), ExtResource("54_lblock"), ExtResource("55_lpierce"), ExtResource("60_pvcritc"), ExtResource("61_pvcritr"), ExtResource("62_pvcrite"), ExtResource("63_pvcritl")])
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1

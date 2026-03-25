@@ -1,4 +1,4 @@
-[gd_scene load_steps=131 format=3 uid="uid://b4ifpsnkclb5q"]
+[gd_scene load_steps=139 format=3 uid="uid://b4ifpsnkclb5q"]
 
 [ext_resource type="Texture2D" uid="uid://cy4xfx762bxgb" path="res://assets/sprites/BG.png" id="1_5tue2"]
 [ext_resource type="Script" uid="uid://dx6ay2e086uwg" path="res://scenes/arena/arena.gd" id="1_asdgj"]
@@ -73,6 +73,10 @@
 [ext_resource type="Resource" uid="uid://d2d856amv6ub4" path="res://resources/items/upgrades/data/range/upgrade_range_50.tres" id="65_a6q8v"]
 [ext_resource type="Resource" uid="uid://bfyxldt284rjo" path="res://resources/items/upgrades/data/pierce/upgrade_pierce_1.tres" id="66_3erww"]
 [ext_resource type="Resource" uid="uid://cv2fymgiv0voc" path="res://resources/items/upgrades/data/pierce/upgrade_pierce_2.tres" id="67_raiaf"]
+[ext_resource type="Resource" path="res://resources/items/upgrades/data/crit_chance/upgrade_crit_chance_1.tres" id="129_cc1"]
+[ext_resource type="Resource" path="res://resources/items/upgrades/data/crit_chance/upgrade_crit_chance_4.tres" id="130_cc4"]
+[ext_resource type="Resource" path="res://resources/items/upgrades/data/crit_chance/upgrade_crit_chance_7.tres" id="131_cc7"]
+[ext_resource type="Resource" path="res://resources/items/upgrades/data/crit_chance/upgrade_crit_chance_10.tres" id="132_cc10"]
 [ext_resource type="Script" uid="uid://bf5u2syoyq8rw" path="res://resources/items/item_base.gd" id="69_b2a0l"]
 [ext_resource type="Resource" uid="uid://bxayqlg74oyri" path="res://resources/items/weapons/melee/punch/item_punch_1.tres" id="70_gtcva"]
 [ext_resource type="Resource" uid="uid://dohkoqu0j2xpl" path="res://resources/items/weapons/melee/punch/item_punch_2.tres" id="71_a1ejh"]
@@ -126,6 +130,10 @@
 [ext_resource type="Resource" uid="uid://cgtxfn1cg7duv" path="res://resources/items/passives/data/passive_sprinter_greed.tres" id="119_xve6l"]
 [ext_resource type="Resource" uid="uid://c3ds5gcj61y0p" path="res://resources/items/passives/data/passive_stone_sigil.tres" id="120_er6xv"]
 [ext_resource type="Resource" uid="uid://ctw80g51dosme" path="res://resources/items/passives/data/passive_vital_bloom.tres" id="121_h8nn0"]
+[ext_resource type="Resource" path="res://resources/items/passives/data/passive_keen_whetstone.tres" id="133_pvcritc"]
+[ext_resource type="Resource" path="res://resources/items/passives/data/passive_predator_charm.tres" id="134_pvcritr"]
+[ext_resource type="Resource" path="res://resources/items/passives/data/passive_executioner_sigil.tres" id="135_pvcrite"]
+[ext_resource type="Resource" path="res://resources/items/passives/data/passive_doomsight_prism.tres" id="136_pvcritl"]
 [ext_resource type="Resource" uid="uid://dmajeqxgga37l" path="res://resources/items/weapons/melee/sword/item_sword_1.tres" id="122_a1ejh"]
 [ext_resource type="Script" uid="uid://djw4mthlrs7ft" path="res://resources/items/weapons/item_weapon.gd" id="126_b4h7k"]
 
@@ -199,12 +207,12 @@ horizontal_alignment = 1
 [node name="UpgradePanel" parent="GameUI" instance=ExtResource("9_6w4xk")]
 unique_name_in_owner = true
 visible = false
-upgrade_list = Array[ExtResource("25_rvsgk")]([ExtResource("26_dlje5"), ExtResource("27_rdx1w"), ExtResource("28_rlwkl"), ExtResource("29_c233o"), ExtResource("30_8m5b6"), ExtResource("31_uh2xj"), ExtResource("32_a6q8v"), ExtResource("33_3erww"), ExtResource("34_raiaf"), ExtResource("35_i5wjf"), ExtResource("36_suft4"), ExtResource("37_ypop5"), ExtResource("38_bt16s"), ExtResource("39_qdbrs"), ExtResource("40_uwy3e"), ExtResource("41_n2cp3"), ExtResource("42_6tjis"), ExtResource("43_2v46x"), ExtResource("44_4r0i2"), ExtResource("45_6kcra"), ExtResource("46_sr54x"), ExtResource("47_7mqte"), ExtResource("48_qn0w1"), ExtResource("49_3s26p"), ExtResource("50_hxwo4"), ExtResource("51_doi8w"), ExtResource("52_r2piv"), ExtResource("53_cpv0d"), ExtResource("54_q8pmp"), ExtResource("55_vt5tt"), ExtResource("56_nmd8y"), ExtResource("57_7r13w"), ExtResource("58_n43t1"), ExtResource("59_kos1b"), ExtResource("60_0537p"), ExtResource("61_nw05c"), ExtResource("62_c233o"), ExtResource("63_8m5b6"), ExtResource("64_uh2xj"), ExtResource("65_a6q8v"), ExtResource("66_3erww"), ExtResource("67_raiaf")])
+upgrade_list = Array[ExtResource("25_rvsgk")]([ExtResource("26_dlje5"), ExtResource("27_rdx1w"), ExtResource("28_rlwkl"), ExtResource("29_c233o"), ExtResource("30_8m5b6"), ExtResource("31_uh2xj"), ExtResource("32_a6q8v"), ExtResource("33_3erww"), ExtResource("34_raiaf"), ExtResource("35_i5wjf"), ExtResource("36_suft4"), ExtResource("37_ypop5"), ExtResource("38_bt16s"), ExtResource("39_qdbrs"), ExtResource("40_uwy3e"), ExtResource("41_n2cp3"), ExtResource("42_6tjis"), ExtResource("43_2v46x"), ExtResource("44_4r0i2"), ExtResource("45_6kcra"), ExtResource("46_sr54x"), ExtResource("47_7mqte"), ExtResource("48_qn0w1"), ExtResource("49_3s26p"), ExtResource("50_hxwo4"), ExtResource("51_doi8w"), ExtResource("52_r2piv"), ExtResource("53_cpv0d"), ExtResource("54_q8pmp"), ExtResource("55_vt5tt"), ExtResource("56_nmd8y"), ExtResource("57_7r13w"), ExtResource("58_n43t1"), ExtResource("59_kos1b"), ExtResource("60_0537p"), ExtResource("61_nw05c"), ExtResource("62_c233o"), ExtResource("63_8m5b6"), ExtResource("64_uh2xj"), ExtResource("65_a6q8v"), ExtResource("66_3erww"), ExtResource("67_raiaf"), ExtResource("129_cc1"), ExtResource("130_cc4"), ExtResource("131_cc7"), ExtResource("132_cc10")])
 
 [node name="ShopPanel" parent="GameUI" instance=ExtResource("10_2ml6w")]
 unique_name_in_owner = true
 visible = false
-shop_items = Array[ExtResource("69_b2a0l")]([ExtResource("70_gtcva"), ExtResource("71_a1ejh"), ExtResource("72_b4h7k"), ExtResource("73_2l10b"), ExtResource("74_y1ias"), ExtResource("75_3xutc"), ExtResource("76_aqtxl"), ExtResource("77_f772w"), ExtResource("78_27j65"), ExtResource("79_yp53l"), ExtResource("80_bdqta"), ExtResource("81_n0rh3"), ExtResource("82_v8b4h"), ExtResource("83_hfltd"), ExtResource("84_dloyk"), ExtResource("85_wkndr"), ExtResource("86_5t7vk"), ExtResource("87_iedlo"), ExtResource("88_dyjsr"), ExtResource("89_jkblg"), ExtResource("90_65pvm"), ExtResource("91_58ww3"), ExtResource("92_mruwx"), ExtResource("93_odits"), ExtResource("94_v7k8q"), ExtResource("95_3yxfe"), ExtResource("96_kqa81"), ExtResource("97_3q8tj"), ExtResource("98_ub4ky"), ExtResource("99_l45ga"), ExtResource("100_hxd5i"), ExtResource("101_8j8l2"), ExtResource("102_0aggx"), ExtResource("103_cmqfc"), ExtResource("104_5lqyc"), ExtResource("105_3u5el"), ExtResource("106_lw83e"), ExtResource("107_6vqs6"), ExtResource("108_k3t35"), ExtResource("109_byxsd"), ExtResource("110_srphe"), ExtResource("111_q4l7f"), ExtResource("112_tfsal"), ExtResource("113_hf0tj"), ExtResource("114_k132i"), ExtResource("115_qnffx"), ExtResource("116_nrujq"), ExtResource("117_e0uac"), ExtResource("118_wvmkp"), ExtResource("119_xve6l"), ExtResource("120_er6xv"), ExtResource("121_h8nn0"), ExtResource("122_a1ejh")])
+shop_items = Array[ExtResource("69_b2a0l")]([ExtResource("70_gtcva"), ExtResource("71_a1ejh"), ExtResource("72_b4h7k"), ExtResource("73_2l10b"), ExtResource("74_y1ias"), ExtResource("75_3xutc"), ExtResource("76_aqtxl"), ExtResource("77_f772w"), ExtResource("78_27j65"), ExtResource("79_yp53l"), ExtResource("80_bdqta"), ExtResource("81_n0rh3"), ExtResource("82_v8b4h"), ExtResource("83_hfltd"), ExtResource("84_dloyk"), ExtResource("85_wkndr"), ExtResource("86_5t7vk"), ExtResource("87_iedlo"), ExtResource("88_dyjsr"), ExtResource("89_jkblg"), ExtResource("90_65pvm"), ExtResource("91_58ww3"), ExtResource("92_mruwx"), ExtResource("93_odits"), ExtResource("94_v7k8q"), ExtResource("95_3yxfe"), ExtResource("96_kqa81"), ExtResource("97_3q8tj"), ExtResource("98_ub4ky"), ExtResource("99_l45ga"), ExtResource("100_hxd5i"), ExtResource("101_8j8l2"), ExtResource("102_0aggx"), ExtResource("103_cmqfc"), ExtResource("104_5lqyc"), ExtResource("105_3u5el"), ExtResource("106_lw83e"), ExtResource("107_6vqs6"), ExtResource("108_k3t35"), ExtResource("109_byxsd"), ExtResource("110_srphe"), ExtResource("111_q4l7f"), ExtResource("112_tfsal"), ExtResource("113_hf0tj"), ExtResource("114_k132i"), ExtResource("115_qnffx"), ExtResource("116_nrujq"), ExtResource("117_e0uac"), ExtResource("118_wvmkp"), ExtResource("119_xve6l"), ExtResource("120_er6xv"), ExtResource("121_h8nn0"), ExtResource("133_pvcritc"), ExtResource("134_pvcritr"), ExtResource("135_pvcrite"), ExtResource("136_pvcritl"), ExtResource("122_a1ejh")])
 
 [node name="CoinsBag" parent="GameUI" instance=ExtResource("11_xgbxb")]
 unique_name_in_owner = true
