@@ -13,4 +13,4 @@ stats = ExtResource("4_stats")
 upgrade_to = ExtResource("5_upgrade")
 item_name = "Sword I"
 item_icon = ExtResource("1_icon")
-item_cost = 32
+item_cost = 25

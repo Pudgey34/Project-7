@@ -213,7 +213,6 @@ func save_game(coins_override: int = -1) -> void:
 		for stat in stats.get_script().get_script_property_list():
 			if stat.type == TYPE_FLOAT or stat.type == TYPE_INT:
 				save_dict["player_stats"][stat.name] = stats.get(stat.name)
-		print(save_dict["player_stats"])
 
 
 	if arena == null:
@@ -289,4 +288,3 @@ func load_game() -> void:
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		save_game()
-		print("SAVING")

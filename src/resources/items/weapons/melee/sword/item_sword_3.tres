@@ -14,4 +14,4 @@ upgrade_to = ExtResource("5_upgrade")
 item_name = "Sword III"
 item_icon = ExtResource("1_icon")
 item_tier = 2
-item_cost = 88
+item_cost = 55

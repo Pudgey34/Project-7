@@ -5,12 +5,14 @@
 
 [resource]
 script = ExtResource("1_khnh1")
-damage = 4.0
+damage = 5.0
 accuracy = 0.85
-cooldown = 0.8
+cooldown = 0.6
+crit_chance = 0.15
+crit_damage = 2.0
 max_range = 350.0
 knockback = 1.0
 pierce = 1
 projectile_scene = ExtResource("1_eqhys")
-projectile_speed = 1700.0
+projectile_speed = 1800.0
 metadata/_custom_type_script = "uid://cj5gl53yq56xm"

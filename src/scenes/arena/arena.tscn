@@ -1,4 +1,4 @@
-[gd_scene load_steps=94 format=3 uid="uid://b4ifpsnkclb5q"]
+[gd_scene load_steps=110 format=3 uid="uid://b4ifpsnkclb5q"]
 
 [ext_resource type="Texture2D" uid="uid://cy4xfx762bxgb" path="res://assets/sprites/BG.png" id="1_5tue2"]
 [ext_resource type="Script" uid="uid://dx6ay2e086uwg" path="res://scenes/arena/arena.gd" id="1_asdgj"]
@@ -91,6 +91,22 @@
 [ext_resource type="Resource" path="res://resources/items/passives/data/passive_doomsight_prism.tres" id="136_pvcritl"]
 [ext_resource type="Resource" uid="uid://c6av4ov6pdomf" path="res://resources/units/enemies/stats_enemy_wave_12.tres" id="137_wave12_enemy"]
 [ext_resource type="Resource" uid="uid://e6jgne8tpvct" path="res://resources/waves/data/wave_12.tres" id="138_w12"]
+[ext_resource type="Resource" path="res://resources/items/weapons/range/laser_pistol/item_laser_pistol_1.tres" id="139_lp1"]
+[ext_resource type="Resource" path="res://resources/items/weapons/range/laser_pistol/item_laser_pistol_2.tres" id="140_lp2"]
+[ext_resource type="Resource" path="res://resources/items/weapons/range/laser_pistol/item_laser_pistol_3.tres" id="141_lp3"]
+[ext_resource type="Resource" path="res://resources/items/weapons/range/laser_pistol/item_laser_pistol_4.tres" id="142_lp4"]
+[ext_resource type="Resource" path="res://resources/items/passives/data/passive_rebound_charm.tres" id="143_bnc0"]
+[ext_resource type="Resource" path="res://resources/items/passives/data/passive_rare_ricochet_spool.tres" id="144_bnc1"]
+[ext_resource type="Resource" path="res://resources/items/passives/data/passive_epic_pinball_core.tres" id="145_bnc2"]
+[ext_resource type="Resource" path="res://resources/items/passives/data/passive_legendary_cataclysm_lens.tres" id="146_bnc3"]
+[ext_resource type="Resource" path="res://resources/items/passives/data/passive_sling_wire.tres" id="147_flc0"]
+[ext_resource type="Resource" path="res://resources/items/passives/data/passive_rare_hurl_coil.tres" id="148_flc1"]
+[ext_resource type="Resource" path="res://resources/items/passives/data/passive_epic_cyclone_trigger.tres" id="149_flc2"]
+[ext_resource type="Resource" path="res://resources/items/passives/data/passive_legendary_meteor_reel.tres" id="150_flc3"]
+[ext_resource type="Resource" path="res://resources/items/passives/data/passive_heartwood_tonic.tres" id="151_hp0"]
+[ext_resource type="Resource" path="res://resources/items/passives/data/passive_stoneblood_capsule.tres" id="152_hp1"]
+[ext_resource type="Resource" path="res://resources/items/passives/data/passive_rare_emergency_rations.tres" id="153_hp2"]
+[ext_resource type="Resource" path="res://resources/items/passives/data/passive_epic_giant_blood.tres" id="154_hp3"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ii07k"]
 font_size = 64
@@ -166,7 +182,7 @@ visible = false
 [node name="ShopPanel" parent="GameUI" instance=ExtResource("10_2ml6w")]
 unique_name_in_owner = true
 visible = false
-shop_items = Array[ExtResource("69_b2a0l")]([ExtResource("70_gtcva"), ExtResource("71_a1ejh"), ExtResource("72_b4h7k"), ExtResource("73_2l10b"), ExtResource("74_y1ias"), ExtResource("75_3xutc"), ExtResource("76_aqtxl"), ExtResource("77_f772w"), ExtResource("78_27j65"), ExtResource("79_yp53l"), ExtResource("80_bdqta"), ExtResource("81_n0rh3"), ExtResource("82_v8b4h"), ExtResource("83_hfltd"), ExtResource("84_dloyk"), ExtResource("85_wkndr"), ExtResource("86_5t7vk"), ExtResource("87_iedlo"), ExtResource("88_dyjsr"), ExtResource("89_jkblg"), ExtResource("90_65pvm"), ExtResource("91_58ww3"), ExtResource("92_mruwx"), ExtResource("93_odits"), ExtResource("94_v7k8q"), ExtResource("95_3yxfe"), ExtResource("96_kqa81"), ExtResource("97_3q8tj"), ExtResource("98_ub4ky"), ExtResource("99_l45ga"), ExtResource("100_hxd5i"), ExtResource("101_8j8l2"), ExtResource("102_0aggx"), ExtResource("103_cmqfc"), ExtResource("104_5lqyc"), ExtResource("105_3u5el"), ExtResource("106_lw83e"), ExtResource("107_6vqs6"), ExtResource("108_k3t35"), ExtResource("109_byxsd"), ExtResource("110_srphe"), ExtResource("111_q4l7f"), ExtResource("112_tfsal"), ExtResource("113_hf0tj"), ExtResource("114_k132i"), ExtResource("115_qnffx"), ExtResource("116_nrujq"), ExtResource("117_e0uac"), ExtResource("118_wvmkp"), ExtResource("119_xve6l"), ExtResource("120_er6xv"), ExtResource("121_h8nn0"), ExtResource("133_pvcritc"), ExtResource("134_pvcritr"), ExtResource("135_pvcrite"), ExtResource("136_pvcritl"), ExtResource("122_a1ejh")])
+shop_items = Array[ExtResource("69_b2a0l")]([ExtResource("70_gtcva"), ExtResource("71_a1ejh"), ExtResource("72_b4h7k"), ExtResource("73_2l10b"), ExtResource("74_y1ias"), ExtResource("75_3xutc"), ExtResource("76_aqtxl"), ExtResource("77_f772w"), ExtResource("139_lp1"), ExtResource("140_lp2"), ExtResource("141_lp3"), ExtResource("142_lp4"), ExtResource("78_27j65"), ExtResource("79_yp53l"), ExtResource("80_bdqta"), ExtResource("81_n0rh3"), ExtResource("82_v8b4h"), ExtResource("83_hfltd"), ExtResource("84_dloyk"), ExtResource("85_wkndr"), ExtResource("86_5t7vk"), ExtResource("87_iedlo"), ExtResource("88_dyjsr"), ExtResource("89_jkblg"), ExtResource("90_65pvm"), ExtResource("91_58ww3"), ExtResource("92_mruwx"), ExtResource("93_odits"), ExtResource("94_v7k8q"), ExtResource("95_3yxfe"), ExtResource("96_kqa81"), ExtResource("97_3q8tj"), ExtResource("98_ub4ky"), ExtResource("99_l45ga"), ExtResource("100_hxd5i"), ExtResource("101_8j8l2"), ExtResource("102_0aggx"), ExtResource("103_cmqfc"), ExtResource("104_5lqyc"), ExtResource("105_3u5el"), ExtResource("106_lw83e"), ExtResource("107_6vqs6"), ExtResource("108_k3t35"), ExtResource("109_byxsd"), ExtResource("110_srphe"), ExtResource("111_q4l7f"), ExtResource("112_tfsal"), ExtResource("113_hf0tj"), ExtResource("114_k132i"), ExtResource("115_qnffx"), ExtResource("116_nrujq"), ExtResource("117_e0uac"), ExtResource("118_wvmkp"), ExtResource("119_xve6l"), ExtResource("120_er6xv"), ExtResource("121_h8nn0"), ExtResource("133_pvcritc"), ExtResource("134_pvcritr"), ExtResource("135_pvcrite"), ExtResource("136_pvcritl"), ExtResource("143_bnc0"), ExtResource("144_bnc1"), ExtResource("145_bnc2"), ExtResource("146_bnc3"), ExtResource("147_flc0"), ExtResource("148_flc1"), ExtResource("149_flc2"), ExtResource("150_flc3"), ExtResource("151_hp0"), ExtResource("152_hp1"), ExtResource("153_hp2"), ExtResource("154_hp3"), ExtResource("122_a1ejh")])
 
 [node name="CoinsBag" parent="GameUI" instance=ExtResource("11_xgbxb")]
 unique_name_in_owner = true
@@ -176,7 +192,7 @@ anchors_preset = 2
 
 [node name="SelectionPanel" parent="GameUI" instance=ExtResource("12_vmsrg")]
 unique_name_in_owner = true
-start_weapons = Array[ExtResource("126_b4h7k")]([ExtResource("70_gtcva"), ExtResource("74_y1ias"), ExtResource("122_a1ejh")])
+start_weapons = Array[ExtResource("126_b4h7k")]([ExtResource("70_gtcva"), ExtResource("74_y1ias"), ExtResource("122_a1ejh"), ExtResource("139_lp1")])
 
 [node name="PauseMenu" parent="GameUI" instance=ExtResource("20_pause")]
 unique_name_in_owner = true

@@ -24,6 +24,7 @@ const KNOCKBACK_DECAY := 8.0
 func _ready() -> void:
 	# Duplicate stats resource to prevent modifying the original resource file
 	stats = stats.duplicate()
+	add_to_group("enemies")
 	
 	super._ready()
 	hitbox.setup(stats.damage, false, 0, self, null)

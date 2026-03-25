@@ -43,7 +43,7 @@ func _get_applied_stat_delta(stat_name: String, value: float) -> float:
 	return value
 
 func _is_percentage_stat(stat_name: String) -> bool:
-	return stat_name == "attack_speed" or stat_name == "life_steal" or stat_name == "block_chance" or stat_name == "crit_chance"
+	return stat_name == "attack_speed" or stat_name == "life_steal" or stat_name == "block_chance" or stat_name == "crit_chance" or stat_name == "fling_chance"
 
 func _format_number(value: float) -> String:
 	if is_equal_approx(value, round(value)):

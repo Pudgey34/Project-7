@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("2_sffih")
-add_value = 5.0
+add_value = 15.0
 add_stats = "life_steal"
 remove_value = 5.0
 remove_stats = "speed"

@@ -37,6 +37,7 @@ const TIER_COLORS: Dictionary[UpgradeTier, Color] = {
 	UpgradeTier.LEGENDARY: Color(0.906, 0.212, 0.212)
 	
 }
+const BLOCK_SOFT_CAP_PERCENT: float = 75.0
 
 enum UpgradeTier{
 	COMMON,
@@ -58,6 +59,46 @@ var selected_weapon: ItemWeapon
 var main_player_selected: UnitStats
 var main_weapon_selected: ItemWeapon
 
+func _ready() -> void:
+	_apply_global_tooltip_theme()
+
+
+func _apply_global_tooltip_theme() -> void:
+	var root_window: Window = get_tree().root
+	if root_window == null:
+		return
+
+	var theme: Theme
+	if root_window.theme != null:
+		theme = root_window.theme.duplicate()
+	else:
+		theme = Theme.new()
+
+	var tooltip_panel_style: StyleBoxFlat = StyleBoxFlat.new()
+	tooltip_panel_style.bg_color = Color(0.06, 0.06, 0.06, 1.0)
+	tooltip_panel_style.border_color = Color(0.10, 0.82, 1.0, 1.0)
+	tooltip_panel_style.border_width_left = 2
+	tooltip_panel_style.border_width_top = 2
+	tooltip_panel_style.border_width_right = 2
+	tooltip_panel_style.border_width_bottom = 2
+	tooltip_panel_style.corner_radius_top_left = 8
+	tooltip_panel_style.corner_radius_top_right = 8
+	tooltip_panel_style.corner_radius_bottom_right = 8
+	tooltip_panel_style.corner_radius_bottom_left = 8
+	tooltip_panel_style.content_margin_left = 12.0
+	tooltip_panel_style.content_margin_top = 8.0
+	tooltip_panel_style.content_margin_right = 12.0
+	tooltip_panel_style.content_margin_bottom = 8.0
+
+	theme.set_stylebox("panel", "TooltipPanel", tooltip_panel_style)
+	theme.set_font_size("font_size", "TooltipLabel", 34)
+	theme.set_color("font_color", "TooltipLabel", Color(1, 1, 1, 1))
+	theme.set_color("font_outline_color", "TooltipLabel", Color(0, 0, 0, 1))
+	theme.set_constant("outline_size", "TooltipLabel", 1)
+	theme.set_constant("line_separation", "TooltipLabel", 2)
+
+	root_window.theme = theme
+
 func get_harvesting_coins() -> void:
 	if not is_instance_valid(player):
 		return
@@ -77,10 +118,47 @@ func get_selected_player() -> Player:
 	return player
 	
 func apply_life_steal(weapon: Weapon) -> void:
-	var steal_chance := (player.stats.life_steal / 100.0) + weapon.data.stats.life_steal
-	if get_chance_success(steal_chance):
-		player.health_component.heal(1.0)
-		on_create_heal_text.emit(player, 1.0)
+	if weapon == null or weapon.data == null:
+		return
+	if not is_instance_valid(player):
+		return
+	if player.health_component == null or player.health_component.current_health <= 0.0:
+		return
+
+	var player_life_steal_percent: float = maxf(0.0, float(player.stats.life_steal))
+	var weapon_life_steal_percent: float = maxf(0.0, float(weapon.data.stats.life_steal) * 100.0)
+	var total_life_steal_percent: float = player_life_steal_percent + weapon_life_steal_percent
+	if total_life_steal_percent <= 0.0:
+		return
+
+	var heal_points: int = _roll_stacked_percent(total_life_steal_percent)
+	if heal_points <= 0:
+		return
+
+	var heal_amount: float = float(heal_points)
+	player.health_component.heal(heal_amount)
+	on_create_heal_text.emit(player, heal_amount)
+
+
+func _roll_stacked_percent(chance_percent: float) -> int:
+	if chance_percent <= 0.0:
+		return 0
+
+	var guaranteed_points: int = int(floor(chance_percent / 100.0))
+	var remainder_chance: float = fmod(chance_percent, 100.0) / 100.0
+	if remainder_chance > 0.0 and get_chance_success(remainder_chance):
+		guaranteed_points += 1
+
+	return max(0, guaranteed_points)
+
+
+func get_effective_block_chance_percent(raw_block_chance_percent: float) -> float:
+	if raw_block_chance_percent <= 0.0:
+		return 0.0
+
+	var soft_cap: float = BLOCK_SOFT_CAP_PERCENT
+	var effective_block: float = soft_cap * (1.0 - exp(-raw_block_chance_percent / soft_cap))
+	return clampf(effective_block, 0.0, soft_cap)
 	
 func get_tier_style(tier: UpgradeTier) -> StyleBoxFlat:
 	match tier:

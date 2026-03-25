@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ItemUpgrade" load_steps=3 format=3 uid="uid://di2gu4uf6txxf"]
+
+[ext_resource type="Texture2D" uid="uid://513vy8yuf2c3" path="res://assets/sprites/Upgrades/6.png" id="1_icon"]
+[ext_resource type="Script" uid="uid://cir86i0cvp8gh" path="res://resources/items/upgrades/item_upgrade.gd" id="2_script"]
+
+[resource]
+script = ExtResource("2_script")
+value = 50.0
+description = "+50%"
+stat_id = "fling_chance"
+item_name = "Fling Chance"
+item_icon = ExtResource("1_icon")
+item_tier = 3
+item_type = 1

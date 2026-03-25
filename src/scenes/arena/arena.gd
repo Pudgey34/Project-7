@@ -5,10 +5,13 @@ class_name Arena
 const BG_MUSIC := preload("res://assets/audio/Bg Music.mp3")
 const DEATH_MUSIC := preload("res://assets/audio/violin.mp3")
 const FINAL_BATTLE_MUSIC := preload("res://assets/audio/final.mp3")
+const VICTORY_MUSIC := preload("res://assets/audio/victory.mp3")
 const BG_MUSIC_VOLUME_DB := -27.0
 const MAIN_MENU_SCENE_PATH := "res://scenes/ui/menu_panel/menu_panel.tscn"
-const FIRST_WAVE_TUTORIAL_TEXT := "WASD - Move\nSpacebar - Dodge (invulnerable while dodging)\nEsc - Pause Game\nSurvive 12 waves to win!\nPicking up coins heals you and awards +1 extra coin!"
+const FIRST_WAVE_TUTORIAL_TEXT := "WASD - Move\nSpacebar - Dodge (invulnerable while dodging)\nPress ESC to view stats\nSurvive 12 waves to win!\nPicking up coins heals you and awards +1 extra coin!\nHover over a stat to learn what it does."
+const FIRST_WAVE_TUTORIAL_DURATION := 10.0
 const FINAL_WAVE_INDEX := 12
+const WAVE_START_PLAYER_POSITION := Vector2.ZERO
 
 @export var player: Player
 
@@ -114,6 +117,7 @@ func _ready() -> void:
 				Global.game_paused = false
 				_begin_wave_checkpoint()
 				_play_wave_music(spawner.wave_index)
+				_center_player_for_wave_start()
 				spawner.start_wave()
 
 
@@ -146,7 +150,7 @@ func _show_first_wave_tutorial() -> void:
 
 	first_wave_tutorial_shown = true
 	first_wave_tutorial_label.visible = true
-	await get_tree().create_timer(7.0).timeout
+	await get_tree().create_timer(FIRST_WAVE_TUTORIAL_DURATION).timeout
 	if is_instance_valid(first_wave_tutorial_label):
 		first_wave_tutorial_label.visible = false
 
@@ -231,6 +235,7 @@ func start_new_wave() -> void:
 	spawner.wave_index += 1
 	_begin_wave_checkpoint()
 	_play_wave_music(spawner.wave_index)
+	_center_player_for_wave_start()
 	spawner.start_wave()
 	
 func clean_arena() -> void:
@@ -247,9 +252,17 @@ func clean_arena() -> void:
 
 
 func clear_projectiles() -> void:
-	for child in get_tree().root.get_children():
-		if child is Projectile:
-			child.queue_free()
+	for node: Node in get_tree().get_nodes_in_group("projectiles"):
+		var projectile: Projectile = node as Projectile
+		if projectile != null and is_instance_valid(projectile):
+			projectile.queue_free()
+
+
+func _center_player_for_wave_start() -> void:
+	if not is_instance_valid(Global.player):
+		return
+
+	Global.player.global_position = WAVE_START_PLAYER_POSITION
 	
 
 func wait_for_coins_collection() -> void:
@@ -308,7 +321,6 @@ func _on_create_heal_text(unit: Node2D, heal: float) -> void:
 	
 	
 func _on_upgrade_selected() -> void:
-	#print("Upgrade Selected.")
 	upgrade_panel.hide()
 	shop_panel.load_shop(spawner.wave_index, spawner.wave_index + 1)
 	shop_panel.show()
@@ -336,6 +348,7 @@ func _on_shop_panel_on_shop_next_wave() -> void:
 		Global.game_paused = false
 		_begin_wave_checkpoint()
 		_play_wave_music(spawner.wave_index)
+		_center_player_for_wave_start()
 		spawner.start_wave()
 	
 func _on_enemy_died(enemy: Enemy) -> void:
@@ -353,6 +366,7 @@ func _on_selection_panel_on_selection_completed() -> void:
 	shop_panel.load_shop(spawner.wave_index, spawner.wave_index + 1)
 	_begin_wave_checkpoint()
 	_play_wave_music(spawner.wave_index)
+	_center_player_for_wave_start()
 	spawner.start_wave()
 	Global.game_paused = false
 	_show_first_wave_tutorial()
@@ -386,6 +400,7 @@ func _show_win_screen() -> void:
 	spawner.pause_wave_timers()
 	pause_menu.close_menu()
 	ProgressData.clear_save_game()
+	SoundManager.play_music(VICTORY_MUSIC, true, -18.0)
 	game_over_screen.open_screen("Congratulations!", "You survived all 12 waves!\nYou win!")
 
 

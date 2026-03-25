@@ -20,7 +20,8 @@ func _on_hurtbox_component_on_damaged(hitbox: HitboxComponent) -> void:
 	if health_component.current_health <= 0:
 		return
 		
-	var blocked := Global.get_chance_success(stats.block_chance / 100)
+	var effective_block_chance_percent: float = Global.get_effective_block_chance_percent(float(stats.block_chance))
+	var blocked := Global.get_chance_success(effective_block_chance_percent / 100.0)
 	if blocked: 
 		Global.on_create_block_text.emit(self)
 		return

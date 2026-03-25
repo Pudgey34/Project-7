@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemPassive" load_steps=3 format=3 uid="uid://d2few7f1438hf"]
+
+[ext_resource type="Texture2D" uid="uid://513vy8yuf2c3" path="res://assets/sprites/Upgrades/6.png" id="1_icon"]
+[ext_resource type="Script" uid="uid://dona4k48tjfmp" path="res://resources/items/passives/item_passive.gd" id="2_script"]
+
+[resource]
+script = ExtResource("2_script")
+add_value = 25.0
+add_stats = "fling_chance"
+remove_value = 6.0
+remove_stats = "block_chance"
+item_name = "Meteor Reel"
+item_icon = ExtResource("1_icon")
+item_tier = 3
+item_type = 2
+item_cost = 68

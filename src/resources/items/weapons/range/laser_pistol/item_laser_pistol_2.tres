@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ItemWeapon" load_steps=6 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/sprites/Weapons/Icons/weapon_laser_icon.png" id="1_icon"]
+[ext_resource type="Script" path="res://resources/items/weapons/item_weapon.gd" id="2_script"]
+[ext_resource type="PackedScene" path="res://scenes/weapons/range/weapon_laser_pistol.tscn" id="3_scene"]
+[ext_resource type="Resource" path="res://resources/items/weapons/range/laser_pistol/stats_laser_pistol_2.tres" id="4_stats"]
+[ext_resource type="Resource" path="res://resources/items/weapons/range/laser_pistol/item_laser_pistol_3.tres" id="5_upgrade"]
+
+[resource]
+script = ExtResource("2_script")
+type = 1
+scene = ExtResource("3_scene")
+stats = ExtResource("4_stats")
+upgrade_to = ExtResource("5_upgrade")
+item_name = "Laser Pistol II"
+item_icon = ExtResource("1_icon")
+item_tier = 1
+item_cost = 34

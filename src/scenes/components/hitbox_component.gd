@@ -81,5 +81,5 @@ func _try_emit_hit(hurtbox: HurtboxComponent) -> void:
 	hit_hurtbox_ids[hurtbox_id] = true
 	hurtbox.receive_hit_from_hitbox(self)
 	if hurtbox.owner is Enemy:
-		SoundManager.play_sound(SoundManager.Sound.ENEMY_HIT)
+		SoundManager.play_enemy_hit_impact()
 	on_hit_hurtbox.emit(hurtbox)

@@ -9,7 +9,9 @@ class_name StatsContainer
 @onready var speed_label: Label = %SpeedLabel
 @onready var attack_speed_label: Label = %AttackSpeedLabel
 @onready var crit_chance_label: Label = %CritChanceLabel
+@onready var fling_chance_label: Label = %FlingChanceLabel
 @onready var pierce_label: Label = %PierceLabel
+@onready var bounce_label: Label = %BounceLabel
 @onready var block_label: Label = %BlockLabel
 @onready var harvesting_label: Label = %HarvestingLabel
 @onready var max_weapons_label: Label = %MaxWeaponsLabel
@@ -24,7 +26,9 @@ class_name StatsContainer
 @onready var stats_speed_panel: Panel = $MarginContainer/VBoxContainer/StatsSpeed
 @onready var stats_attack_speed_panel: Panel = $MarginContainer/VBoxContainer/StatsAttackSpeed
 @onready var stats_crit_chance_panel: Panel = $MarginContainer/VBoxContainer/StatsCritChance
+@onready var stats_fling_chance_panel: Panel = $MarginContainer/VBoxContainer/StatsFlingChance
 @onready var stats_pierce_panel: Panel = $MarginContainer/VBoxContainer/StatsPierce
+@onready var stats_bounce_panel: Panel = $MarginContainer/VBoxContainer/StatsBounce
 @onready var stats_block_panel: Panel = $MarginContainer/VBoxContainer/StatsBlock
 @onready var stats_harvesting_panel: Panel = $MarginContainer/VBoxContainer/StatsHarvesting
 @onready var stats_max_weapons_panel: Panel = $MarginContainer/VBoxContainer/StatsMaxWeapons
@@ -63,6 +67,10 @@ func _process(_delta: float) -> void:
 	var eff_pierce: int = maxi(0, raw_pierce)
 	pierce_label.text = _format_stat_with_effective(float(raw_pierce), float(eff_pierce), false, true)
 
+	var raw_bounce: int = int(round(Global.player.stats.bounce))
+	var eff_bounce: int = maxi(0, raw_bounce)
+	bounce_label.text = _format_stat_with_effective(float(raw_bounce), float(eff_bounce), false, true)
+
 	var raw_range := float(Global.player.stats.range)
 	range_label.text = _format_compact_number(raw_range)
 
@@ -80,12 +88,16 @@ func _process(_delta: float) -> void:
 	var eff_crit_chance: float = maxf(0.0, raw_crit_chance)
 	crit_chance_label.text = _format_stat_with_effective(raw_crit_chance, eff_crit_chance, true)
 
+	var raw_fling_chance: float = float(Global.player.stats.fling_chance)
+	var eff_fling_chance: float = maxf(0.0, raw_fling_chance)
+	fling_chance_label.text = _format_stat_with_effective(raw_fling_chance, eff_fling_chance, true)
+
 	var raw_pickup_range := float(Global.player.stats.pickup_range)
 	var eff_pickup_range: float = maxf(0.1, raw_pickup_range)
 	pickup_range_label.text = _format_stat_with_effective(raw_pickup_range, eff_pickup_range)
 
 	var raw_block := float(Global.player.stats.block_chance)
-	var eff_block: float = maxf(0.0, raw_block)
+	var eff_block: float = Global.get_effective_block_chance_percent(raw_block)
 	block_label.text = _format_stat_with_effective(raw_block, eff_block, true)
 
 	var raw_harvesting := float(Global.player.stats.harvesting)
@@ -107,8 +119,10 @@ func _setup_stats_scroll() -> void:
 		stats_block_panel,
 		stats_damage_panel,
 		stats_pierce_panel,
+		stats_bounce_panel,
 		stats_attack_speed_panel,
 		stats_crit_chance_panel,
+		stats_fling_chance_panel,
 		stats_range_panel,
 		stats_speed_panel,
 		stats_pickup_range_panel,
@@ -145,13 +159,15 @@ func _setup_stat_tooltips() -> void:
 	_set_tooltip_for_stat(stats_life_steal_panel, "Life Steal. Chance to heal when your attacks hit.")
 	_set_tooltip_for_stat(stats_damage_panel, "Damage. Added to your weapons to increase hit damage.")
 	_set_tooltip_for_stat(stats_pierce_panel, "Pierce. Adds extra enemies your ranged attacks can pass through.")
+	_set_tooltip_for_stat(stats_bounce_panel, "Bounce. Projectiles that hit can seek out another nearby target.")
 	_set_tooltip_for_stat(stats_range_panel, "Range. Flat bonus added to your weapons' range.")
 	_set_tooltip_for_stat(stats_luck_panel, "Luck. Improves odds for better upgrade and item choices.")
 	_set_tooltip_for_stat(stats_speed_panel, "Speed. Increases movement speed.")
 	_set_tooltip_for_stat(stats_attack_speed_panel, "Attack Speed. Increases attack frequency. 100% is base speed.")
 	_set_tooltip_for_stat(stats_crit_chance_panel, "Crit Chance. Added to your weapons' critical hit chance.")
+	_set_tooltip_for_stat(stats_fling_chance_panel, "Fling Chance. Chance for melee attacks to launch a spinning piercing melee projectile.")
 	_set_tooltip_for_stat(stats_pickup_range_panel, "Pickup Range. Multiplier for how far away you can collect drops.")
-	_set_tooltip_for_stat(stats_block_panel, "Block. Chance to negate incoming damage.")
+	_set_tooltip_for_stat(stats_block_panel, "Block. Chance to negate incoming damage. Uses diminishing returns at higher values.")
 	_set_tooltip_for_stat(stats_harvesting_panel, "Harvesting. Extra coins gained at the end of each wave.")
 	_set_tooltip_for_stat(stats_max_weapons_panel, "Max Weapons. Maximum number of weapons you can equip at once.")
 

@@ -7,7 +7,7 @@
 script = ExtResource("2_script")
 add_value = 4.0
 add_stats = "pierce"
-remove_value = 4.0
+remove_value = 5.0
 remove_stats = "damage"
 item_name = "Abyssal Drill"
 item_icon = ExtResource("1_icon")

@@ -21,7 +21,6 @@ enum SpawnType {
 
 func get_random_unit_scene() -> PackedScene:
 	if units.is_empty():
-		printerr("No Units.")
 		return null
 	var enemies: Array[PackedScene]
 	var weights: Array[float]

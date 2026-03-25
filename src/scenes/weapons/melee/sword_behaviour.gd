@@ -38,7 +38,10 @@ func execute_attack() -> void:
 	weapon.sprite.rotation_degrees = 0.0
 	weapon.sprite.position = weapon.atk_start_pos
 
-	hitbox.setup(get_damage(), critical, weapon.data.stats.knockback, weapon.get_parent(), weapon)
+	var attack_damage: float = get_damage()
+	var attack_critical: bool = critical
+	hitbox.setup(attack_damage, attack_critical, weapon.data.stats.knockback, weapon.get_parent(), weapon)
+	try_spawn_melee_fling(attack_damage, attack_critical)
 
 	var tween: Tween = create_tween()
 

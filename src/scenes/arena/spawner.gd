@@ -7,6 +7,9 @@ signal on_wave_completed
 @export var spawn_area_size := Vector2(1000,500)
 @export var waves_data: Array[WaveData]
 @export var enemy_collection: Array[UnitStats]
+@export var post_wave_multiplier_start_wave: int = 5
+@export_range(0.0, 1.0, 0.01) var post_wave_health_multiplier_step: float = 0.10
+@export_range(0.0, 1.0, 0.01) var post_wave_damage_multiplier_step: float = 0.10
 
 @onready var wave_timer: Timer = $WaveTimer
 @onready var spawn_timer: Timer = $SpawnTimer
@@ -37,7 +40,6 @@ func find_wave_data() -> WaveData:
 func start_wave() -> void:
 	current_wave_data = find_wave_data()
 	if not current_wave_data:
-		printerr("No valid wave.")
 		is_wave_active = false
 		spawn_timer.stop()
 		wave_timer.stop()
@@ -54,6 +56,7 @@ func update_enemies_new_wave() -> void:
 	for stat: UnitStats in enemy_collection:
 		stat.health += stat.health_increase_per_wave
 		stat.damage += stat.damage_increase_per_wave
+		stat.speed += stat.speed_increase_per_wave
 
 func clear_enemies() -> void:
 	if spawned_enemies.size() > 0:
@@ -128,9 +131,35 @@ func _on_spawn_effect_finished(_anim_name: StringName, spawn_anim: Node, enemy_s
 		return
 
 	var enemy_instance := enemy_scene.instantiate() as Enemy
+	_apply_post_wave_enemy_multipliers(enemy_instance, spawn_wave_index)
 	enemy_instance.global_position = spawn_pos
 	get_parent().add_child(enemy_instance)
 	spawned_enemies.append(enemy_instance)
+
+
+func _apply_post_wave_enemy_multipliers(enemy_instance: Enemy, spawn_wave_index: int) -> void:
+	if enemy_instance == null or enemy_instance.stats == null:
+		return
+
+	var health_multiplier: float = _get_post_wave_multiplier(spawn_wave_index, post_wave_health_multiplier_step)
+	var damage_multiplier: float = _get_post_wave_multiplier(spawn_wave_index, post_wave_damage_multiplier_step)
+	if is_equal_approx(health_multiplier, 1.0) and is_equal_approx(damage_multiplier, 1.0):
+		return
+
+	var instance_stats: UnitStats = enemy_instance.stats.duplicate()
+	instance_stats.health = maxi(1, int(round(float(instance_stats.health) * health_multiplier)))
+	instance_stats.damage = float(instance_stats.damage) * damage_multiplier
+	enemy_instance.stats = instance_stats
+
+
+func _get_post_wave_multiplier(spawn_wave_index: int, per_wave_step: float) -> float:
+	if per_wave_step <= 0.0:
+		return 1.0
+	if spawn_wave_index < post_wave_multiplier_start_wave:
+		return 1.0
+
+	var scaled_waves: int = spawn_wave_index - post_wave_multiplier_start_wave + 1
+	return pow(1.0 + per_wave_step, float(scaled_waves))
 
 func get_wave_text() -> String:
 	return "Wave %s" % wave_index

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dqblj6x37v5ae" path="res://resources/waves/wave_data.gd" id="1_wave_data"]
 [ext_resource type="Script" uid="uid://dgn2irjw1bxqy" path="res://resources/waves/wave_unit_data.gd" id="2_wave_unit_data"]
-[ext_resource type="PackedScene" path="res://scenes/unit/enemy/enemy_wave_12.tscn" id="3_boss_scene"]
+[ext_resource type="PackedScene" uid="uid://ccopsixap0yf1" path="res://scenes/unit/enemy/enemy_wave_12.tscn" id="3_boss_scene"]
 [ext_resource type="PackedScene" uid="uid://cjkpq563q15pt" path="res://scenes/unit/enemy/enemy_chaser_slow.tscn" id="4_chaser_slow"]
 [ext_resource type="PackedScene" uid="uid://ryafurhmlwtn" path="res://scenes/unit/enemy/enemy_chaser_mid.tscn" id="5_chaser_mid"]
 [ext_resource type="PackedScene" uid="uid://dwfk13cyivxjk" path="res://scenes/unit/enemy/enemy_chaser_fast.tscn" id="6_chaser_fast"]
@@ -41,5 +41,7 @@ to = 12
 wave_time = 60.0
 opening_units = Array[PackedScene]([ExtResource("3_boss_scene")])
 units = Array[ExtResource("2_wave_unit_data")]([SubResource("1_enemy"), SubResource("2_enemy"), SubResource("3_enemy"), SubResource("4_enemy"), SubResource("5_enemy")])
+spawn_type = 0
+fixed_spawn_time = 0.5
 max_spawn_time = 4.6
-spawn_count_per_tick = 2
+spawn_count_per_tick = 7

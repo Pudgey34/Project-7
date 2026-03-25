@@ -14,8 +14,12 @@ func execute_attack() -> void:
 	var recoil_pos := Vector2(weapon.atk_start_pos.x - weapon.data.stats.recoil, weapon.atk_start_pos.y)
 	tween.tween_property(weapon.sprite, "position", recoil_pos, weapon.data.stats.recoil_duration)
 	
+	var attack_damage: float = get_damage()
+	var attack_critical: bool = critical
+
 	hitbox.enable()
-	hitbox.setup(get_damage(),critical, weapon.data.stats.knockback, weapon.get_parent(), weapon)
+	hitbox.setup(attack_damage, attack_critical, weapon.data.stats.knockback, weapon.get_parent(), weapon)
+	try_spawn_melee_fling(attack_damage, attack_critical)
 
 	var attack_pos := Vector2(weapon.atk_start_pos.x + weapon.data.stats.max_range, weapon.atk_start_pos.y)
 	tween.tween_property(weapon.sprite, "position", attack_pos, weapon.data.stats.attack_duration)

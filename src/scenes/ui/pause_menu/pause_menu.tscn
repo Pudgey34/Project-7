@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://scenes/ui/pause_menu/pause_menu.gd" id="1_script"]
 [ext_resource type="StyleBox" uid="uid://cxtqhn2pkqjsg" path="res://styles/common_styles.tres" id="2_style"]
 [ext_resource type="PackedScene" uid="uid://4ob1k1bqlxm" path="res://scenes/ui/custom_button/custom_button.tscn" id="3_button"]
+[ext_resource type="PackedScene" uid="uid://bmygk5xaykque" path="res://scenes/ui/stats_container/stats_container.tscn" id="4_stats"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card"]
 bg_color = Color(0.16, 0.16, 0.17, 1)
@@ -77,6 +78,13 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Quit"
+
+[node name="StatsContainer" parent="." instance=ExtResource("4_stats")]
+layout_mode = 0
+offset_left = 1380.0
+offset_top = 60.0
+offset_right = 1860.0
+offset_bottom = 1040.0
 
 [node name="OptionsOverlay" type="Panel" parent="."]
 unique_name_in_owner = true

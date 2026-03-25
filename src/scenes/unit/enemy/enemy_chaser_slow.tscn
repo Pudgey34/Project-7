@@ -22,6 +22,7 @@ radius = 33.01515
 collision_layer = 2
 script = ExtResource("2_lmqbh")
 flock_push = 20.0
+visual_scale = 0.5
 stats = ExtResource("3_lmqbh")
 
 [node name="Sprite" parent="Visuals" index="1"]

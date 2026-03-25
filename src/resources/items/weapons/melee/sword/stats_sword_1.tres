@@ -6,7 +6,7 @@
 script = ExtResource("1_stats")
 damage = 7.0
 accuracy = 1.0
-cooldown = 1.35
+cooldown = 1.2
 crit_chance = 0.08
 crit_damage = 1.6
 max_range = 170.0

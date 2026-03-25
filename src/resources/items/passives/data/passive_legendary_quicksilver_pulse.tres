@@ -7,7 +7,7 @@
 script = ExtResource("2_script")
 add_value = 50.0
 add_stats = "attack_speed"
-remove_value = 10.0
+remove_value = 8.0
 remove_stats = "health"
 item_name = "Quicksilver Pulse"
 item_icon = ExtResource("1_icon")

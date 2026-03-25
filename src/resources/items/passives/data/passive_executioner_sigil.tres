@@ -1,11 +1,11 @@
-[gd_resource type="Resource" script_class="ItemPassive" load_steps=3 format=3]
+[gd_resource type="Resource" script_class="ItemPassive" load_steps=3 format=3 uid="uid://gnr0jkwtt101"]
 
-[ext_resource type="Texture2D" path="res://assets/sprites/Upgrades/2.png" id="1_icon"]
-[ext_resource type="Script" path="res://resources/items/passives/item_passive.gd" id="2_script"]
+[ext_resource type="Texture2D" uid="uid://c41e5to043u4m" path="res://assets/sprites/Upgrades/2.png" id="1_icon"]
+[ext_resource type="Script" uid="uid://dona4k48tjfmp" path="res://resources/items/passives/item_passive.gd" id="2_script"]
 
 [resource]
 script = ExtResource("2_script")
-add_value = 11.0
+add_value = 15.0
 add_stats = "crit_chance"
 remove_value = 3.0
 remove_stats = "hp_regen"
