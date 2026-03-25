@@ -60,6 +60,7 @@ layout_mode = 2
 theme_override_constants/separation = 12
 
 [node name="PageSelector" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 alignment = 1
 theme_override_constants/separation = 10

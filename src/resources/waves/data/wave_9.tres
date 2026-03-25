@@ -16,22 +16,22 @@ weight = 5.0
 [sub_resource type="Resource" id="2"]
 script = ExtResource("2")
 unit_scene = ExtResource("4")
-weight = 20.0
+weight = 5.0
 
 [sub_resource type="Resource" id="3"]
 script = ExtResource("2")
 unit_scene = ExtResource("5")
-weight = 25.0
+weight = 5.0
 
 [sub_resource type="Resource" id="4"]
 script = ExtResource("2")
 unit_scene = ExtResource("6")
-weight = 30.0
+weight = 80.0
 
 [sub_resource type="Resource" id="5"]
 script = ExtResource("2")
 unit_scene = ExtResource("7")
-weight = 20.0
+weight = 5.0
 
 [resource]
 script = ExtResource("1")

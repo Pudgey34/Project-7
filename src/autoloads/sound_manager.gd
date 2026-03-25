@@ -11,12 +11,16 @@ enum Sound {
 	SELL,
 	SATISFYING,
 	PUNCH,
-	SWORD
+	SWORD,
+	DEATH,
+	PLAYER_FIRE,
+	PISTOL_FIRE,
+	CHARGE_HORN
 }
 
 var sound_dictionary: Dictionary[Sound, Resource] = {
 	Sound.ENEMY_HIT: preload("uid://blonjlaa37md0"),
-	Sound.FIRE: preload("uid://g72hyxdnaath"),
+	Sound.FIRE: preload("res://assets/audio/enemygun.mp3"),
 	Sound.UI: preload("uid://6nolwqlami52"),
 	Sound.COIN: preload("res://assets/audio/coin.mp3"),
 	Sound.PURCHASE: preload("res://assets/audio/purchase.mp3"),
@@ -24,8 +28,12 @@ var sound_dictionary: Dictionary[Sound, Resource] = {
 	Sound.DASH: preload("res://assets/audio/dash.mp3"),
 	Sound.SELL: preload("res://assets/audio/sell.mp3"),
 	Sound.SATISFYING: preload("res://assets/audio/satisfying.mp3"),
-	Sound.PUNCH: preload("uid://bah5akwld6a1"),
-	Sound.SWORD: preload("uid://bfbq5a1jaqovo")
+	Sound.PUNCH: preload("uid://cucccrglm402c"),
+	Sound.SWORD: preload("uid://bfbq5a1jaqovo"),
+	Sound.DEATH: preload("res://assets/audio/death.mp3"),
+	Sound.PLAYER_FIRE: preload("res://assets/audio/ShotgunFire.wav"),
+	Sound.PISTOL_FIRE: preload("res://assets/audio/shot.mp3"),
+	Sound.CHARGE_HORN: preload("res://assets/audio/horn.mp3")
 }
 
 @export var stream_players: Array[AudioStreamPlayer]

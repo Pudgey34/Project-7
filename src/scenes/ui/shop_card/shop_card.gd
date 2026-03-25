@@ -4,9 +4,14 @@ class_name ShopCard
 
 signal on_item_purchased(item: ItemBase)
 signal on_purchase_failed(reason: String)
+signal on_lock_toggled(locked: bool)
 
 const AFFORDABLE_PRICE_COLOR := Color(1, 1, 1, 1)
 const UNAFFORDABLE_PRICE_COLOR := Color(1, 0.35, 0.35, 1)
+const LOCK_OPEN_ICON: Texture2D = preload("res://assets/sprites/open.png")
+const LOCK_CLOSED_ICON: Texture2D = preload("res://assets/sprites/close.png")
+const LOCK_OPEN_TOOLTIP := "Unlocked"
+const LOCK_CLOSED_TOOLTIP := "Locked (persists through rerolls and next waves)"
 
 @export var shop_item: ItemBase: set = _set_shop_item
 
@@ -15,11 +20,25 @@ const UNAFFORDABLE_PRICE_COLOR := Color(1, 0.35, 0.35, 1)
 @onready var item_description: RichTextLabel = %ItemDescription
 @onready var coins_label: Label = %CoinsLabel
 @onready var item_type: Label = %ItemType
+@onready var lock_button: Button = %LockButton
 
 var _last_can_afford: Variant = null
+var is_locked := false
+
+
+func _ready() -> void:
+	_update_lock_visuals()
+
+
+func set_locked(value: bool) -> void:
+	is_locked = value
+	_update_lock_visuals()
 
 func _set_shop_item(value: ItemBase) -> void:
 	shop_item = value
+	if value == null:
+		return
+
 	item_icon.texture = value.item_icon
 	item_name.text = value.item_name
 	item_type.text = ItemBase.ItemType.keys()[value.item_type]
@@ -49,6 +68,14 @@ func _update_price_color() -> void:
 		coins_label.self_modulate = AFFORDABLE_PRICE_COLOR
 	else:
 		coins_label.self_modulate = UNAFFORDABLE_PRICE_COLOR
+
+
+func _update_lock_visuals() -> void:
+	if not is_instance_valid(lock_button):
+		return
+
+	lock_button.icon = LOCK_CLOSED_ICON if is_locked else LOCK_OPEN_ICON
+	lock_button.tooltip_text = LOCK_CLOSED_TOOLTIP if is_locked else LOCK_OPEN_TOOLTIP
 
 func _get_plain_tooltip_text(value: ItemBase) -> String:
 	var description := value.get_description()
@@ -86,6 +113,13 @@ func _on_buy_button_pressed() -> void:
 	Global.coins -= shop_item.item_cost
 	on_item_purchased.emit(shop_item)
 	queue_free()
+
+
+func _on_lock_button_pressed() -> void:
+	is_locked = not is_locked
+	_update_lock_visuals()
+	on_lock_toggled.emit(is_locked)
+	SoundManager.play_sound(SoundManager.Sound.UI)
 
 
 func _can_auto_merge_on_full_inventory(weapon_item: ItemWeapon) -> bool:

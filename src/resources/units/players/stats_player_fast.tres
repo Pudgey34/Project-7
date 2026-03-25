@@ -7,8 +7,8 @@
 script = ExtResource("1_fast")
 name = "Fast"
 icon = ExtResource("2_fast")
-description = "Agile fighter that moves quickly but has low health and no block chance."
-health = 10
+description = "Agile fighter that moves quickly and has lower dash cooldown. Relatively lowe health"
+health = 15
 health_increase_per_wave = 0.0
 damage = 0.0
 damage_increase_per_wave = 0.0

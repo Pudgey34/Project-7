@@ -7,6 +7,8 @@ const SHOP_CARD_SCENE = preload("uid://bqr2tbjs3nfti")
 const WEAPONS_TITLE_BASE := "Weapons"
 const SELL_BUTTON_BASE := "Sell Weapon"
 const REROLL_BUTTON_BASE := "reroll"
+const NEXT_WAVE_BUTTON_BASE := "next wave"
+const SHOP_OFFER_SLOT_COUNT := 4
 
 @export var shop_items: Array[ItemBase]
 @export var reroll_wave_multiplier := 1
@@ -16,6 +18,7 @@ const REROLL_BUTTON_BASE := "reroll"
 @onready var weapons_container: GridContainer = %WeaponsContainer
 @onready var weapons_title: Label = $"MarginContainer/Control/WeaponsTitle"
 @onready var reroll_button: Button = %RerollButton
+@onready var new_wave_button: Button = $"MarginContainer/Control/VBoxContainer/NewWaveButton"
 
 @onready var combine_button: Button = %CombineButton
 @onready var sell_button: Button = $"MarginContainer/Control/VBoxContainer/SellButton"
@@ -26,6 +29,9 @@ var context_card: ItemCard
 var reroll_cost := 0
 var current_shop_wave := 1
 var reroll_uses_this_wave := 0
+var next_wave_number := 1
+var offer_slot_items: Array = []
+var offer_slot_locks: Array[bool] = []
 
 func _ready() -> void: 
 	for child in passives_container.get_children(): child.queue_free()
@@ -33,10 +39,11 @@ func _ready() -> void:
 	combine_button.disabled = true
 	reroll_uses_this_wave = 0
 	_refresh_reroll_cost()
-	_wire_shop_card_signals()
+	_ensure_offer_slots()
 	_update_weapons_title()
 	_update_sell_button_text()
 	_update_reroll_button_text()
+	_update_new_wave_button_text()
 
 func _update_weapons_title() -> void:
 	if not is_instance_valid(weapons_title):
@@ -72,6 +79,13 @@ func _update_reroll_button_text() -> void:
 
 	reroll_button.text = "%s\n(%d)" % [REROLL_BUTTON_BASE, reroll_cost]
 
+
+func _update_new_wave_button_text() -> void:
+	if not is_instance_valid(new_wave_button):
+		return
+
+	new_wave_button.text = "%s\n(%d)" % [NEXT_WAVE_BUTTON_BASE, next_wave_number]
+
 func _get_base_reroll_cost() -> int:
 	return max(1, current_shop_wave * reroll_wave_multiplier)
 
@@ -84,33 +98,127 @@ func _clear_shop_offer_cards() -> void:
 		child.queue_free()
 
 func _populate_shop_offer_cards(current_wave: int) -> void:
-	_clear_shop_offer_cards()
+	_ensure_offer_slots()
+
+	var locked_items: Array = []
+	for slot_index: int in range(SHOP_OFFER_SLOT_COUNT):
+		var slot_item: ItemBase = offer_slot_items[slot_index] as ItemBase
+		var keep_locked: bool = offer_slot_locks[slot_index] and slot_item != null
+		offer_slot_locks[slot_index] = keep_locked
+		if keep_locked:
+			locked_items.append(slot_item)
+
+	var needed_items: int = SHOP_OFFER_SLOT_COUNT - locked_items.size()
+	var generated_items: Array = _build_offer_items(current_wave, needed_items, locked_items)
+	var generated_index := 0
+
+	for slot_index: int in range(SHOP_OFFER_SLOT_COUNT):
+		var keep_locked: bool = offer_slot_locks[slot_index] and offer_slot_items[slot_index] != null
+		if keep_locked:
+			continue
+
+		if generated_index < generated_items.size():
+			offer_slot_items[slot_index] = generated_items[generated_index] as ItemBase
+			generated_index += 1
+		else:
+			offer_slot_items[slot_index] = null
+		offer_slot_locks[slot_index] = false
+
+	_render_shop_offer_cards()
+
+
+func _ensure_offer_slots() -> void:
+	if offer_slot_items.size() > SHOP_OFFER_SLOT_COUNT:
+		offer_slot_items.resize(SHOP_OFFER_SLOT_COUNT)
+	if offer_slot_locks.size() > SHOP_OFFER_SLOT_COUNT:
+		offer_slot_locks.resize(SHOP_OFFER_SLOT_COUNT)
+
+	while offer_slot_items.size() < SHOP_OFFER_SLOT_COUNT:
+		offer_slot_items.append(null)
+	while offer_slot_locks.size() < SHOP_OFFER_SLOT_COUNT:
+		offer_slot_locks.append(false)
+
+
+func _build_offer_items(current_wave: int, needed_count: int, excluded_items: Array) -> Array:
+	var results: Array = []
+	if needed_count <= 0:
+		return results
 
 	var config := Global.SHOP_PROBABILITY_CONFIG
-	var selected_items := Global.select_items_for_offer(shop_items, current_wave, config)
-	for shop_item : ItemBase in selected_items:
+	var attempts := 0
+	while results.size() < needed_count and attempts < 24:
+		attempts += 1
+		var selected_items: Array = Global.select_items_for_offer(shop_items, current_wave, config)
+		for selected in selected_items:
+			var selected_item: ItemBase = selected as ItemBase
+			if selected_item == null:
+				continue
+			if excluded_items.has(selected_item) or results.has(selected_item):
+				continue
+			results.append(selected_item)
+			if results.size() >= needed_count:
+				break
+
+	if results.size() < needed_count:
+		var fallback_pool: Array = []
+		for pool_item_variant in shop_items:
+			var pool_item: ItemBase = pool_item_variant as ItemBase
+			if pool_item == null:
+				continue
+			if excluded_items.has(pool_item) or results.has(pool_item):
+				continue
+			fallback_pool.append(pool_item)
+
+		while results.size() < needed_count and not fallback_pool.is_empty():
+			var pick_index: int = randi() % fallback_pool.size()
+			var fallback_item: ItemBase = fallback_pool[pick_index] as ItemBase
+			fallback_pool.remove_at(pick_index)
+			results.append(fallback_item)
+
+	return results
+
+
+func _render_shop_offer_cards() -> void:
+	_clear_shop_offer_cards()
+
+	for slot_index: int in range(SHOP_OFFER_SLOT_COUNT):
+		var slot_item: ItemBase = offer_slot_items[slot_index] as ItemBase
+		if slot_item == null:
+			continue
+
 		var card_instance := SHOP_CARD_SCENE.instantiate() as ShopCard
 		items_container.add_child(card_instance)
-		card_instance.shop_item = shop_item
+		card_instance.shop_item = slot_item
+		card_instance.set_locked(offer_slot_locks[slot_index])
+		card_instance.on_item_purchased.connect(_on_offer_card_item_purchased.bind(slot_index))
+		card_instance.on_purchase_failed.connect(_on_item_purchase_failed)
+		card_instance.on_lock_toggled.connect(_on_offer_card_lock_toggled.bind(slot_index))
 
-	_wire_shop_card_signals()
 
-func _wire_shop_card_signals() -> void:
-	for child in items_container.get_children():
-		if child is ShopCard:
-			var card := child as ShopCard
-			if not card.on_item_purchased.is_connected(_on_item_purchased):
-				card.on_item_purchased.connect(_on_item_purchased)
-			if not card.on_purchase_failed.is_connected(_on_item_purchase_failed):
-				card.on_purchase_failed.connect(_on_item_purchase_failed)
+func _on_offer_card_item_purchased(item: ItemBase, slot_index: int) -> void:
+	_ensure_offer_slots()
+	offer_slot_items[slot_index] = null
+	offer_slot_locks[slot_index] = false
+	_on_item_purchased(item)
+
+
+func _on_offer_card_lock_toggled(locked: bool, slot_index: int) -> void:
+	_ensure_offer_slots()
+	var slot_item: ItemBase = offer_slot_items[slot_index] as ItemBase
+	offer_slot_locks[slot_index] = locked and slot_item != null
 	
 	
-func load_shop(current_wave: int) -> void:
+func load_shop(current_wave: int, wave_to_start: int = -1) -> void:
 	current_shop_wave = current_wave
+	if wave_to_start > 0:
+		next_wave_number = wave_to_start
+	else:
+		next_wave_number = current_wave + 1
 	reroll_uses_this_wave = 0
 	_refresh_reroll_cost()
 	_populate_shop_offer_cards(current_wave)
 	_update_reroll_button_text()
+	_update_new_wave_button_text()
 	_update_weapons_title()
 		
 func create_item_card() -> ItemCard:

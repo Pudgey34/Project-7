@@ -30,6 +30,7 @@ func shoot() -> void:
 		return
 		
 	enemy.can_move = false
+	SoundManager.play_sound(SoundManager.Sound.FIRE, false, -1.0, -4.0)
 	
 	var direction := enemy.global_position.direction_to(Global.player.global_position)
 	var start_angle := -arc_angle /2.0

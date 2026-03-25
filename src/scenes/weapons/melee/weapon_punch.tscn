@@ -1,29 +1,42 @@
-[gd_scene load_steps=6 format=3 uid="uid://c56h2boc7jwws"]
+[gd_scene load_steps=7 format=3 uid="uid://c56h2boc7jwws"]
 
 [ext_resource type="PackedScene" uid="uid://by0cvj61konn2" path="res://scenes/weapons/weapon_base.tscn" id="1_soyvn"]
-[ext_resource type="Texture2D" uid="uid://l5hst1cf27oo" path="res://assets/sprites/Weapons/Melee/Weapon_Punch.png" id="2_sv013"]
+[ext_resource type="Shader" uid="uid://dlh1c1y15i2px" path="res://shaders/outline.gdshader" id="2_etoc4"]
 [ext_resource type="PackedScene" uid="uid://cy7i75brgp0g5" path="res://scenes/components/hitbox_component.tscn" id="3_etoc4"]
 [ext_resource type="Script" uid="uid://cvenxgm0iqjvr" path="res://scenes/weapons/melee/melee_behaviour.gd" id="4_etoc4"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7lfcn"]
+resource_local_to_scene = true
+shader = ExtResource("2_etoc4")
+shader_parameter/outline_color = Color(0.9079417, 0.9079417, 0.90794164, 1)
+shader_parameter/outline_width = 5.0000002375
+shader_parameter/glow_intensity = 4.00000019
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7lfcn"]
-size = Vector2(56, 43)
+size = Vector2(85.714294, 58.57143)
 
 [node name="WeaponPunch" instance=ExtResource("1_soyvn")]
 
 [node name="Sprite2D" parent="." index="0"]
+material = SubResource("ShaderMaterial_7lfcn")
 position = Vector2(1.9073486e-06, -8.5265135e-14)
-texture = ExtResource("2_sv013")
 
 [node name="HitboxComponent" parent="Sprite2D" index="0" instance=ExtResource("3_etoc4")]
 z_index = 1
 scale = Vector2(2, 2)
+monitoring = false
+monitorable = false
 collision_layer = 16
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/HitboxComponent" index="0"]
-position = Vector2(0, 0.5)
+position = Vector2(-1.42858, -2.1428614)
+scale = Vector2(0.9999998, 0.9999998)
 shape = SubResource("RectangleShape2D_7lfcn")
 debug_color = Color(0.9582171, 0, 0.53098524, 0.41960785)
+
+[node name="CollisionShape2D" parent="RangeArea" index="0"]
+visible = false
 
 [node name="WeaponBehaviour" parent="." index="3" node_paths=PackedStringArray("hitbox", "weapon")]
 script = ExtResource("4_etoc4")

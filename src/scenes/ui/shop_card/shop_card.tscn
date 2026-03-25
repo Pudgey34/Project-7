@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://bqr2tbjs3nfti"]
+[gd_scene load_steps=11 format=3 uid="uid://bqr2tbjs3nfti"]
 
 [ext_resource type="Script" uid="uid://dqwqslnp0v5j1" path="res://scenes/ui/shop_card/shop_card.gd" id="1_32l3b"]
 [ext_resource type="StyleBox" uid="uid://cxtqhn2pkqjsg" path="res://styles/common_styles.tres" id="1_b8qnx"]
 [ext_resource type="Texture2D" uid="uid://cyh23wqn8vcac" path="res://assets/sprites/Weapons/Icons/weapon_punch_icon.png" id="3_7csgf"]
 [ext_resource type="PackedScene" uid="uid://4ob1k1bqlxm" path="res://scenes/ui/custom_button/custom_button.tscn" id="4_xkf66"]
 [ext_resource type="Texture2D" uid="uid://chm4srsn6xd8y" path="res://assets/sprites/Gold/gold_1.png" id="5_moip7"]
+[ext_resource type="Texture2D" uid="uid://cnf77fx3r3div" path="res://assets/sprites/open.png" id="6_open"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h66gf"]
 bg_color = Color(0.21, 0.21, 0.22, 0.9)
@@ -81,6 +82,20 @@ offset_bottom = -19.333332
 text = "Item Type"
 label_settings = SubResource("LabelSettings_7csgf")
 
+[node name="LockButton" type="Button" parent="MarginContainer/Control"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 0
+offset_left = 93.000015
+offset_top = 377.99997
+offset_right = 1125.0
+offset_bottom = 1410.0
+scale = Vector2(0.1, 0.1)
+tooltip_text = "Unlocked"
+focus_mode = 0
+icon = ExtResource("6_open")
+flat = true
+
 [node name="ItemDescription" type="RichTextLabel" parent="MarginContainer/Control"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(288, 186)
@@ -134,4 +149,5 @@ layout_mode = 2
 text = "30"
 label_settings = SubResource("LabelSettings_s6itt")
 
+[connection signal="pressed" from="MarginContainer/Control/LockButton" to="." method="_on_lock_button_pressed"]
 [connection signal="pressed" from="MarginContainer/Control/BuyButton" to="." method="_on_buy_button_pressed"]

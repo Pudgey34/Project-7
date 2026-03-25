@@ -9,7 +9,7 @@ func execute_attack() -> void:
 	weapon.is_attacking = true
 
 	create_projectile()
-	SoundManager.play_sound(SoundManager.Sound.FIRE)
+	SoundManager.play_sound(_get_fire_sound(), false)
 	
 	var tween := create_tween()
 	
@@ -31,6 +31,17 @@ func execute_attack() -> void:
 	weapon.is_attacking =false
 	
 	critical = false
+
+
+func _get_fire_sound() -> int:
+	if weapon == null or weapon.data == null:
+		return SoundManager.Sound.PLAYER_FIRE
+
+	var weapon_name: String = weapon.data.item_name
+	if weapon_name.begins_with("Pistol"):
+		return SoundManager.Sound.PISTOL_FIRE
+
+	return SoundManager.Sound.PLAYER_FIRE
 	
 func create_projectile() -> void: 
 	var instance := weapon.data.stats.projectile_scene.instantiate() as Projectile

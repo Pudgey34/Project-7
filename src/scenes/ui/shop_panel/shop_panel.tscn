@@ -13,55 +13,55 @@
 [ext_resource type="Resource" uid="uid://b01457l8u1wc3" path="res://resources/items/weapons/range/pistol/item_pistol_2.tres" id="8_h8ew1"]
 [ext_resource type="Resource" uid="uid://cqommdmn5ys8l" path="res://resources/items/weapons/range/pistol/item_pistol_3.tres" id="9_1rtbb"]
 [ext_resource type="Resource" uid="uid://dku6o47wpiwe2" path="res://resources/items/weapons/range/pistol/item_pistol_4.tres" id="10_akg8r"]
-[ext_resource type="Resource" path="res://resources/items/weapons/melee/sword/item_sword_1.tres" id="56_sword1"]
-[ext_resource type="Resource" path="res://resources/items/weapons/melee/sword/item_sword_2.tres" id="57_sword2"]
-[ext_resource type="Resource" path="res://resources/items/weapons/melee/sword/item_sword_3.tres" id="58_sword3"]
-[ext_resource type="Resource" path="res://resources/items/weapons/melee/sword/item_sword_4.tres" id="59_sword4"]
 [ext_resource type="Resource" uid="uid://mjhrkt2w0i6x" path="res://resources/items/passives/data/passive_fires_blazing_strength.tres" id="11_l4hq1"]
 [ext_resource type="Resource" uid="uid://bi1wxxo5rdx22" path="res://resources/items/passives/data/passive_gravekeepers_cloak.tres" id="12_f1e0c"]
 [ext_resource type="PackedScene" uid="uid://c8bnprxgjttxt" path="res://scenes/ui/item_card/item_card.tscn" id="13_jqy7g"]
 [ext_resource type="Resource" uid="uid://c44ksl4etjuri" path="res://resources/items/passives/data/passive_blood_rush.tres" id="14_blood"]
-[ext_resource type="Resource" path="res://resources/items/passives/data/passive_bulwark_heart.tres" id="15_pvhlth"]
-[ext_resource type="Resource" path="res://resources/items/passives/data/passive_vital_bloom.tres" id="16_pvhprg"]
-[ext_resource type="Resource" path="res://resources/items/passives/data/passive_coin_carver.tres" id="17_pvharv"]
-[ext_resource type="Resource" path="res://resources/items/passives/data/passive_sprinter_greed.tres" id="18_pvspeed"]
-[ext_resource type="Resource" path="res://resources/items/passives/data/passive_lucky_burden.tres" id="19_pvluck"]
-[ext_resource type="Resource" path="res://resources/items/passives/data/passive_longshot_lens.tres" id="20_pvrange"]
-[ext_resource type="Resource" path="res://resources/items/passives/data/passive_stone_sigil.tres" id="21_pvblock"]
-[ext_resource type="Resource" path="res://resources/items/passives/data/passive_ghost_rounds.tres" id="22_pvpierce"]
-[ext_resource type="Resource" path="res://resources/items/passives/data/passive_rare_iron_bloom.tres" id="23_rhealth"]
-[ext_resource type="Resource" path="res://resources/items/passives/data/passive_rare_glass_fang.tres" id="24_rdamage"]
-[ext_resource type="Resource" path="res://resources/items/passives/data/passive_rare_second_wind.tres" id="25_rregen"]
-[ext_resource type="Resource" path="res://resources/items/passives/data/passive_rare_crimson_appetite.tres" id="26_rsteal"]
-[ext_resource type="Resource" path="res://resources/items/passives/data/passive_rare_gilded_siphon.tres" id="27_rharv"]
-[ext_resource type="Resource" path="res://resources/items/passives/data/passive_rare_storm_anklet.tres" id="28_rspeed"]
-[ext_resource type="Resource" path="res://resources/items/passives/data/passive_rare_deadeye_spring.tres" id="29_raspd"]
-[ext_resource type="Resource" path="res://resources/items/passives/data/passive_rare_fickle_charm.tres" id="30_rluck"]
-[ext_resource type="Resource" path="res://resources/items/passives/data/passive_rare_far_reach.tres" id="31_rrange"]
-[ext_resource type="Resource" path="res://resources/items/passives/data/passive_rare_bastion_thread.tres" id="32_rblock"]
-[ext_resource type="Resource" path="res://resources/items/passives/data/passive_rare_phantom_bore.tres" id="33_rpierce"]
-[ext_resource type="Resource" path="res://resources/items/passives/data/passive_epic_iron_core.tres" id="34_ehealth"]
-[ext_resource type="Resource" path="res://resources/items/passives/data/passive_epic_warbrand.tres" id="35_edamage"]
-[ext_resource type="Resource" path="res://resources/items/passives/data/passive_epic_evergreen_tear.tres" id="36_eregen"]
-[ext_resource type="Resource" path="res://resources/items/passives/data/passive_epic_vampire_silk.tres" id="37_esteal"]
-[ext_resource type="Resource" path="res://resources/items/passives/data/passive_epic_golden_idol.tres" id="38_eharv"]
-[ext_resource type="Resource" path="res://resources/items/passives/data/passive_epic_flashstep.tres" id="39_espeed"]
-[ext_resource type="Resource" path="res://resources/items/passives/data/passive_epic_clockwork_vein.tres" id="40_easpd"]
-[ext_resource type="Resource" path="res://resources/items/passives/data/passive_epic_jesters_coin.tres" id="41_eluck"]
-[ext_resource type="Resource" path="res://resources/items/passives/data/passive_epic_hawkeye_frame.tres" id="42_erange"]
-[ext_resource type="Resource" path="res://resources/items/passives/data/passive_epic_fortress_knot.tres" id="43_eblock"]
-[ext_resource type="Resource" path="res://resources/items/passives/data/passive_epic_void_bore.tres" id="44_epierce"]
-[ext_resource type="Resource" path="res://resources/items/passives/data/passive_legendary_colossus_seed.tres" id="45_lhealth"]
-[ext_resource type="Resource" path="res://resources/items/passives/data/passive_legendary_hellbite.tres" id="46_ldamage"]
-[ext_resource type="Resource" path="res://resources/items/passives/data/passive_legendary_verdant_engine.tres" id="47_lregen"]
-[ext_resource type="Resource" path="res://resources/items/passives/data/passive_legendary_blood_crown.tres" id="48_lsteal"]
-[ext_resource type="Resource" path="res://resources/items/passives/data/passive_legendary_king_mint.tres" id="49_lharv"]
-[ext_resource type="Resource" path="res://resources/items/passives/data/passive_legendary_comet_anklet.tres" id="50_lspeed"]
-[ext_resource type="Resource" path="res://resources/items/passives/data/passive_legendary_quicksilver_pulse.tres" id="51_laspd"]
-[ext_resource type="Resource" path="res://resources/items/passives/data/passive_legendary_fateshade.tres" id="52_lluck"]
-[ext_resource type="Resource" path="res://resources/items/passives/data/passive_legendary_starline_scope.tres" id="53_lrange"]
-[ext_resource type="Resource" path="res://resources/items/passives/data/passive_legendary_bastion_organ.tres" id="54_lblock"]
-[ext_resource type="Resource" path="res://resources/items/passives/data/passive_legendary_abyssal_drill.tres" id="55_lpierce"]
+[ext_resource type="Resource" uid="uid://dtgrmwu8cg6y2" path="res://resources/items/passives/data/passive_bulwark_heart.tres" id="15_pvhlth"]
+[ext_resource type="Resource" uid="uid://ctw80g51dosme" path="res://resources/items/passives/data/passive_vital_bloom.tres" id="16_pvhprg"]
+[ext_resource type="Resource" uid="uid://d23fmp0djgxt" path="res://resources/items/passives/data/passive_coin_carver.tres" id="17_pvharv"]
+[ext_resource type="Resource" uid="uid://cgtxfn1cg7duv" path="res://resources/items/passives/data/passive_sprinter_greed.tres" id="18_pvspeed"]
+[ext_resource type="Resource" uid="uid://42y7dwipfs4g" path="res://resources/items/passives/data/passive_lucky_burden.tres" id="19_pvluck"]
+[ext_resource type="Resource" uid="uid://cn8qfoa2adwo4" path="res://resources/items/passives/data/passive_longshot_lens.tres" id="20_pvrange"]
+[ext_resource type="Resource" uid="uid://c3ds5gcj61y0p" path="res://resources/items/passives/data/passive_stone_sigil.tres" id="21_pvblock"]
+[ext_resource type="Resource" uid="uid://b7uskvjhyyafl" path="res://resources/items/passives/data/passive_ghost_rounds.tres" id="22_pvpierce"]
+[ext_resource type="Resource" uid="uid://f2u5cjeoqqad" path="res://resources/items/passives/data/passive_rare_iron_bloom.tres" id="23_rhealth"]
+[ext_resource type="Resource" uid="uid://cl6u4423vriyq" path="res://resources/items/passives/data/passive_rare_glass_fang.tres" id="24_rdamage"]
+[ext_resource type="Resource" uid="uid://cjnxl1yvaatk2" path="res://resources/items/passives/data/passive_rare_second_wind.tres" id="25_rregen"]
+[ext_resource type="Resource" uid="uid://bd7cjyirebcss" path="res://resources/items/passives/data/passive_rare_crimson_appetite.tres" id="26_rsteal"]
+[ext_resource type="Resource" uid="uid://tosg7ndxs60g" path="res://resources/items/passives/data/passive_rare_gilded_siphon.tres" id="27_rharv"]
+[ext_resource type="Resource" uid="uid://b6xijn861oy3h" path="res://resources/items/passives/data/passive_rare_storm_anklet.tres" id="28_rspeed"]
+[ext_resource type="Resource" uid="uid://kyciljufk5tx" path="res://resources/items/passives/data/passive_rare_deadeye_spring.tres" id="29_raspd"]
+[ext_resource type="Resource" uid="uid://dqx0ciutvaub" path="res://resources/items/passives/data/passive_rare_fickle_charm.tres" id="30_rluck"]
+[ext_resource type="Resource" uid="uid://dom8alomxqlo8" path="res://resources/items/passives/data/passive_rare_far_reach.tres" id="31_rrange"]
+[ext_resource type="Resource" uid="uid://c68fwt7f56l5p" path="res://resources/items/passives/data/passive_rare_bastion_thread.tres" id="32_rblock"]
+[ext_resource type="Resource" uid="uid://cww8rywr4faxp" path="res://resources/items/passives/data/passive_rare_phantom_bore.tres" id="33_rpierce"]
+[ext_resource type="Resource" uid="uid://dk6ypxvome4fl" path="res://resources/items/passives/data/passive_epic_iron_core.tres" id="34_ehealth"]
+[ext_resource type="Resource" uid="uid://qnyhp242j2gq" path="res://resources/items/passives/data/passive_epic_warbrand.tres" id="35_edamage"]
+[ext_resource type="Resource" uid="uid://clh3rgm7oe3lr" path="res://resources/items/passives/data/passive_epic_evergreen_tear.tres" id="36_eregen"]
+[ext_resource type="Resource" uid="uid://wqs3yltd1nls" path="res://resources/items/passives/data/passive_epic_vampire_silk.tres" id="37_esteal"]
+[ext_resource type="Resource" uid="uid://b00wf102u0jjo" path="res://resources/items/passives/data/passive_epic_golden_idol.tres" id="38_eharv"]
+[ext_resource type="Resource" uid="uid://bw6yd330my2nb" path="res://resources/items/passives/data/passive_epic_flashstep.tres" id="39_espeed"]
+[ext_resource type="Resource" uid="uid://bniqg6tphgi1j" path="res://resources/items/passives/data/passive_epic_clockwork_vein.tres" id="40_easpd"]
+[ext_resource type="Resource" uid="uid://ds7xlw4ue3m4d" path="res://resources/items/passives/data/passive_epic_jesters_coin.tres" id="41_eluck"]
+[ext_resource type="Resource" uid="uid://cvc8udmpoptsx" path="res://resources/items/passives/data/passive_epic_hawkeye_frame.tres" id="42_erange"]
+[ext_resource type="Resource" uid="uid://cqxa7e5p0s7pf" path="res://resources/items/passives/data/passive_epic_fortress_knot.tres" id="43_eblock"]
+[ext_resource type="Resource" uid="uid://d4k25g3oihaob" path="res://resources/items/passives/data/passive_epic_void_bore.tres" id="44_epierce"]
+[ext_resource type="Resource" uid="uid://b7q1ve84hqfs6" path="res://resources/items/passives/data/passive_legendary_colossus_seed.tres" id="45_lhealth"]
+[ext_resource type="Resource" uid="uid://se52vjspifmn" path="res://resources/items/passives/data/passive_legendary_hellbite.tres" id="46_ldamage"]
+[ext_resource type="Resource" uid="uid://b5ec0atx4f7xf" path="res://resources/items/passives/data/passive_legendary_verdant_engine.tres" id="47_lregen"]
+[ext_resource type="Resource" uid="uid://ckyoekrfpng46" path="res://resources/items/passives/data/passive_legendary_blood_crown.tres" id="48_lsteal"]
+[ext_resource type="Resource" uid="uid://dkokorxw8086q" path="res://resources/items/passives/data/passive_legendary_king_mint.tres" id="49_lharv"]
+[ext_resource type="Resource" uid="uid://cauuiwrg64jom" path="res://resources/items/passives/data/passive_legendary_comet_anklet.tres" id="50_lspeed"]
+[ext_resource type="Resource" uid="uid://dys5tdcf4hxnl" path="res://resources/items/passives/data/passive_legendary_quicksilver_pulse.tres" id="51_laspd"]
+[ext_resource type="Resource" uid="uid://bfhii3yv6gfl" path="res://resources/items/passives/data/passive_legendary_fateshade.tres" id="52_lluck"]
+[ext_resource type="Resource" uid="uid://duqyr77yii1s8" path="res://resources/items/passives/data/passive_legendary_starline_scope.tres" id="53_lrange"]
+[ext_resource type="Resource" uid="uid://c3jiwlu2plnex" path="res://resources/items/passives/data/passive_legendary_bastion_organ.tres" id="54_lblock"]
+[ext_resource type="Resource" uid="uid://c1xylndrta4em" path="res://resources/items/passives/data/passive_legendary_abyssal_drill.tres" id="55_lpierce"]
+[ext_resource type="Resource" uid="uid://dmajeqxgga37l" path="res://resources/items/weapons/melee/sword/item_sword_1.tres" id="56_sword1"]
+[ext_resource type="Resource" uid="uid://bewmfeyeicote" path="res://resources/items/weapons/melee/sword/item_sword_2.tres" id="57_sword2"]
+[ext_resource type="Resource" uid="uid://h3o07yxvs3cq" path="res://resources/items/weapons/melee/sword/item_sword_3.tres" id="58_sword3"]
+[ext_resource type="Resource" uid="uid://dw8uw55pesoc5" path="res://resources/items/weapons/melee/sword/item_sword_4.tres" id="59_sword4"]
 [ext_resource type="Resource" path="res://resources/items/passives/data/passive_keen_whetstone.tres" id="60_pvcritc"]
 [ext_resource type="Resource" path="res://resources/items/passives/data/passive_predator_charm.tres" id="61_pvcritr"]
 [ext_resource type="Resource" path="res://resources/items/passives/data/passive_executioner_sigil.tres" id="62_pvcrite"]
@@ -221,10 +221,10 @@ layout_mode = 2
 
 [node name="StatsContainer" parent="MarginContainer/Control" instance=ExtResource("3_o7w7v")]
 layout_mode = 0
-offset_left = 1385.0
-offset_top = 100.0
-offset_right = 1865.0
-offset_bottom = 650.0
+offset_left = 1380.0
+offset_top = 61.0
+offset_right = 1860.0
+offset_bottom = 611.0
 
 [node name="PassivesBox" type="Panel" parent="MarginContainer/Control"]
 layout_mode = 0
@@ -415,9 +415,9 @@ theme_override_styles/normal = ExtResource("4_1gnn5")
 custom_minimum_size = Vector2(350, 250)
 layout_mode = 0
 offset_left = 1440.0
-offset_top = 679.0
+offset_top = 632.0
 offset_right = 1790.0
-offset_bottom = 1049.0
+offset_bottom = 1060.0
 theme_override_constants/separation = 16
 alignment = 1
 

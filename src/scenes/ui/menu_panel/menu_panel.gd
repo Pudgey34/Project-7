@@ -2,6 +2,7 @@ extends Panel
 
 const ARENA_SCENE_PATH := "res://scenes/arena/arena.tscn"
 const BG_MUSIC := preload("res://assets/audio/Bg Music.mp3")
+const BG_MUSIC_VOLUME_DB := -27.0
 
 @onready var new_game_button: Button = %NewGameButton
 @onready var continue_button: Button = %ContinueButton
@@ -16,7 +17,7 @@ const BG_MUSIC := preload("res://assets/audio/Bg Music.mp3")
 
 
 func _ready() -> void:
-	SoundManager.play_music(BG_MUSIC)
+	SoundManager.play_music(BG_MUSIC, false, BG_MUSIC_VOLUME_DB)
 
 	_connect_button_sounds(new_game_button)
 	_connect_button_sounds(continue_button)

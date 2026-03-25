@@ -18,10 +18,21 @@ var spawned_enemies: Array[Enemy] = []
 var is_wave_active := false
 
 func find_wave_data() -> WaveData:
+	var best_wave: WaveData = null
+	var best_from := -999999
+	var best_span := 999999
+
 	for wave in waves_data:
-		if wave and wave.is_valid_index(wave_index):
-			return wave
-	return null
+		if wave == null or not wave.is_valid_index(wave_index):
+			continue
+
+		var span: int = max(0, wave.to - wave.from)
+		if best_wave == null or wave.from > best_from or (wave.from == best_from and span < best_span):
+			best_wave = wave
+			best_from = wave.from
+			best_span = span
+
+	return best_wave
 	
 func start_wave() -> void:
 	current_wave_data = find_wave_data()
@@ -35,6 +46,7 @@ func start_wave() -> void:
 	wave_timer.wait_time = current_wave_data.wave_time
 	wave_timer.start()
 	
+	spawn_opening_units()
 	set_spawn_timer()
 	
 	
@@ -72,10 +84,14 @@ func get_random_spawn_position() -> Vector2:
 	
 	return Vector2(random_x, random_y)
 func spawn_enemy() -> void:
-	var enemy_scene := current_wave_data.get_random_unit_scene() as PackedScene
+	var enemy_scene: PackedScene = current_wave_data.get_random_unit_scene()
 	if not enemy_scene:
 		return
+	spawn_enemy_from_scene(enemy_scene)
 
+func spawn_enemy_from_scene(enemy_scene: PackedScene) -> void:
+	if not enemy_scene:
+		return
 	var spawn_pos := get_random_spawn_position()
 	var spawn_anim := Global.SPAWN_EFFECT_SCENE.instantiate()
 	get_parent().add_child(spawn_anim)
@@ -84,6 +100,18 @@ func spawn_enemy() -> void:
 
 	if spawn_anim.anim_player and not spawn_anim.anim_player.animation_finished.is_connected(_on_spawn_effect_finished):
 		spawn_anim.anim_player.animation_finished.connect(_on_spawn_effect_finished.bind(spawn_anim, enemy_scene, spawn_pos, spawn_wave_index), CONNECT_ONE_SHOT)
+
+func spawn_opening_units() -> void:
+	if not is_wave_active or not current_wave_data:
+		return
+
+	if current_wave_data.opening_units.is_empty():
+		return
+
+	for opening_scene: PackedScene in current_wave_data.opening_units:
+		if opening_scene == null:
+			continue
+		spawn_enemy_from_scene(opening_scene)
 
 
 func _on_spawn_effect_finished(_anim_name: StringName, spawn_anim: Node, enemy_scene: PackedScene, spawn_pos: Vector2, spawn_wave_index: int) -> void:

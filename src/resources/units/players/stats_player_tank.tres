@@ -7,8 +7,8 @@
 script = ExtResource("1_tank")
 name = "Tank"
 icon = ExtResource("2_tank")
-description = "Heavy fighter with extra health and a chance to block attacks. Moves slowly."
-health = 45
+description = "Heavy fighter with extra health, high block chance, and health regeneration. Very slow movement speed."
+health = 50
 health_increase_per_wave = 0.0
 damage = 0.0
 damage_increase_per_wave = 0.0

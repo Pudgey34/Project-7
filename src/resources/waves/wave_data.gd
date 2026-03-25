@@ -10,6 +10,7 @@ enum SpawnType {
 @export var from: int
 @export var to: int
 @export var wave_time := 20.0
+@export var opening_units: Array[PackedScene] = []
 @export var units: Array[WaveUnitData]
 
 @export var spawn_type := SpawnType.RANDOM

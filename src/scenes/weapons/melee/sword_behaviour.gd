@@ -48,25 +48,24 @@ func execute_attack() -> void:
 	tween.parallel().tween_property(weapon.sprite, "rotation_degrees", -half_arc, extend_duration)\
 		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
+	# Hitbox fires as the swing launches
+	tween.tween_callback(hitbox.enable)
+
 	# Phase 2: tiny pull-back wind-up for anticipation feel
 	tween.tween_property(weapon.sprite, "position", _angle_to_pos(windup_degrees), 0.04)\
 		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	tween.parallel().tween_property(weapon.sprite, "rotation_degrees", windup_degrees, 0.04)\
 		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
-	# Hitbox fires as the swing launches
-	tween.tween_callback(hitbox.enable)
-
 	# Phase 3: main swing arc — tween_method keeps it on the circle with cubic ease-out
 	tween.tween_method(_set_blade_angle, windup_degrees, overshoot_degrees, sweep_duration)\
 		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 
+	# Disable hitbox before return so it can't clip on the way back
+	tween.tween_callback(hitbox.disable)
 	# Phase 4: overshoot settle — snap to true end angle for follow-through feel
 	tween.tween_property(weapon.sprite, "position", _angle_to_pos(half_arc), 0.05)
 	tween.parallel().tween_property(weapon.sprite, "rotation_degrees", half_arc, 0.05)
-
-	# Disable hitbox before return so it can't clip on the way back
-	tween.tween_callback(hitbox.disable)
 
 	# Phase 5: return directly to the resting position on the player (not along arc)
 	tween.tween_property(weapon.sprite, "position", weapon.atk_start_pos, return_duration)\

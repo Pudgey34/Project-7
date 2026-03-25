@@ -129,7 +129,7 @@ func update_visuals() -> void:
 		sprite.scale.y = 0.35
 	
 func can_use_weapon() -> bool:
-	return cooldown_timer.is_stopped() and closest_target
+	return not is_attacking and cooldown_timer.is_stopped() and is_instance_valid(closest_target)
 	
 func apply_tier_outline() -> void:
 	if data.item_tier == Global.UpgradeTier.COMMON:

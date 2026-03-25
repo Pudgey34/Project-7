@@ -4,6 +4,8 @@ class_name GameOverScreen
 signal back_to_main_menu_requested
 
 @onready var main_menu_button: Button = %MainMenuButton
+@onready var title_label: Label = %Title
+@onready var subtitle_label: Label = %Subtitle
 
 
 func _ready() -> void:
@@ -11,7 +13,10 @@ func _ready() -> void:
 	hide()
 
 
-func open_screen() -> void:
+func open_screen(title: String = "Game Over", subtitle: String = "") -> void:
+	title_label.text = title
+	subtitle_label.text = subtitle
+	subtitle_label.visible = not subtitle.is_empty()
 	show()
 
 

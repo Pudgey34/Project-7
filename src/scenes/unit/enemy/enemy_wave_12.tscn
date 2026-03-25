@@ -1,0 +1,107 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="PackedScene" uid="uid://cjkpq563q15pt" path="res://scenes/unit/enemy/enemy_chaser_slow.tscn" id="1_base"]
+[ext_resource type="Resource" path="res://resources/units/enemies/stats_enemy_wave_12.tres" id="2_stats"]
+[ext_resource type="Texture2D" path="res://assets/sprites/Players/Player_5.png" id="3_sprite"]
+[ext_resource type="Script" path="res://scenes/unit/enemy/hybrid_shooter_charger_behaviour.gd" id="4_hybrid"]
+[ext_resource type="PackedScene" uid="uid://b802dnutyc0bn" path="res://scenes/projectiles/projectile_enemy.tscn" id="5_projectile"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_body"]
+radius = 10.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hurtbox"]
+radius = 50.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hitbox"]
+radius = 46.0
+
+[sub_resource type="Animation" id="Animation_charge"]
+resource_name = "charge"
+length = 0.7
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals/Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.85882354, 0.28627452, 0.44313726, 1), Color(1, 1, 1, 1), Color(0.85882354, 0.28627452, 0.44313726, 1), Color(1, 1, 1, 1), Color(0.85882354, 0.28627452, 0.44313726, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_reset"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals/Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_charge"]
+_data = {
+&"RESET": SubResource("Animation_reset"),
+&"charge": SubResource("Animation_charge")
+}
+
+[node name="EnemyWave12" instance=ExtResource("1_base")]
+flock_push = 12.0
+visual_scale = 0.82
+stats = ExtResource("2_stats")
+
+[node name="Sprite" parent="Visuals" index="1"]
+texture = ExtResource("3_sprite")
+
+[node name="FirePos" type="Marker2D" parent="Visuals" index="2"]
+position = Vector2(-84, -58)
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, -24)
+shape = SubResource("CircleShape2D_body")
+
+[node name="CollisionShape2D" parent="HurtboxComponent" index="0"]
+position = Vector2(0, -25)
+shape = SubResource("CircleShape2D_hurtbox")
+
+[node name="CollisionShape2D" parent="HitboxComponent" index="0"]
+position = Vector2(0, -27)
+shape = SubResource("CircleShape2D_hitbox")
+
+[node name="HealthBar" parent="." index="7"]
+offset_left = -70.0
+offset_top = -118.0
+offset_right = 70.0
+offset_bottom = -94.0
+
+[node name="HybridShooterChargerBehaviour" type="Node2D" parent="." index="10" node_paths=PackedStringArray("enemy", "fire_pos", "anim_effects")]
+script = ExtResource("4_hybrid")
+enemy = NodePath("..")
+fire_pos = NodePath("../Visuals/FirePos")
+anim_effects = NodePath("../AnimationEffects")
+projectile_scene = ExtResource("5_projectile")
+projectile_count = 5
+arc_angle = 50.0
+fire_full_circle = true
+full_circle_projectile_count = 20
+charge_speed_multiplier = 6.9
+charge_lead_time = 0.25
+charge_pass_distance = 205.0
+charge_stationary_pass_distance = 68.0
+charge_max_time = 0.65
+charge_end_distance = 16.0
+charge_hitbox_scale = 1.9
+charge_flash_speed = 0.72
+
+[node name="AnimationEffects" type="AnimationPlayer" parent="." index="11"]
+libraries = {
+&"": SubResource("AnimationLibrary_charge")
+}

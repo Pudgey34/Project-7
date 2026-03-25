@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="WaveData" load_steps=14 format=3 uid="uid://e6jgne8tpvct"]
+
+[ext_resource type="Script" uid="uid://dqblj6x37v5ae" path="res://resources/waves/wave_data.gd" id="1_wave_data"]
+[ext_resource type="Script" uid="uid://dgn2irjw1bxqy" path="res://resources/waves/wave_unit_data.gd" id="2_wave_unit_data"]
+[ext_resource type="PackedScene" path="res://scenes/unit/enemy/enemy_wave_12.tscn" id="3_boss_scene"]
+[ext_resource type="PackedScene" uid="uid://cjkpq563q15pt" path="res://scenes/unit/enemy/enemy_chaser_slow.tscn" id="4_chaser_slow"]
+[ext_resource type="PackedScene" uid="uid://ryafurhmlwtn" path="res://scenes/unit/enemy/enemy_chaser_mid.tscn" id="5_chaser_mid"]
+[ext_resource type="PackedScene" uid="uid://dwfk13cyivxjk" path="res://scenes/unit/enemy/enemy_chaser_fast.tscn" id="6_chaser_fast"]
+[ext_resource type="PackedScene" uid="uid://dxbqd4cvi0buv" path="res://scenes/unit/enemy/enemy_shooter.tscn" id="7_shooter"]
+[ext_resource type="PackedScene" uid="uid://cl1blw5gfdqfo" path="res://scenes/unit/enemy/enemy_charger.tscn" id="8_charger"]
+
+[sub_resource type="Resource" id="1_enemy"]
+script = ExtResource("2_wave_unit_data")
+unit_scene = ExtResource("4_chaser_slow")
+weight = 10.0
+
+[sub_resource type="Resource" id="2_enemy"]
+script = ExtResource("2_wave_unit_data")
+unit_scene = ExtResource("5_chaser_mid")
+weight = 28.0
+
+[sub_resource type="Resource" id="3_enemy"]
+script = ExtResource("2_wave_unit_data")
+unit_scene = ExtResource("6_chaser_fast")
+weight = 24.0
+
+[sub_resource type="Resource" id="4_enemy"]
+script = ExtResource("2_wave_unit_data")
+unit_scene = ExtResource("7_shooter")
+weight = 20.0
+
+[sub_resource type="Resource" id="5_enemy"]
+script = ExtResource("2_wave_unit_data")
+unit_scene = ExtResource("8_charger")
+weight = 18.0
+
+[resource]
+script = ExtResource("1_wave_data")
+from = 12
+to = 12
+wave_time = 60.0
+opening_units = Array[PackedScene]([ExtResource("3_boss_scene")])
+units = Array[ExtResource("2_wave_unit_data")]([SubResource("1_enemy"), SubResource("2_enemy"), SubResource("3_enemy"), SubResource("4_enemy"), SubResource("5_enemy")])
+max_spawn_time = 4.6
+spawn_count_per_tick = 2

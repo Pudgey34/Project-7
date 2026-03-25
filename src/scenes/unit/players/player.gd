@@ -4,6 +4,7 @@ class_name Player
 @export var dash_duration := 0.5
 @export var dash_speed_multi := 2.5
 @export var dash_cooldown := 0.5
+const HP_REGEN_TICK_INTERVAL := 1.0
 
 @onready var dash_timer: Timer = $DashTimer
 @onready var dash_cooldown_timer: Timer = $DashCooldownTimer
@@ -40,6 +41,7 @@ func _ready() -> void:
 		health_component.on_unit_died.connect(_on_health_component_on_unit_died)
 	dash_timer.wait_time = dash_duration
 	dash_cooldown_timer.wait_time = dash_cooldown
+	hp_regen_timer.start(HP_REGEN_TICK_INTERVAL)
 	setup_coin_pickup_radius()
 	
 

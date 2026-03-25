@@ -19,23 +19,41 @@ func _process(delta: float) -> void:
 		
 	if active_hitboxes.is_empty():
 		return
+
+	for i: int in range(active_hitboxes.size() - 1, -1, -1):
+		var active_hitbox: HitboxComponent = active_hitboxes[i]
+		if not is_instance_valid(active_hitbox) or not active_hitbox.is_damage_active():
+			active_hitboxes.remove_at(i)
+
+	if active_hitboxes.is_empty():
+		return
 	
 	damage_timer -= delta
 	if damage_timer <= 0.0:
 		damage_timer = continuous_damage_interval
-		for hitbox in active_hitboxes:
-			if is_instance_valid(hitbox):
-				on_damaged.emit(hitbox)
+		for active_hitbox: HitboxComponent in active_hitboxes:
+			if is_instance_valid(active_hitbox) and active_hitbox.is_damage_active():
+				on_damaged.emit(active_hitbox)
+
+
+func receive_hit_from_hitbox(hitbox: HitboxComponent) -> void:
+	if Global.game_paused:
+		return
+	if not is_instance_valid(hitbox):
+		return
+	if not hitbox.is_damage_active():
+		return
+	on_damaged.emit(hitbox)
 
 func _on_area_entered(area: Area2D) -> void:
 	if Global.game_paused:
 		return
 
 	if area is HitboxComponent:
-		on_damaged.emit(area)
 		# Only track active hitboxes for the player
-		if owner is Player and area not in active_hitboxes:
-			active_hitboxes.append(area)
+		var hitbox: HitboxComponent = area as HitboxComponent
+		if owner is Player and hitbox not in active_hitboxes:
+			active_hitboxes.append(hitbox)
 
 func _on_area_exited(area: Area2D) -> void:
 	if area is HitboxComponent:

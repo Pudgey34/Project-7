@@ -1,9 +1,9 @@
-[gd_scene load_steps=11 format=3]
+[gd_scene load_steps=11 format=3 uid="uid://d1485g8ebtuxr"]
 
 [ext_resource type="PackedScene" uid="uid://dy3i5rocyopb" path="res://scenes/unit/unit.tscn" id="1_fast"]
 [ext_resource type="Script" uid="uid://k3se2wgulxmg" path="res://scenes/unit/players/player.gd" id="2_fast"]
-[ext_resource type="Texture2D" path="res://assets/sprites/Players/Player_4.png" id="3_fast"]
-[ext_resource type="Resource" path="res://resources/units/players/stats_player_fast.tres" id="4_fast"]
+[ext_resource type="Texture2D" uid="uid://dmox6e28kf6ax" path="res://assets/sprites/Players/Player_4.png" id="3_fast"]
+[ext_resource type="Resource" uid="uid://cqf7k0n1v7mnu" path="res://resources/units/players/stats_player_fast.tres" id="4_fast"]
 [ext_resource type="Script" uid="uid://c858bvn2ij6io" path="res://scenes/unit/players/trail.gd" id="5_fast"]
 [ext_resource type="Script" uid="uid://dkesr3kl022of" path="res://scenes/unit/players/weapon_container.gd" id="6_fast"]
 [ext_resource type="PackedScene" uid="uid://dij17rgw5ak1j" path="res://scenes/ui/dash_indicator/dash_indicator.tscn" id="7_fast"]

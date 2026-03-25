@@ -2,8 +2,6 @@ extends Panel
 
 class_name StatsContainer
 
-const STATS_PER_PAGE := 7
-
 @onready var health_label: Label = %HealthLabel
 @onready var hp_regen_label: Label = %HPRegenLabel
 @onready var life_steal_label: Label = %LifeStealLabel
@@ -32,19 +30,15 @@ const STATS_PER_PAGE := 7
 @onready var stats_max_weapons_panel: Panel = $MarginContainer/VBoxContainer/StatsMaxWeapons
 @onready var stats_range_panel: Panel = $MarginContainer/VBoxContainer/StatsRange
 @onready var stats_pickup_range_panel: Panel = $MarginContainer/VBoxContainer/StatsPickupRange
-@onready var prev_page_button: Button = %PrevPageButton
-@onready var next_page_button: Button = %NextPageButton
-@onready var page_label: Label = %PageLabel
+@onready var margin_container: MarginContainer = $MarginContainer
+@onready var stats_vbox: VBoxContainer = $MarginContainer/VBoxContainer
+@onready var page_selector: HBoxContainer = $MarginContainer/VBoxContainer/PageSelector
 
 var stat_panels: Array[Panel] = []
-var current_page := 0
-var total_pages := 1
 
 func _ready() -> void:
 	_setup_stat_tooltips()
-	_setup_stat_pages()
-	prev_page_button.pressed.connect(_on_prev_page_pressed)
-	next_page_button.pressed.connect(_on_next_page_pressed)
+	_setup_stats_scroll()
 
 func _process(_delta: float) -> void:
 	if not is_instance_valid(Global.player):
@@ -105,7 +99,7 @@ func _process(_delta: float) -> void:
 		max_weapons_label.text = "%d/%d (%d)" % [Global.player.current_weapons.size(), raw_max_weapons, eff_max_weapons]
 
 
-func _setup_stat_pages() -> void:
+func _setup_stats_scroll() -> void:
 	stat_panels = [
 		stats_health_panel,
 		stats_hp_regen_panel,
@@ -123,40 +117,27 @@ func _setup_stat_pages() -> void:
 		stats_luck_panel,
 	]
 
-	total_pages = maxi(1, int(ceil(float(stat_panels.size()) / float(STATS_PER_PAGE))))
-	current_page = clampi(current_page, 0, total_pages - 1)
-	_refresh_page_visibility()
+	for panel: Panel in stat_panels:
+		panel.visible = true
 
+	if is_instance_valid(page_selector):
+		page_selector.visible = false
+		page_selector.queue_free()
 
-func _refresh_page_visibility() -> void:
-	var start_index := current_page * STATS_PER_PAGE
-	var end_index := start_index + STATS_PER_PAGE
+	if stats_vbox.get_parent() == margin_container:
+		var scroll_container: ScrollContainer = ScrollContainer.new()
+		scroll_container.name = "StatsScrollContainer"
+		scroll_container.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		scroll_container.size_flags_vertical = Control.SIZE_EXPAND_FILL
+		margin_container.add_child(scroll_container)
+		margin_container.move_child(scroll_container, 0)
+		stats_vbox.reparent(scroll_container)
 
-	for i in stat_panels.size():
-		var is_on_page := i >= start_index and i < end_index
-		stat_panels[i].visible = is_on_page
+		var v_scroll_bar: VScrollBar = scroll_container.get_v_scroll_bar()
+		if v_scroll_bar != null:
+			v_scroll_bar.custom_minimum_size.x = 14.0
 
-	page_label.text = "%d/%d" % [current_page + 1, total_pages]
-	prev_page_button.disabled = current_page == 0
-	next_page_button.disabled = current_page >= total_pages - 1
-
-
-func _on_prev_page_pressed() -> void:
-	if current_page <= 0:
-		return
-
-	SoundManager.play_sound(SoundManager.Sound.UI)
-	current_page -= 1
-	_refresh_page_visibility()
-
-
-func _on_next_page_pressed() -> void:
-	if current_page >= total_pages - 1:
-		return
-
-	SoundManager.play_sound(SoundManager.Sound.UI)
-	current_page += 1
-	_refresh_page_visibility()
+	stats_vbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 
 func _setup_stat_tooltips() -> void:
 	_set_tooltip_for_stat(stats_health_panel, "Max HP. Increases how much damage you can take before dying.")

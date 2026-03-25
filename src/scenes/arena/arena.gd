@@ -3,8 +3,12 @@ extends Node2D
 class_name Arena
 
 const BG_MUSIC := preload("res://assets/audio/Bg Music.mp3")
+const DEATH_MUSIC := preload("res://assets/audio/violin.mp3")
+const FINAL_BATTLE_MUSIC := preload("res://assets/audio/final.mp3")
+const BG_MUSIC_VOLUME_DB := -27.0
 const MAIN_MENU_SCENE_PATH := "res://scenes/ui/menu_panel/menu_panel.tscn"
-const FIRST_WAVE_TUTORIAL_TEXT := "WASD - Move\nSpacebar - Dodge (invulnerable while dodging)\nEsc - Pause Game\nSurvive 12 waves to win!"
+const FIRST_WAVE_TUTORIAL_TEXT := "WASD - Move\nSpacebar - Dodge (invulnerable while dodging)\nEsc - Pause Game\nSurvive 12 waves to win!\nPicking up coins heals you and awards +1 extra coin!"
+const FINAL_WAVE_INDEX := 12
 
 @export var player: Player
 
@@ -34,7 +38,7 @@ var first_wave_tutorial_shown := false
 
 
 func _ready() -> void:
-	SoundManager.play_music(BG_MUSIC)
+	SoundManager.play_music(BG_MUSIC, false, BG_MUSIC_VOLUME_DB)
 	_setup_first_wave_tutorial_label()
 
 	Global.on_create_block_text.connect(_on_create_block_text)
@@ -104,11 +108,12 @@ func _ready() -> void:
 			if ProgressData.resume_from_shop:
 				shop_panel.show()
 				should_advance_wave_on_shop_continue = false
-				shop_panel.load_shop(spawner.wave_index)
+				shop_panel.load_shop(spawner.wave_index, spawner.wave_index)
 				Global.game_paused = true
 			else:
 				Global.game_paused = false
 				_begin_wave_checkpoint()
+				_play_wave_music(spawner.wave_index)
 				spawner.start_wave()
 
 
@@ -200,8 +205,10 @@ func _on_player_died() -> void:
 	ProgressData.clear_save_game()
 	spawner.pause_wave_timers()
 	pause_menu.close_menu()
+	SoundManager.play_sound(SoundManager.Sound.DEATH, false, -1.0, -3.0)
+	SoundManager.play_music(DEATH_MUSIC, true, -18.0)
 	await get_tree().create_timer(1.0).timeout
-	game_over_screen.open_screen()
+	game_over_screen.open_screen("Game Over", "You were overwhelmed.")
 	
 	
 	
@@ -223,6 +230,7 @@ func start_new_wave() -> void:
 	Global.player.update_player_new_wave()
 	spawner.wave_index += 1
 	_begin_wave_checkpoint()
+	_play_wave_music(spawner.wave_index)
 	spawner.start_wave()
 	
 func clean_arena() -> void:
@@ -302,7 +310,7 @@ func _on_create_heal_text(unit: Node2D, heal: float) -> void:
 func _on_upgrade_selected() -> void:
 	#print("Upgrade Selected.")
 	upgrade_panel.hide()
-	shop_panel.load_shop(spawner.wave_index)
+	shop_panel.load_shop(spawner.wave_index, spawner.wave_index + 1)
 	shop_panel.show()
 	#start_new_wave()
 
@@ -311,6 +319,11 @@ func _on_spawner_on_wave_completed() -> void:
 	if not Global.player: return
 	clean_arena()
 	await wait_for_coins_collection()
+
+	if spawner.wave_index >= FINAL_WAVE_INDEX:
+		_show_win_screen()
+		return
+
 	show_upgrades()
 
 
@@ -322,6 +335,7 @@ func _on_shop_panel_on_shop_next_wave() -> void:
 		should_advance_wave_on_shop_continue = true
 		Global.game_paused = false
 		_begin_wave_checkpoint()
+		_play_wave_music(spawner.wave_index)
 		spawner.start_wave()
 	
 func _on_enemy_died(enemy: Enemy) -> void:
@@ -336,8 +350,9 @@ func _on_selection_panel_on_selection_completed() -> void:
 	shop_panel.create_item_weapon(Global.main_weapon_selected)
 	Global.equipped_weapons.append(Global.main_weapon_selected)
 	
-	shop_panel.load_shop(spawner.wave_index)
+	shop_panel.load_shop(spawner.wave_index, spawner.wave_index + 1)
 	_begin_wave_checkpoint()
+	_play_wave_music(spawner.wave_index)
 	spawner.start_wave()
 	Global.game_paused = false
 	_show_first_wave_tutorial()
@@ -362,4 +377,20 @@ func _on_pause_menu_quit_requested() -> void:
 
 func _on_game_over_screen_back_to_main_menu_requested() -> void:
 	Global.game_paused = false
+	SoundManager.stop_music()
 	get_tree().change_scene_to_file(MAIN_MENU_SCENE_PATH)
+
+
+func _show_win_screen() -> void:
+	Global.game_paused = true
+	spawner.pause_wave_timers()
+	pause_menu.close_menu()
+	ProgressData.clear_save_game()
+	game_over_screen.open_screen("Congratulations!", "You survived all 12 waves!\nYou win!")
+
+
+func _play_wave_music(wave_number: int) -> void:
+	if wave_number >= FINAL_WAVE_INDEX:
+		SoundManager.play_music(FINAL_BATTLE_MUSIC, true, -18.0)
+	else:
+		SoundManager.play_music(BG_MUSIC, false, BG_MUSIC_VOLUME_DB)
