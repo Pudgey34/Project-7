@@ -19,6 +19,9 @@ func _on_hurtbox_component_on_damaged(hitbox: HitboxComponent) -> void:
 
 	if health_component.current_health <= 0:
 		return
+
+	if self is Player and Global.testing_mode_enabled:
+		return
 		
 	var effective_block_chance_percent: float = Global.get_effective_block_chance_percent(float(stats.block_chance))
 	var blocked := Global.get_chance_success(effective_block_chance_percent / 100.0)

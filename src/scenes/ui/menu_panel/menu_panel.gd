@@ -6,6 +6,7 @@ const BG_MUSIC_VOLUME_DB := -27.0
 
 @onready var new_game_button: Button = %NewGameButton
 @onready var continue_button: Button = %ContinueButton
+@onready var testing_mode_toggle: CheckButton = %TestingModeToggle
 @onready var options_button: Button = %OptionsButton
 @onready var quit_button: Button = %QuitButton
 @onready var options_overlay: Panel = $OptionsOverlay
@@ -21,12 +22,14 @@ func _ready() -> void:
 
 	_connect_button_sounds(new_game_button)
 	_connect_button_sounds(continue_button)
+	_connect_button_sounds(testing_mode_toggle)
 	_connect_button_sounds(options_button)
 	_connect_button_sounds(quit_button)
 	_connect_button_sounds(back_button)
 
 	new_game_button.pressed.connect(_on_new_game_pressed)
 	continue_button.pressed.connect(_on_continue_pressed)
+	testing_mode_toggle.toggled.connect(_on_testing_mode_toggled)
 	options_button.pressed.connect(_on_options_pressed)
 	quit_button.pressed.connect(_on_quit_pressed)
 	back_button.pressed.connect(_on_back_button_pressed)
@@ -37,6 +40,8 @@ func _ready() -> void:
 
 	_update_continue_button_state()
 	_sync_options_ui_from_current_settings()
+	testing_mode_toggle.set_pressed_no_signal(Global.testing_mode_enabled)
+	_update_testing_mode_toggle_text()
 
 
 func _update_continue_button_state() -> void:
@@ -65,6 +70,13 @@ func _on_button_hovered() -> void:
 	SoundManager.play_sound(SoundManager.Sound.UI)
 
 
+func _update_testing_mode_toggle_text() -> void:
+	if Global.testing_mode_enabled:
+		testing_mode_toggle.text = "Testing Mode (make player invincible): ON"
+	else:
+		testing_mode_toggle.text = "Testing Mode (make player invincible): OFF"
+
+
 func _on_new_game_pressed() -> void:
 	SoundManager.play_sound(SoundManager.Sound.UI)
 	ProgressData.set_menu_start_mode(ProgressData.MENU_START_NEW_GAME)
@@ -78,6 +90,11 @@ func _on_continue_pressed() -> void:
 	SoundManager.play_sound(SoundManager.Sound.UI)
 	ProgressData.set_menu_start_mode(ProgressData.MENU_START_CONTINUE)
 	get_tree().change_scene_to_file(ARENA_SCENE_PATH)
+
+
+func _on_testing_mode_toggled(enabled: bool) -> void:
+	Global.testing_mode_enabled = enabled
+	_update_testing_mode_toggle_text()
 
 func _on_options_pressed() -> void:
 	SoundManager.play_sound(SoundManager.Sound.UI)

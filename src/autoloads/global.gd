@@ -54,6 +54,7 @@ var available_players: Dictionary[String, PackedScene] = {
 var coins := 0
 var player: Player
 var game_paused:= false
+var testing_mode_enabled: bool = false
 var equipped_weapons: Array[ItemWeapon]
 var selected_weapon: ItemWeapon
 var main_player_selected: UnitStats
