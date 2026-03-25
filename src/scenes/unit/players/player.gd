@@ -167,7 +167,9 @@ func _on_hp_regen_timer_timeout() -> void:
 		return
 	
 	if health_component.current_health < stats.health:
-		var heal := stats.hp_regen
+		var heal: float = maxf(0.0, float(stats.hp_regen))
+		if heal <= 0.0:
+			return
 		health_component.heal(heal)
 		Global.on_create_heal_text.emit(self, heal)
 

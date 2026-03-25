@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("2_dhuvg")
-damage = 7.0
+damage = 8.0
 accuracy = 0.85
 cooldown = 0.75
 crit_chance = 0.08

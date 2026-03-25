@@ -65,7 +65,7 @@ func _on_player_selected(player: UnitStats) -> void:
 	
 	player_icon.texture = player.icon
 	player_name.text = player.name
-	var desc_text = "[code]Health: [color=green]%s[/color]\nDamage: [color=green]%s[/color]\nPierce: [color=green]%s[/color]\nSpeed: [color=green]%s[/color]\nLuck: [color=green]%s[/color]\nBlock Chance: [color=green]%s%%[/color]\n" % [player.health, player.damage, player.pierce, player.speed, player.luck, player.block_chance]
+	var desc_text = "[code]Health: [color=green]%s[/color]\nDamage: [color=green]%s[/color]\nPierce: [color=green]%s[/color]\nSpeed: [color=green]%s[/color]\nLuck: [color=green]%s[/color]\nBlock Chance: [color=green]%s%%[/color]\nCrit Chance: [color=green]%s%%[/color]\n" % [player.health, player.damage, player.pierce, player.speed, player.luck, player.block_chance, player.crit_chance]
 	if player.description:
 		desc_text += "[color=#bdbdbd][font_size=14]%s[/font_size][/color]\n" % player.description
 	player_description.text = desc_text + "[/code]"

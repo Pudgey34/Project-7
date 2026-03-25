@@ -373,6 +373,42 @@ text = "100%"
 label_settings = SubResource("LabelSettings_gvnmg")
 horizontal_alignment = 2
 
+[node name="StatsCritChance" type="Panel" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_d6vhd")
+
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/StatsCritChance"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 5.0
+offset_top = -14.5
+offset_right = 190.0
+offset_bottom = 14.5
+grow_vertical = 2
+text = "Crit Chance: "
+label_settings = SubResource("LabelSettings_gvnmg")
+
+[node name="CritChanceLabel" type="Label" parent="MarginContainer/VBoxContainer/StatsCritChance"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -112.0
+offset_top = -14.5
+offset_right = -17.0
+offset_bottom = 14.5
+grow_horizontal = 0
+grow_vertical = 2
+text = "0%"
+label_settings = SubResource("LabelSettings_gvnmg")
+horizontal_alignment = 2
+
 [node name="StatsPierce" type="Panel" parent="MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 45)
 layout_mode = 2

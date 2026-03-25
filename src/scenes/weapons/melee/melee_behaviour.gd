@@ -6,6 +6,8 @@ class_name MeleeBehaviour
 
 func execute_attack() -> void:
 	weapon.is_attacking = true
+	if SoundManager and SoundManager.has_method("play_sound"):
+		SoundManager.play_sound(SoundManager.Sound.PUNCH)
 	
 	var tween := create_tween()
 	

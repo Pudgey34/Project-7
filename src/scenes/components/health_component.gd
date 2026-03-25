@@ -10,7 +10,7 @@ var max_health := 1.0
 var current_health := 1.0
 
 func setup(stats: UnitStats) -> void: 
-	max_health = stats.health
+	max_health = max(1, stats.health)
 	current_health = max_health
 	on_health_changed.emit(current_health, max_health)
 	

@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_khnh1")
-damage = 3.0
+damage = 4.0
 accuracy = 0.85
 cooldown = 0.8
 max_range = 350.0

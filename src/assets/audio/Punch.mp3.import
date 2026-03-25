@@ -2,13 +2,13 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-uid="uid://bah5akwld6a1"
-path="res://.godot/imported/Punch.mp3-78bd7fa4cb7d87cc75dbc4b822aedafa.mp3str"
+uid="uid://cucccrglm402c"
+path="res://.godot/imported/punch.mp3-fd486b1dd78b6094fa68e1763ef38be2.mp3str"
 
 [deps]
 
-source_file="res://assets/audio/Punch.mp3"
-dest_files=["res://.godot/imported/Punch.mp3-78bd7fa4cb7d87cc75dbc4b822aedafa.mp3str"]
+source_file="res://assets/audio/punch.mp3"
+dest_files=["res://.godot/imported/punch.mp3-fd486b1dd78b6094fa68e1763ef38be2.mp3str"]
 
 [params]
 

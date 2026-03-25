@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bxd0bti563hw2"]
+[gd_scene load_steps=17 format=3 uid="uid://bxd0bti563hw2"]
 
 [ext_resource type="StyleBox" uid="uid://cxtqhn2pkqjsg" path="res://styles/common_styles.tres" id="1_a22ni"]
 [ext_resource type="Script" uid="uid://dlt6f4twq3da4" path="res://scenes/ui/selection_panel/selection_panel.gd" id="1_un15a"]
@@ -11,6 +11,8 @@
 [ext_resource type="Resource" uid="uid://bxayqlg74oyri" path="res://resources/items/weapons/melee/punch/item_punch_1.tres" id="5_5ne7w"]
 [ext_resource type="Resource" uid="uid://ci0b8f4wu1e2p" path="res://resources/items/weapons/range/pistol/item_pistol_1.tres" id="6_6e6br"]
 [ext_resource type="Resource" path="res://resources/items/weapons/melee/sword/item_sword_1.tres" id="7_sword1"]
+[ext_resource type="Resource" path="res://resources/units/players/stats_player_tank.tres" id="8_tank"]
+[ext_resource type="Resource" path="res://resources/units/players/stats_player_fast.tres" id="9_fast"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_58qwm"]
 bg_color = Color(0.19317096, 0.19317225, 0.20538026, 1)
@@ -42,7 +44,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_58qwm")
 script = ExtResource("1_un15a")
-players = Array[ExtResource("2_rbokc")]([ExtResource("3_dh0xd")])
+players = Array[ExtResource("2_rbokc")]([ExtResource("3_dh0xd"), ExtResource("8_tank"), ExtResource("9_fast")])
 start_weapons = Array[ExtResource("4_m67jx")]([ExtResource("5_5ne7w"), ExtResource("7_sword1"), ExtResource("6_6e6br")])
 
 [node name="MarginContainer" type="MarginContainer" parent="."]

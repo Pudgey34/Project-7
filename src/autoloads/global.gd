@@ -46,7 +46,9 @@ enum UpgradeTier{
 }
 
 var available_players: Dictionary[String, PackedScene] = {
-	"Egg" : preload("uid://v3s585564nk4")
+	"Egg" : preload("uid://v3s585564nk4"),
+	"Tank" : preload("res://scenes/unit/players/player_tank.tscn"),
+	"Fast" : preload("res://scenes/unit/players/player_fast.tscn"),
 }
 var coins := 0
 var player: Player
@@ -125,9 +127,7 @@ func calculate_tier_probability(current_wave: int, config: Dictionary) -> Array[
 	# common takes remaining probabilitiy
 	common_chance = 1.0 - total_non_common_chances
 	
-	# debug print
-	print("Wave: %d, Luck: %.1f => Chances: C: %.2f R: %.2f E:%.2f L:%.2f" %
-	[current_wave, Global.player.stats.luck, common_chance, rare_chance, epic_chance, legendary_chance] )
+	# debug print removed
 		
 	return [
 		max(0.0,common_chance),

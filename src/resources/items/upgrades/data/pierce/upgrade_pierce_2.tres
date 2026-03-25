@@ -10,5 +10,5 @@ description = "+2"
 stat_id = "pierce"
 item_name = "Pierce"
 item_icon = ExtResource("1_icon")
-item_tier = 1
+item_tier = 3
 item_type = 1

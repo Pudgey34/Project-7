@@ -21,6 +21,7 @@ enum UnitType {
 @export var range := 0.0
 @export var luck := 1.0
 @export var block_chance := 0.0
+@export var crit_chance := 0.0
 @export var gold_drop := 1
 @export var pickup_range := 1.0
 @export var hp_regen := 0.0

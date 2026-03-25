@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="UnitStats" load_steps=3 format=3 uid="uid://cqf7k0n1v7mnu"]
+
+[ext_resource type="Script" uid="uid://dfxspktmdyr6c" path="res://resources/units/unit_stats.gd" id="1_fast"]
+[ext_resource type="Texture2D" uid="uid://dmox6e28kf6ax" path="res://assets/sprites/Players/Player_4.png" id="2_fast"]
+
+[resource]
+script = ExtResource("1_fast")
+name = "Fast"
+icon = ExtResource("2_fast")
+description = "Agile fighter that moves quickly but has low health and no block chance."
+health = 10
+health_increase_per_wave = 0.0
+damage = 0.0
+damage_increase_per_wave = 0.0
+speed = 480
+luck = 6.0
+gold_drop = 0
+metadata/_custom_type_script = "uid://dfxspktmdyr6c"

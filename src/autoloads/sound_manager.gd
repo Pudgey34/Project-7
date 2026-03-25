@@ -9,7 +9,9 @@ enum Sound {
 	ERROR,
 	DASH,
 	SELL,
-	SATISFYING
+	SATISFYING,
+	PUNCH,
+	SWORD
 }
 
 var sound_dictionary: Dictionary[Sound, Resource] = {
@@ -21,7 +23,9 @@ var sound_dictionary: Dictionary[Sound, Resource] = {
 	Sound.ERROR: preload("res://assets/audio/error.mp3"),
 	Sound.DASH: preload("res://assets/audio/dash.mp3"),
 	Sound.SELL: preload("res://assets/audio/sell.mp3"),
-	Sound.SATISFYING: preload("res://assets/audio/satisfying.mp3")
+	Sound.SATISFYING: preload("res://assets/audio/satisfying.mp3"),
+	Sound.PUNCH: preload("uid://bah5akwld6a1"),
+	Sound.SWORD: preload("uid://bfbq5a1jaqovo")
 }
 
 @export var stream_players: Array[AudioStreamPlayer]

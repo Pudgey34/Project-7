@@ -9,18 +9,28 @@ extends WeaponBehaviour
 @export_range(0.01, 1.0) var sweep_duration := 0.35
 ## How long the weapon takes to return to the player after the sweep
 @export_range(0.01, 1.0) var return_duration := 0.15
+## Minimum swing radius — prevents the blade from swinging too close to the player's body
+@export_range(0.0, 200.0) var min_range := 60.0
+## Maximum tip-to-tip chord width of the swing in pixels.
+## At large ranges the arc angle narrows automatically to keep this width constant.
+@export_range(50.0, 600.0) var max_arc_chord := 220.0
 
 var _sweep_radius: float = 0.0
 
 func execute_attack() -> void:
 	weapon.is_attacking = true
+	if SoundManager and SoundManager.has_method("play_sound"):
+		SoundManager.play_sound(SoundManager.Sound.SWORD)
 	if weapon.closest_target and is_instance_valid(weapon.closest_target):
 		var dist: float = weapon.global_position.distance_to(weapon.closest_target.global_position)
-		_sweep_radius = minf(dist, weapon.data.stats.max_range)
+		_sweep_radius = clampf(dist, min_range, weapon.data.stats.max_range)
 	else:
 		_sweep_radius = weapon.data.stats.max_range
 
-	var half_arc: float = sweep_arc_degrees * 0.5
+	# Clamp arc so the tip-to-tip chord never exceeds max_arc_chord.
+	# chord = 2 * r * sin(θ/2)  →  θ = 2 * arcsin(chord / (2r))
+	var chord_arc: float = rad_to_deg(2.0 * asin(clampf(max_arc_chord / (2.0 * _sweep_radius), 0.0, 1.0)))
+	var half_arc: float = minf(sweep_arc_degrees, chord_arc) * 0.5
 	var windup_degrees: float = -half_arc - 10.0
 	var overshoot_degrees: float = half_arc + 5.0
 
@@ -76,8 +86,9 @@ func _angle_to_pos(angle_degrees: float) -> Vector2:
 ## Falls back to the cached _sweep_radius if no valid target exists.
 func _get_live_radius() -> float:
 	if weapon.closest_target and is_instance_valid(weapon.closest_target):
-		return minf(
+		return clampf(
 			weapon.global_position.distance_to(weapon.closest_target.global_position),
+			min_range,
 			weapon.data.stats.max_range
 		)
 	return _sweep_radius

@@ -1,9 +1,9 @@
-[gd_resource type="Resource" script_class="ItemWeapon" load_steps=5 format=3]
+[gd_resource type="Resource" script_class="ItemWeapon" load_steps=5 format=3 uid="uid://dw8uw55pesoc5"]
 
-[ext_resource type="Texture2D" path="res://assets/sprites/Weapons/Icons/weapon_sword_icon.png" id="1_icon"]
-[ext_resource type="Script" path="res://resources/items/weapons/item_weapon.gd" id="2_script"]
-[ext_resource type="PackedScene" path="res://scenes/weapons/melee/weapon_sword.tscn" id="3_scene"]
-[ext_resource type="Resource" path="res://resources/items/weapons/melee/sword/stats_sword_4.tres" id="4_stats"]
+[ext_resource type="Texture2D" uid="uid://bnb452021oi28" path="res://assets/sprites/Weapons/Icons/weapon_sword_icon.png" id="1_icon"]
+[ext_resource type="Script" uid="uid://djw4mthlrs7ft" path="res://resources/items/weapons/item_weapon.gd" id="2_script"]
+[ext_resource type="PackedScene" uid="uid://bh34p30unx5eq" path="res://scenes/weapons/melee/weapon_sword.tscn" id="3_scene"]
+[ext_resource type="Resource" uid="uid://cbaike4ruyibe" path="res://resources/items/weapons/melee/sword/stats_sword_4.tres" id="4_stats"]
 
 [resource]
 script = ExtResource("2_script")

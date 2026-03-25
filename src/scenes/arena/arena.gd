@@ -4,7 +4,7 @@ class_name Arena
 
 const BG_MUSIC := preload("res://assets/audio/Bg Music.mp3")
 const MAIN_MENU_SCENE_PATH := "res://scenes/ui/menu_panel/menu_panel.tscn"
-const FIRST_WAVE_TUTORIAL_TEXT := "WASD - Move\nSpacebar - Dodge (invulnerable while dodging)"
+const FIRST_WAVE_TUTORIAL_TEXT := "WASD - Move\nSpacebar - Dodge (invulnerable while dodging)\nEsc - Pause Game\nSurvive 12 waves to win!"
 
 @export var player: Player
 
@@ -125,7 +125,7 @@ func _setup_first_wave_tutorial_label() -> void:
 	first_wave_tutorial_label.add_theme_constant_override("outline_size", 3)
 	first_wave_tutorial_label.anchors_preset = Control.PRESET_TOP_WIDE
 	first_wave_tutorial_label.offset_top = 180
-	first_wave_tutorial_label.offset_bottom = 280
+	first_wave_tutorial_label.offset_bottom = 360
 	$GameUI.add_child(first_wave_tutorial_label)
 
 
