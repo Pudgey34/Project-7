@@ -1,2 +1,10 @@
-Refer to patch notes in docs folder to see weekly progress and other important project information.
+# Project 7
 
+## Playable Build
+- A runnable Windows executable is included at `Game/Project7.exe`.
+
+## Source Files
+- All game source files are available in `src/`.
+
+## Documentation
+- Additional documentation is available in `docs/`.
