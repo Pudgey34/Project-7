@@ -9,6 +9,7 @@ signal on_enemy_died(enemy: Enemy)
 const COINS_SCENE = preload("uid://dkvbklgbghtf3")
 const FLASH_MATERIAL = preload("uid://bys1rfyuawvhe")
 const SPAWN_EFFECT_SCENE = preload("uid://c340vhcs6rned")
+const INFINITE_MONEY_CHEAT_COINS := 999999
 
 const FLOATING_TEXT_SCENE = preload("uid://cnjxlvdplj5ds")
 const ITEM_CARD_SCENE = preload("uid://c8bnprxgjttxt")
@@ -55,10 +56,17 @@ var coins := 0
 var player: Player
 var game_paused:= false
 var testing_mode_enabled: bool = false
+var infinite_money_cheat_enabled: bool = false
 var equipped_weapons: Array[ItemWeapon]
 var selected_weapon: ItemWeapon
 var main_player_selected: UnitStats
 var main_weapon_selected: ItemWeapon
+
+
+func apply_infinite_money_cheat() -> void:
+	if not infinite_money_cheat_enabled:
+		return
+	coins = maxi(coins, INFINITE_MONEY_CHEAT_COINS)
 
 func _ready() -> void:
 	_apply_global_tooltip_theme()

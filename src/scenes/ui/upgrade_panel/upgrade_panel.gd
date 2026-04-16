@@ -3,6 +3,7 @@ extends Panel
 class_name UpgradePanel
 
 const UPGRADE_CARD_SCENE = preload("uid://dodlei8lt3pwn")
+const MAX_REROLL_COST := 10000
 
 @export var upgrade_list: Array[ItemUpgrade]
 @export var reroll_wave_multiplier := 1
@@ -56,7 +57,8 @@ func _get_base_reroll_cost() -> int:
 
 func _refresh_reroll_state() -> void:
 	var base_cost := _get_base_reroll_cost()
-	current_reroll_cost = int(round(float(base_cost) * pow(2.0, float(reroll_uses_this_wave))))
+	var scaled_cost := int(round(float(base_cost) * pow(2.0, float(reroll_uses_this_wave))))
+	current_reroll_cost = min(MAX_REROLL_COST, scaled_cost)
 	_update_reroll_button_text()
 
 func _update_reroll_button_text() -> void:

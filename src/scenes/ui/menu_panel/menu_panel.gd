@@ -7,6 +7,9 @@ const BG_MUSIC_VOLUME_DB := -27.0
 @onready var new_game_button: Button = %NewGameButton
 @onready var continue_button: Button = %ContinueButton
 @onready var testing_mode_toggle: CheckButton = %TestingModeToggle
+@onready var infinite_money_toggle: CheckButton = %InfiniteMoneyToggle
+@onready var continue_wave_spin_box: SpinBox = %ContinueWaveSpinBox
+@onready var set_continue_wave_button: Button = %SetContinueWaveButton
 @onready var options_button: Button = %OptionsButton
 @onready var quit_button: Button = %QuitButton
 @onready var options_overlay: Panel = $OptionsOverlay
@@ -23,6 +26,8 @@ func _ready() -> void:
 	_connect_button_sounds(new_game_button)
 	_connect_button_sounds(continue_button)
 	_connect_button_sounds(testing_mode_toggle)
+	_connect_button_sounds(infinite_money_toggle)
+	_connect_button_sounds(set_continue_wave_button)
 	_connect_button_sounds(options_button)
 	_connect_button_sounds(quit_button)
 	_connect_button_sounds(back_button)
@@ -30,6 +35,8 @@ func _ready() -> void:
 	new_game_button.pressed.connect(_on_new_game_pressed)
 	continue_button.pressed.connect(_on_continue_pressed)
 	testing_mode_toggle.toggled.connect(_on_testing_mode_toggled)
+	infinite_money_toggle.toggled.connect(_on_infinite_money_toggled)
+	set_continue_wave_button.pressed.connect(_on_set_continue_wave_button_pressed)
 	options_button.pressed.connect(_on_options_pressed)
 	quit_button.pressed.connect(_on_quit_pressed)
 	back_button.pressed.connect(_on_back_button_pressed)
@@ -42,6 +49,8 @@ func _ready() -> void:
 	_sync_options_ui_from_current_settings()
 	testing_mode_toggle.set_pressed_no_signal(Global.testing_mode_enabled)
 	_update_testing_mode_toggle_text()
+	infinite_money_toggle.set_pressed_no_signal(Global.infinite_money_cheat_enabled)
+	_update_infinite_money_toggle_text()
 
 
 func _update_continue_button_state() -> void:
@@ -55,10 +64,18 @@ func _update_continue_button_state() -> void:
 		continue_button.text = "Continue\n%s - Wave %d" % [player_name, wave]
 		continue_button.modulate = Color(1, 1, 1, 1)
 		continue_button.tooltip_text = ""
+		continue_wave_spin_box.value = clampi(wave, 1, ProgressData.MAX_SAVE_WAVE)
+		continue_wave_spin_box.editable = true
+		set_continue_wave_button.disabled = false
+		set_continue_wave_button.tooltip_text = ""
 	else:
 		continue_button.text = "Continue"
 		continue_button.modulate = Color(0.55, 0.55, 0.55, 1)
 		continue_button.tooltip_text = "No save data found"
+		continue_wave_spin_box.value = 1
+		continue_wave_spin_box.editable = false
+		set_continue_wave_button.disabled = true
+		set_continue_wave_button.tooltip_text = "No save data found"
 
 
 func _connect_button_sounds(button: Button) -> void:
@@ -80,6 +97,7 @@ func _update_testing_mode_toggle_text() -> void:
 func _on_new_game_pressed() -> void:
 	SoundManager.play_sound(SoundManager.Sound.UI)
 	ProgressData.set_menu_start_mode(ProgressData.MENU_START_NEW_GAME)
+	Global.apply_infinite_money_cheat()
 	get_tree().change_scene_to_file(ARENA_SCENE_PATH)
 
 
@@ -89,12 +107,40 @@ func _on_continue_pressed() -> void:
 
 	SoundManager.play_sound(SoundManager.Sound.UI)
 	ProgressData.set_menu_start_mode(ProgressData.MENU_START_CONTINUE)
+	Global.apply_infinite_money_cheat()
 	get_tree().change_scene_to_file(ARENA_SCENE_PATH)
 
 
 func _on_testing_mode_toggled(enabled: bool) -> void:
 	Global.testing_mode_enabled = enabled
 	_update_testing_mode_toggle_text()
+
+
+func _update_infinite_money_toggle_text() -> void:
+	if Global.infinite_money_cheat_enabled:
+		infinite_money_toggle.text = "Infinite Money Cheat: ON"
+	else:
+		infinite_money_toggle.text = "Infinite Money Cheat: OFF"
+
+
+func _on_infinite_money_toggled(enabled: bool) -> void:
+	Global.infinite_money_cheat_enabled = enabled
+	Global.apply_infinite_money_cheat()
+	_update_infinite_money_toggle_text()
+
+
+func _on_set_continue_wave_button_pressed() -> void:
+	if not ProgressData.has_save_file():
+		SoundManager.play_sound(SoundManager.Sound.ERROR, false, 0.82, -8.0)
+		return
+
+	var target_wave: int = clampi(int(round(continue_wave_spin_box.value)), 1, ProgressData.MAX_SAVE_WAVE)
+	if not ProgressData.set_continue_wave(target_wave):
+		SoundManager.play_sound(SoundManager.Sound.ERROR, false, 0.82, -8.0)
+		return
+
+	SoundManager.play_sound(SoundManager.Sound.UI)
+	_update_continue_button_state()
 
 func _on_options_pressed() -> void:
 	SoundManager.play_sound(SoundManager.Sound.UI)

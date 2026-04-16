@@ -5,6 +5,7 @@ const settings_path: String = "user://settings.cfg"
 const MENU_START_UNSET := -1
 const MENU_START_NEW_GAME := 0
 const MENU_START_CONTINUE := 1
+const MAX_SAVE_WAVE := 12
 const MIN_DB := -40.0
 
 var current_wave: int
@@ -84,8 +85,36 @@ func get_save_summary() -> Dictionary:
 	return {
 		"has_save": true,
 		"player_name": player_name,
-		"wave": int(data.get("current_wave", 1))
+		"wave": clampi(int(data.get("current_wave", 1)), 1, MAX_SAVE_WAVE)
 	}
+
+
+func set_continue_wave(target_wave: int) -> bool:
+	if not FileAccess.file_exists(save_path):
+		return false
+
+	var read_file := FileAccess.open(save_path, FileAccess.READ)
+	if read_file == null:
+		return false
+
+	var json_string := read_file.get_as_text()
+	read_file.close()
+
+	var data = JSON.parse_string(json_string)
+	if data == null or not (data is Dictionary):
+		return false
+
+	var clamped_wave: int = clampi(target_wave, 1, MAX_SAVE_WAVE)
+	data["current_wave"] = clamped_wave
+
+	var write_file := FileAccess.open(save_path, FileAccess.WRITE)
+	if write_file == null:
+		return false
+	write_file.store_string(JSON.stringify(data))
+	write_file.close()
+
+	current_wave = clamped_wave
+	return true
 
 
 func set_menu_start_mode(mode: int) -> void:
@@ -109,6 +138,7 @@ func _prepare_new_game_state() -> void:
 	Global.main_player_selected = null
 	Global.main_weapon_selected = null
 	Global.coins = 0
+	Global.apply_infinite_money_cheat()
 
 
 func load_settings() -> void:
@@ -248,7 +278,7 @@ func load_game() -> void:
 	file.close()
 	
 	Global.coins = data.get("coins", 0)
-	current_wave = data.get("current_wave", 1)
+	current_wave = clampi(int(data.get("current_wave", 1)), 1, MAX_SAVE_WAVE)
 	resume_from_shop = data.get("resume_from_shop", true)
 	current_player_name = data.get("current_player_name", "")
 	
@@ -281,6 +311,8 @@ func load_game() -> void:
 	Global.equipped_weapons.clear()
 	for path in data.get("equipped_weapons", []):
 		Global.equipped_weapons.append(load(path))
+
+	Global.apply_infinite_money_cheat()
 	
 	has_saved_game = true
 	

@@ -9,6 +9,7 @@ const SELL_BUTTON_BASE := "Sell Weapon"
 const REROLL_BUTTON_BASE := "reroll"
 const NEXT_WAVE_BUTTON_BASE := "next wave"
 const SHOP_OFFER_SLOT_COUNT := 4
+const MAX_REROLL_COST := 10000
 
 @export var shop_items: Array[ItemBase]
 @export var reroll_wave_multiplier := 1
@@ -90,7 +91,8 @@ func _get_base_reroll_cost() -> int:
 	return max(1, current_shop_wave * reroll_wave_multiplier)
 
 func _refresh_reroll_cost() -> void:
-	reroll_cost = int(round(float(_get_base_reroll_cost()) * pow(2.0, float(reroll_uses_this_wave))))
+	var scaled_cost := int(round(float(_get_base_reroll_cost()) * pow(2.0, float(reroll_uses_this_wave))))
+	reroll_cost = min(MAX_REROLL_COST, scaled_cost)
 
 func _clear_shop_offer_cards() -> void:
 	for child in items_container.get_children():

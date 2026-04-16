@@ -107,6 +107,9 @@ func _ready() -> void:
 				item_card.stack_count = max(1, passive_stack_count)
 				
 			spawner.wave_index = ProgressData.current_wave
+			var progression_steps: int = maxi(0, spawner.wave_index - 1)
+			for _i in progression_steps:
+				spawner.update_enemies_new_wave()
 
 			if ProgressData.resume_from_shop:
 				shop_panel.show()

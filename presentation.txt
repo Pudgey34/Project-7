@@ -1,0 +1,149 @@
+///////
+1. Assignment Overview
+The Final Project Presentation is the culminating activity of your project in this course. You will present your completed application, demonstrate its functionality, and reflect on your development process.
+
+This presentation is a required component of the course and aligns with the expectation that students deliver and present a completed software project :contentReference[oaicite:0]{index=0}.
+
+2. Presentation Structure
+Your presentation must follow this structure:
+
+Application Overview
+Problem being solved
+Target users
+Key features and platforms
+Live Demonstration
+Show core functionality
+Walk through a realistic user scenario
+Demonstrate data interaction where applicable
+Challenges
+Technical, design, or team challenges
+How challenges were addressed
+Budget Review
+Actual Hours vs Estimated Hours
+Where time differed from expectations
+Results
+What was completed
+What remains incomplete
+Success Factors
+Why the project succeeded or progressed as expected
+Reflection and Improvements
+What you would do differently next time
+3. Expectations
+Clear and professional communication
+Logical and structured delivery
+Functional demonstration of the application
+Balanced participation among team members
+Honest reflection on project outcomes
+4. Submission
+This assignment will be delivered live during scheduled presentation time.
+
+All team members must participate
+Your application must be ready to demonstrate
+Any supporting presentation materials (slides) should be prepared in advance and stored in SharePoint
+Submit a link to your presentation (PowerPoint or equivalent) from SharePoint
+Submit a link to your published Power BI dashboard
+5. Evaluation Summary
+Your presentation will be evaluated based on:
+
+Quality and clarity of the demonstration
+Depth of analysis in challenges and reflection
+Accuracy of budget reporting
+Professionalism and communication
+//////////////
+
+1. Purpose of the Final Presentation
+The final presentation represents the culmination of your work in CIS354. It is not only a demonstration of your application, but also an evaluation of your ability to communicate your development process, decisions, and outcomes.
+
+As outlined in the course expectations, students must deliver a completed and demonstrable project and present it to their peers :contentReference[oaicite:0]{index=0}.
+
+Your presentation should clearly answer:
+
+What did you build?
+How does it work?
+What challenges did you face?
+Did you meet your goals?
+What would you improve?
+2. Presentation Flow
+Introduction
+
+Application Overview
+
+Live Demonstration
+
+Challenges
+
+Budget Review
+
+Results
+
+Success Factors
+
+Reflection and Improvements
+
+Your presentation should follow a logical sequence. Avoid jumping between topics. The audience should be able to follow your journey from concept to outcome.
+
+3. Step 1 - Application Overview
+Begin by explaining your application at a high level.
+
+What problem does your application solve?
+Who is the intended user?
+What platforms are included?
+What are the key features?
+Keep this concise. The goal is to prepare the audience for your demonstration.
+
+4. Step 2 - Live Demonstration
+Demonstrate your application in action. This is the most important part of your presentation.
+
+Show core functionality
+Walk through a realistic user scenario
+Demonstrate data interaction where applicable
+Highlight multiple platforms if applicable
+Focus on what works. If something fails, explain it clearly rather than avoiding it.
+5. Step 3 - Challenges
+Discuss the major challenges encountered during development.
+
+Technical challenges
+Design challenges
+Team or communication challenges
+Unexpected blockers
+Explain how you addressed these challenges. This demonstrates problem-solving ability.
+
+6. Step 4 - Budget Review
+Present your development budget using Actual Hours vs Estimated Hours.
+
+Which requirements consumed the most time?
+Where did estimates differ from reality?
+Were there overruns or efficiencies?
+This connects your presentation to project management outcomes and demonstrates your ability to track progress.
+
+7. Step 5 - Results
+Clearly state the outcome of your project.
+
+Was the project completed as planned?
+Which features are fully implemented?
+Which features are incomplete or missing?
+Be honest. Partial completion is acceptable if clearly explained.
+
+8. Step 6 - Success Factors
+Success factors explain why your project succeeded or progressed as expected.
+
+Strong planning or architecture
+Effective teamwork
+Clear requirements
+Efficient tools or technologies
+If your project did not meet expectations, redefine success in terms of learning and progress.
+
+9. Step 7 - Reflection and Improvements
+If your project was not completed as expected, explain what you would do differently next time.
+
+What would you change in your planning?
+What technical decisions would you revisit?
+How would you manage time differently?
+This is not a failure discussion. It is a professional reflection on improvement.
+10. Presentation Expectations
+Clear and structured delivery
+Professional communication
+Demonstration readiness
+Balanced participation among team members
+Time management
+Your ability to communicate your work is just as important as the work itself.
