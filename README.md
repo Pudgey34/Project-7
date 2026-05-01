@@ -2,6 +2,20 @@
 
 Project 7 is a Godot 4.5 top-down arena survival game. Pick a character, choose a starter weapon, survive timed enemy waves, collect coins, and improve your build through upgrades and shop purchases. The goal is to survive all 12 waves and clear the final battle.
 
+## Screenshots
+
+### Early Wave Gameplay
+
+![Wave 1 gameplay with movement tutorial and enemies](generic.png)
+
+### Shop and Build Management
+
+![Shop screen showing weapon offers, passive items, stats, and next wave controls](shop.png)
+
+### Final Wave Combat
+
+![Wave 12 combat with late-game enemies and the final encounter](final.png)
+
 ## Quick Start
 
 ### Play the Included Build
@@ -78,6 +92,9 @@ Weapons automatically aim at enemies in range, so the player's main job is movem
 |   |-- shaders/                  # Shader resources
 |   `-- styles/                   # UI style resources
 |-- docs/                         # Planning, test, patch, and retrospective docs
+|-- generic.png                   # Early wave gameplay screenshot
+|-- shop.png                      # Shop and build management screenshot
+|-- final.png                     # Final wave combat screenshot
 |-- FINAL_PRESENTATION.pptx       # Presentation materials
 |-- FINAL_PRESENTATION_UPDATED.pptx
 `-- README.md
@@ -112,4 +129,3 @@ godot --headless --path src --export-release "Windows Desktop" ../Game/Project7.
 ## Documentation
 
 Supporting course/project documentation is in `docs/`, including test plans, test cases, planning files, development notes, patch notes, and retrospective materials.
-
